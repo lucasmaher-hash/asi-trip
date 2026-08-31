@@ -181,6 +181,7 @@ footer{color:var(--muted);font-size:.8rem;padding:26px 0 44px;border-top:1px sol
 </header>
 </div>
 
+<div id="bar-top"></div>
 <div class="bar">
   <div class="bar-in">
     <div class="chips" id="chips"></div>
@@ -450,13 +451,21 @@ function render(){
     cat==="todo" ? "" : (document.body.dataset.view==="full" ? "alle Details" : "nur das Wichtigste");
 }
 
+/* scroll helper: never scroll higher than the sticky bar */
+const barTop=document.getElementById("bar-top");
+function barAnchor(){return Math.round(barTop.getBoundingClientRect().top+window.scrollY)}
+function snapToBar(){
+  const y=barAnchor();
+  if(window.scrollY>y) window.scrollTo({top:y,behavior:"smooth"});
+}
+
 /* chips */
 const chips=document.getElementById("chips");
 chips.innerHTML=CATS.map(([v,l])=>'<button class="chip cf" data-c="'+v+'" aria-pressed="'+(cat===v)+'">'+l+'<span class="dot"></span></button>').join("");
 
 document.addEventListener("click",e=>{
   const cf=e.target.closest(".cf");
-  if(cf){cat=cf.dataset.c;[...chips.children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.c===cat));render();window.scrollTo({top:0,behavior:"smooth"});return}
+  if(cf){cat=cf.dataset.c;[...chips.children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.c===cat));render();snapToBar();return}
   const tf=e.target.closest(".tf");
   if(tf){tFilter=tf.dataset.t;renderTodos();return}
   const td=e.target.closest(".todo");
