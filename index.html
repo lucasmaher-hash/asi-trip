@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F0F0F3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Südostasien 2027</title>
+<style>
+:root{
+  --ground:#F0F0F3;
+  --surface:#F6F6F8;
+  --raised:#FAFAFC;
+  --ink:#16161A;
+  --ink-2:#4A4A52;
+  --muted:#8C8C95;
+  --line:rgba(20,18,16,.10);
+  --line-soft:rgba(20,18,16,.055);
+  --accent:#FF5C00;
+  --shadow-lo:rgba(58,48,40,.055);
+  --shadow-hi:rgba(58,48,40,.10);
+  --rim:rgba(255,255,255,.92);
+  --r-lg:18px; --r-md:13px; --r-sm:9px;
+  --spring:cubic-bezier(.22,1.2,.36,1);
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:15.5px;line-height:1.62;letter-spacing:-.008em;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.72rem;letter-spacing:.04em}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+
+/* ---------- hero ---------- */
+header{padding:46px 0 26px}
+.kicker{color:var(--muted);margin-bottom:22px}
+h1{font-size:clamp(2rem,7.5vw,2.9rem);line-height:1.02;letter-spacing:-.035em;font-weight:660;margin:0 0 6px}
+.sub{color:var(--ink-2);margin:0 0 30px;font-size:1.02rem}
+
+.count{
+  display:flex;align-items:baseline;gap:12px;
+  padding:20px 22px;margin-bottom:14px;border-radius:var(--r-lg);
+  background:linear-gradient(160deg,var(--raised),var(--surface));
+  box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo),0 8px 20px -10px var(--shadow-hi);
+}
+.count b{font-size:2.6rem;font-weight:640;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.count span{color:var(--muted);font-size:.95rem}
+
+.route{display:flex;gap:6px;margin-bottom:6px}
+.leg{
+  flex:1;padding:11px 12px 12px;border-radius:var(--r-md);
+  background:linear-gradient(160deg,var(--raised),var(--surface));
+  box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo);
+}
+.leg em{display:block;font-style:normal;font-weight:600;font-size:.92rem;margin-bottom:1px}
+.leg i{display:block;font-style:normal;color:var(--muted);font-size:.72rem;font-family:ui-monospace,monospace}
+
+/* ---------- controls ---------- */
+.bar{position:sticky;top:0;z-index:40;background:rgba(240,240,243,.86);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid var(--line-soft)}
+.bar-in{max-width:720px;margin:0 auto;padding:11px 20px 12px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:0 20px}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;border:0;cursor:pointer;white-space:nowrap;
+  padding:7px 14px;border-radius:100px;font:inherit;font-size:.83rem;font-weight:520;
+  color:var(--ink-2);background:linear-gradient(160deg,var(--raised),var(--surface));
+  box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo);
+  transition:transform .32s var(--spring),box-shadow .28s var(--ease),color .2s;
+}
+.chip:hover{transform:translateY(-1px);box-shadow:0 1px 0 var(--rim) inset,0 2px 5px var(--shadow-lo),0 6px 14px -8px var(--shadow-hi)}
+.chip:active{transform:translateY(0);box-shadow:inset 1px 2px 4px var(--shadow-hi),inset -1px -1px 2px var(--rim)}
+.chip[aria-pressed="true"]{color:var(--ink);box-shadow:inset 1px 2px 5px var(--shadow-hi),inset -1px -1px 2px var(--rim);background:var(--surface)}
+.chip .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle;opacity:0;transition:opacity .25s}
+.chip[aria-pressed="true"] .dot{opacity:1}
+
+.row2{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:11px}
+.seg{display:flex;padding:3px;border-radius:100px;background:var(--surface);box-shadow:inset 1px 2px 4px var(--shadow-lo),inset -1px -1px 2px var(--rim);position:relative}
+.seg button{position:relative;z-index:2;border:0;background:none;cursor:pointer;font:inherit;font-size:.79rem;font-weight:540;padding:5px 15px;border-radius:100px;color:var(--muted);transition:color .3s var(--ease)}
+.seg button[aria-pressed="true"]{color:var(--ink)}
+.glass{position:absolute;top:3px;bottom:3px;z-index:1;border-radius:100px;background:linear-gradient(160deg,#fff,var(--raised));box-shadow:0 1px 0 var(--rim) inset,0 1px 3px var(--shadow-lo),0 3px 8px -4px var(--shadow-hi);transition:transform .5s var(--spring),width .5s var(--spring)}
+.meta{color:var(--muted);font-family:ui-monospace,monospace;font-size:.7rem;letter-spacing:.03em}
+
+/* ---------- sections ---------- */
+main{padding:30px 0 90px}
+section{margin-bottom:38px;scroll-margin-top:118px}
+section[hidden]{display:none}
+.s-head{display:flex;align-items:baseline;gap:11px;margin-bottom:15px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+.s-head h2{font-size:1.22rem;font-weight:620;letter-spacing:-.022em;margin:0}
+.s-head .mono{color:var(--muted);margin-left:auto}
+
+.card{
+  padding:19px 20px;border-radius:var(--r-lg);margin-bottom:9px;
+  background:linear-gradient(160deg,var(--raised),var(--surface));
+  box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo),0 10px 22px -14px var(--shadow-hi);
+}
+.card h3{margin:0 0 3px;font-size:1.02rem;font-weight:610;letter-spacing:-.016em}
+.card .when{color:var(--muted);font-family:ui-monospace,monospace;font-size:.71rem;letter-spacing:.03em;margin-bottom:11px}
+.card p{margin:0 0 9px}
+.card p:last-child{margin-bottom:0}
+.card ul{margin:9px 0 0;padding-left:17px}
+.card li{margin-bottom:5px}
+.card li::marker{color:var(--muted)}
+.star{color:var(--accent);font-weight:600}
+.warn{border-left:2px solid var(--accent);padding-left:13px;margin:12px 0 0;color:var(--ink-2);font-size:.93rem}
+.long{display:none}
+body[data-view="full"] .long{display:block}
+body[data-view="full"] li.long{display:list-item}
+a{color:var(--ink);text-decoration-color:var(--muted);text-underline-offset:3px}
+
+.badge{display:inline-block;padding:2px 9px;border-radius:100px;font-family:ui-monospace,monospace;font-size:.66rem;letter-spacing:.04em;background:var(--surface);box-shadow:inset 1px 1px 3px var(--shadow-lo),0 1px 0 var(--rim);color:var(--ink-2)}
+.badge.on{color:var(--accent)}
+
+table{width:100%;border-collapse:collapse;margin-top:11px;font-size:.9rem}
+th,td{text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-family:ui-monospace,monospace;font-size:.68rem;letter-spacing:.05em;color:var(--muted);font-weight:500}
+td:last-child,th:last-child{text-align:right;padding-right:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ---------- todos ---------- */
+.prog{display:flex;align-items:center;gap:13px;margin-bottom:15px;padding:15px 18px;border-radius:var(--r-md);background:var(--surface);box-shadow:inset 1px 2px 5px var(--shadow-lo),inset -1px -1px 2px var(--rim)}
+.track{flex:1;height:4px;border-radius:100px;background:rgba(20,18,16,.09);overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:100px;transition:width .6s var(--spring)}
+
+.phase{margin-top:22px}
+.phase:first-of-type{margin-top:0}
+.phase > .mono{color:var(--muted);display:block;margin-bottom:8px}
+
+.todo{
+  display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;
+  padding:14px 16px;margin-bottom:6px;border:0;cursor:pointer;font:inherit;
+  border-radius:var(--r-md);color:var(--ink);
+  background:linear-gradient(160deg,var(--raised),var(--surface));
+  box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo);
+  transition:transform .34s var(--spring),box-shadow .28s var(--ease),opacity .3s;
+}
+.todo:active{transform:scale(.988);box-shadow:inset 1px 2px 5px var(--shadow-hi),inset -1px -1px 2px var(--rim)}
+.mark{flex:0 0 auto;width:19px;height:19px;border-radius:50%;margin-top:2px;position:relative;background:var(--surface);box-shadow:inset 1px 2px 4px var(--shadow-lo),inset -1px -1px 2px var(--rim);transition:background .3s var(--ease),box-shadow .3s var(--ease)}
+.mark::after{content:"";position:absolute;inset:0;display:grid;place-items:center;font-size:11px;line-height:19px;text-align:center;color:#fff;opacity:0;transition:opacity .25s}
+.todo .body{flex:1;min-width:0}
+.todo .t{font-weight:545;letter-spacing:-.012em}
+.todo .d{color:var(--muted);font-size:.86rem;margin-top:2px;line-height:1.5}
+
+.todo[data-s="pending"] .mark{background:var(--accent);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 2px 6px -2px rgba(255,92,0,.5)}
+.todo[data-s="pending"] .mark::after{content:"~";opacity:1;font-weight:700}
+.todo[data-s="done"]{opacity:.42}
+.todo[data-s="done"] .mark{background:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.25) inset}
+.todo[data-s="done"] .mark::after{content:"✓";opacity:1}
+.todo[data-s="done"] .t{text-decoration:line-through;text-decoration-color:var(--muted)}
+
+.hint{color:var(--muted);font-size:.85rem;margin:14px 0 0}
+.reset{border:0;background:none;color:var(--muted);font:inherit;font-size:.8rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;margin-top:18px}
+footer{color:var(--muted);font-size:.8rem;padding:26px 0 44px;border-top:1px solid var(--line-soft);margin-top:34px;line-height:1.7}
+
+.empty{padding:34px 4px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+@media (max-width:520px){
+  .route{flex-direction:column}
+  header{padding-top:34px}
+}
+</style>
+</head>
+<body data-view="short">
+
+<div class="wrap">
+<header>
+  <div class="kicker mono">Reiseplan · Stand 31.08.2026</div>
+  <h1>Südostasien 2027</h1>
+  <p class="sub">Thailand · Philippinen · Vietnam. 41 Nächte, solo, Hostels.</p>
+
+  <div class="count"><b id="dleft">—</b><span id="dtxt">Tage bis zum Abflug</span></div>
+
+  <div class="route">
+    <div class="leg"><em>Thailand</em><i>02.02 – 20.02 · 18 T</i></div>
+    <div class="leg"><em>Philippinen</em><i>20.02 – 01.03 · 10 T</i></div>
+    <div class="leg"><em>Vietnam</em><i>02.03 – 13.03 · 11 T</i></div>
+  </div>
+</header>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="chips" id="chips"></div>
+    <div class="row2">
+      <div class="seg" id="seg">
+        <div class="glass" id="glass"></div>
+        <button data-v="short" aria-pressed="true">Kurz</button>
+        <button data-v="full" aria-pressed="false">Ausführlich</button>
+      </div>
+      <div class="meta" id="metaline"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<main id="main"></main>
+<footer>
+  Abhak-Status wird nur auf diesem Gerät gespeichert und nicht synchronisiert.<br>
+  Preise sind Schätzungen. Visa-, Einreise- und Impfregeln vor Abflug auf auswaertiges-amt.de gegenprüfen.
+  <br><button class="reset" id="reset">Alle To-dos zurücksetzen</button>
+</footer>
+</div>
+
+<script>
+const DEPART = new Date("2027-02-01T08:40:00+01:00");
+
+/* ============ CONTENT ============ */
+const SECTIONS = [
+{id:"status", cat:"start", n:"00", title:"Buchungsstatus", cards:[
+  {h:"Was steht", when:"Stand 31.08.2026", table:[
+    ["Langstreckenflüge","gebucht"],["Hostel Bangkok","gebucht"],["Tauchkurs Koh Tao","angefragt"],
+    ["Boot-Expedition","offen"],["Regionalflüge (3×)","offen"],["Ha Giang Loop","offen"],
+    ["Khao Sok Bungalow","offen"],["Impfungen / Versicherung","offen"]],
+   p:"Der nächste echte Engpass ist die Boot-Expedition. Alles andere hat Luft.",
+   long:"<p><b>Qatar Airways, Ref. 89KMNH, 658 € inkl. Gepäck.</b> Hinflug MUC 08:40 → Doha (4 h 10 Transit) → Bangkok 06:40 am 2.2. Rückflug Hanoi 08:55 am 13.3. → Doha (14 h Transit) → München 06:55 am 14.3.</p><p><b>Khao San Social Capsule Hostel</b>, 1.–6.2., 109 $, freie Stornierung, Zahlung am 30.1.2027. Check-in um 09:00 vom Hostel schriftlich bestätigt.</p>"}
+]},
+
+{id:"warum", cat:"start", n:"01", title:"Warum diese Route", cards:[
+  {h:"Drei Zwänge", p:"Tết am 6. Februar, das Wetter in Nordvietnam, und die Burning Season in Nordthailand. Alle drei zeigen in dieselbe Richtung.",
+   li:["<b>Tết (6.2.)</b> — Vietnams Neujahr. Vom 3. bis 13. Februar ist vieles zu, Transport ausgebucht. Vietnam gehört ans Ende.",
+       "<b>Nordvietnam im Februar</b> ist kalt und neblig. Ha Giang lohnt erst ab März.",
+       "<b>Burning Season</b> im Norden Thailands ab Mitte Februar. Deshalb Süden statt Chiang Mai."],
+   long:"<p>Innerhalb Thailands läuft die Route bewusst von Ost nach West: Bangkok → Golf (Koh Tao, Koh Phangan) → Khao Sok (liegt zwischen den Küsten) → Andamanenseite (Krabi) → Abflug ab Krabi. Kein einziger Rückweg. Wer erst nach Krabi fährt und dann zum Golf zurück, verliert anderthalb Tage im Bus.</p><p>2027 fällt Tết auf denselben Tag wie das chinesische Neujahr, was Flugpreise in der ganzen Region hochtreibt.</p>"}
+]},
+
+{id:"vorbereitung", cat:"prep", n:"02", title:"Vorbereitung", cards:[
+  {h:"Impfungen", when:"reisemedizinische Beratung · Sept/Okt", p:"Mit dem Impfpass in eine reisemedizinische Sprechstunde. Nicht später — Tollwut braucht 2–3 Dosen über 3–4 Wochen.",
+   li:["Standard: Tetanus, Diphtherie, Polio, MMR","Hepatitis A — praktisch Pflicht in Südostasien","Typhus — bei viel Streetfood","Tollwut — relevant wegen Ha Giang und Khao Sok"],
+   long:"<p>Hepatitis B je nach Vorgeschichte, Japanische Enzephalitis nur bei viel Zeit im ländlichen Raum. Malaria ist auf deiner Route ein geringes Risiko, eine Prophylaxe wird normalerweise nicht verschrieben. Das reale Thema ist <b>Dengue</b> — dagegen hilft nur Mückenschutz, und die Mücken stechen tagsüber. Was für dich gilt, entscheidet die Ärztin.</p><p>Kosten grob 200–400 €. Viele Krankenkassen erstatten Reiseimpfungen ganz oder teilweise.</p>"},
+
+  {h:"Versicherung", when:"vor der Buchung der Expedition", p:"Die TK zahlt in keinem der drei Länder. Rücktransport zahlt die gesetzliche Kasse grundsätzlich nie.",
+   li:["Rücktransport „medizinisch <b>sinnvoll und vertretbar</b>“ — nicht „notwendig“","Reisedauer mindestens 56 Tage","Tauchausbildung und Sporttauchen bis 40 m eingeschlossen","Motorrad als Sozius","Such-, Rettungs- und Bergungskosten","Keine Selbstbeteiligung"],
+   long:"<p>Über die TK gibt es Envivas-Tarife (TravelXN / TravelXF, bis 60 Tage) direkt im TK-Portal. Als Vergleichsbasis nehmen, nicht automatisch abschließen — HanseMerkur, ERGO, Barmenia, Würzburger und DKV sind für junge Einzelpersonen oft günstiger.</p><p>„Notwendig“ heißt: Du wirst nur zurückgeflogen, wenn die Behandlung vor Ort nicht ausreicht — und in Bangkok reicht sie fast immer. Tarife mit dieser Formulierung sind faktisch ohne Rücktransport.</p><p>Kosten 30–60 € für den Zeitraum.</p>"},
+
+  {h:"Führerschein", when:"Entscheidung nötig", p:"Mit Klasse B darfst du in Thailand und Vietnam kein Moped fahren. B196 gilt nur in Deutschland.",
+   long:"<p>Der Internationale Führerschein überträgt nur Klassen, die du tatsächlich hast. Bei einem Unfall greift die Haftpflicht nicht, und die Auslandskrankenversicherung kann wegen Fahrens ohne gültige Fahrerlaubnis die Leistung verweigern. Vietnam hat die Kontrollen verschärft, Bußgelder 2–8 Mio. VND plus Beschlagnahmung.</p><p><b>Konsequenz:</b> Ha Giang als Sozius ist richtig. Zieh das auf Thailand durch — Songthaews und Longtailboote kosten pro Tag vielleicht 5 € mehr. Wenn du selbst fahren willst: A1 vorher machen.</p>"},
+
+  {h:"Geld", when:"Trade Republic + DKB", p:"Trade Republic ist deine Hauptkarte: keine Fremdwährungsgebühr, weltweit kostenlos abheben ab 100 €.",
+   li:["PIN in der App unter Profil → Karte → PIN anzeigen. Vor Abflug merken.","Karte einmal in Deutschland mit PIN nutzen, damit kontaktlos freigeschaltet ist.","Kartennummer und CVV stehen nur in der App — für Online-Buchungen nötig.","Cash-Guthaben auffüllen: Die Karte zieht nicht aus Wertpapieren."],
+   long:"<p><b>DKB</b> ist weltweit nur mit Aktivstatus kostenlos (700 € monatlicher Geldeingang, Prüfung über drei Monate). Ohne Aktivstatus 2,20 % auf Fremdwährung. Entweder ab November einen Dauerauftrag einrichten oder DKB als reine Notfallkarte nutzen.</p><p><b>DCC immer ablehnen.</b> Wenn ein Automat oder Terminal „in EUR abrechnen?“ fragt: nein, Landeswährung. Der angebotene Kurs liegt 3–6 % über dem echten.</p><p><b>Thailand:</b> 220 Baht Automatengebühr, bei jeder Bank. Einmal 20.000 abheben statt fünfmal 4.000 spart ~25 €. <b>Vietnam:</b> TPBank und MB Bank gelten als gebührenfrei. <b>Philippinen:</b> schlechtestes Verhältnis, ~250 PHP bei niedrigem Limit.</p><p>Beide Karten getrennt verstauen. Sperrnotruf 116 116, aus dem Ausland +49 116 116.</p>"},
+
+  {h:"Packen", when:"40–50 l Rucksack", p:"Weniger als du denkst. Alles außer Elektronik kaufst du unterwegs nach, Wäsche kostet in Thailand ~1 €/kg.",
+   li:["<span class='star'>Drybag (10–20 l)</span> — auf der Expedition kommst du vier Tage nicht ans Hauptgepäck","<span class='star'>Warme Schicht</span> für Ha Giang: nachts 8–14 °C, auf dem Motorrad gefühlt kälter","Feste Schuhe für Khao Sok und Ninh Binh, dazu Flip-Flops","Stirnlampe, Powerbank, Weltadapter, Vorhängeschloss","Ohrstöpsel und Schlafmaske — bei 30 Nächten im Dorm nicht optional"],
+   long:"<p>Kleidung: 5–6 T-Shirts, 2 Shorts, 1 lange leichte Hose, 2 Badehosen, 1 Longsleeve gegen Sonne und Mücken, Unterwäsche für sieben Tage, dünne Regenjacke.</p><p>Reef-safe Sonnencreme (in manchen Nationalparks Pflicht), Mückenschutz mit DEET oder Icaridin, Mikrofasertuch, kleine Reiseapotheke mit Elektrolyten und Durchfallmittel. Probiotika schaden nicht.</p><p>Die warme Schicht für Ha Giang kannst du in Hanoi günstig nachkaufen — man muss nur wissen, dass man sie braucht.</p>"},
+
+  {h:"Einreise", when:"kurz vor Abflug", p:"Alle drei Länder visumfrei. Aber zwei Pflichtregistrierungen, beide erst 72 Stunden vorher.",
+   li:["<b>TDAC</b> Thailand — tdac.immigration.go.th, kostenlos. Ohne TDAC keine Einreise.","<b>eTravel</b> Philippinen — etravel.gov.ph, kostenlos. Ohne QR-Code kein Check-in.","Vietnam Pre-Arrival-Pflicht für Hanoi prüfen — wird gerade ausgeweitet.","Reisepass muss über September 2027 hinaus gültig sein."],
+   long:"<p>Thailand aktuell 60 Tage visumfrei (Kabinettsbeschluss Mai 2026 zur Reduzierung auf 30 stand zuletzt aus — reicht dir mit 18 Tagen so oder so). Philippinen 30 Tage. Vietnam 45 Tage.</p><p>Nur die offiziellen Domains nutzen, es gibt viele Fake-Seiten mit Gebühren.</p><p>Alle drei können einen <b>Weiterflugnachweis</b> verlangen. Deshalb den Flug Krabi → Manila buchen, <i>bevor</i> du nach Bangkok fliegst — sonst kann dich die Airline in München stehen lassen.</p>"}
+]},
+
+{id:"thailand", cat:"th", n:"03", title:"Thailand", cards:[
+  {h:"Bangkok", when:"02.–06.02 · 4 Nächte", p:"Ankommen, Jetlag abbauen, Anschluss finden. Halb Backpacker-Südostasien geht hier durch.",
+   li:["<span class='star'>Rajadamnern Stadium</span> — Muay Thai, Tickets ab ~1.000–2.000 THB. Günstige Ränge nehmen, dort sitzen die Thailänder.","<span class='star'>Yaowarat (Chinatown)</span> abends ab 18 Uhr — beste Streetfood-Straße Asiens","Wat Pho und Wat Arun, früh hin","Express Boat auf dem Chao Phraya statt Taxi, 20 THB"],
+   long:"<p>Unterkunft steht: Khao San Social Capsule, Soi Rambuttri-Gegend. Eine Straße hinter der Khao San — gleiche Dichte, aber du kannst schlafen.</p><p><b>Chatuchak</b> öffnet nur Sa/So. Dein Block läuft Di–Sa, du erwischst ihn nur am Abreisetag. Alternative: Talad Rot Fai Ratchada, täglich.</p><p><span class='star'>Chinesisches Neujahr am 6. Februar</span> fällt auf deinen Abreisetag. Yaowarat feiert groß — eine der besten Nächte des Jahres. Wenn du sie mitnehmen willst, Nachtbus erst am 7.2. und woanders einen Tag kürzen.</p><p>Budget 200–280 €.</p>"},
+
+  {h:"Koh Tao — Tauchschein", when:"07.–12.02 · 5 Nächte", star:1, p:"IHASIA Diving angefragt für 8.–10.2. SSI Open Water, max. 3 Schüler pro Instructor, 6 Tauchgänge, 3 Tage.",
+   li:["Preis laut Verzeichnis 9.000 THB (~240 €) — bei Antwort bestätigen lassen","Abbruchregel: nach dem 1. Tauchgang 2.500 THB, nach dem 2. 3.000 THB","Bei ausbleibender Antwort über WhatsApp nachfassen","Zweite Schule als Backup anschreiben: Crystal Dive, Scuba Shack, Hang Loose"],
+   long:"<p><b>Warum Koh Tao ganz nach vorne gehört:</b> Ein Tauchkurs ist die effektivste Freundschaftsmaschine der Reise. Drei Tage dieselbe Kleingruppe, im Boot, im Wasser, abends beim Bier. Und weil das in Woche eins passiert, begleiten dich diese Leute potenziell fünf Wochen statt einer.</p><p><b>Zur Gruppengröße:</b> Max. 3 pro Instructor heißt nicht, dass du allein bist. Auf dem Boot sind 15–30 Leute — mehrere Kursgruppen, Fun Diver, Advanced. Die kleine Gruppe betrifft nur die Lernqualität unter Wasser, nicht dein Sozialleben.</p><p><b>Stundenplan laut Website:</b> Tag 1 — 08:30 Papierkram, 09:30 Theorie, 12:00 zwei Tauchgänge. Tag 2 — 09:00 Theorie, 10:00 Prüfung, 12:00 zwei Tauchgänge. Tag 3 — 06:30 zwei Tauchgänge, 12:00 Zertifizierung. Abende bleiben frei.</p><p><b>Noch klären:</b> Verfügbarkeit, Endpreis inkl. Zertifizierungskarte, Unterkunft während des Kurses, SSI-Theorie vorab online.</p><p>Danach ein bis zwei Fun Dives am Chumphon Pinnacle. Budget 350–450 €.</p>"},
+
+  {h:"Koh Phangan", when:"12.–14.02 · 2 Nächte", p:"Liegt umwegfrei auf der Fährstrecke. Keine Full Moon Party — Jungle Experience oder Half Moon Festival.",
+   warn:"Termine für Februar 2027 stehen noch nicht fest. Im Dezember prüfen. Wenn im Fenster 11.–14.2. nichts läuft: Stopp streichen, die zwei Nächte an Koh Tao oder Krabi hängen.",
+   long:"<p>30.000 Betrunkene an einem Strand produzieren Instagram-Kontakte, keine Reisepartner. Die kleineren Dschungelpartys haben bessere Musik und weniger Massenauflauf.</p><p>Nordbuchten statt Haad Rin: Haad Yao, Chaloklum, Bottle Beach. Budget 90–130 €.</p>"},
+
+  {h:"Khao Sok Nationalpark", when:"14.–17.02 · 3 Nächte", star:1, p:"Ältester Regenwald der Welt, Karstberge im Stausee. Der Natur-Reset, nach dem du gefragt hast.",
+   li:["<span class='star'>Floating Bungalow auf dem Cheow-Lan-See</span>, 2 Tage / 1 Nacht, 3.000–5.000 THB","Höhlenwanderung Nam Talu — teils durch Wasser, nur mit Guide","Dschungeltrek, halbtags 800–1.200 THB"],
+   long:"<p>Nams Tipp („Koa Sol“) und der Punkt deiner eigenen Liste („Khan Sok“). Optisch wie Ha Long Bay, nur ohne die Bootsmassen.</p><p>Anreise: Fähre von Koh Phangan nach Surat Thani, dann Minivan. Khao Sok liegt genau auf dem Weg zur Andamanenseite — kein Umweg.</p><p>Das Dorf Khlong Sok besteht aus einer Straße mit Hostels und Reggae-Kneipen. Klein, aber sozial, weil alle dasselbe machen. Budget 200–280 €.</p><p>Rafthouse 4–8 Wochen vorher reservieren, die Anzahl ist begrenzt.</p>"},
+
+  {h:"Krabi — Ao Nang und Railay", when:"17.–20.02 · 3 Nächte", p:"Ruhige See und Postkartenwetter. Ao Nang als Basis.",
+   li:["<span class='star'>Railay Beach</span> — nur per Longtailboot, 100–150 THB ab Ao Nang","Klettern in Railay, Halbtageskurs ab 1.000–1.500 THB","Kajaktour durch die Wasserhöhlen bei Ao Thalane","Phi Phi als Tagesausflug, nicht als Übernachtung"],
+   long:"<p>Mollys „Ban Ao Nang“ mit den Wasserhöhlen und Matis Krabi-Empfehlung laufen hier zusammen.</p><p>Mati bewertet Phi Phi richtig: sehr schön, sehr voll. Tagesausflug ab Ao Nang (1.200–1.800 THB) nimmt die Maya Bay mit und spart zwei Umzugstage. Wenn dir das zu überlaufen ist: Hong Islands, leerer bei ähnlicher Landschaft.</p><p><b>Alternative:</b> Wenn du eine Insel ohne Trubel brauchst, tausch Ao Nang gegen zwei Nächte Koh Yao Yai. Sei dir nur bewusst, dass beide Inseln das Gegenteil von sozial sind.</p><p>Budget 220–300 €. Am 20.2. Flug Richtung Philippinen.</p>"}
+]},
+
+{id:"philippinen", cat:"ph", n:"04", title:"Philippinen", cards:[
+  {h:"El Nido", when:"21.–24.02 · 3 Nächte", p:"Februar und März sind die trockensten Monate in Palawan. Genau dein Fenster.",
+   li:["Island Hopping Tour A — 1.400–1.800 THB plus 200 PHP Umweltgebühr, im Ort buchen","Nacpan Beach, 4 km Sandstrand, 45 Min außerhalb","Taraw Cliff Viewpoint bei Sonnenaufgang"],
+   long:"<p>El Nido als Ort ist laut und nicht besonders hübsch, aber die Hostel-Szene ist extrem gut fürs Leutekennenlernen. Die meisten sind wie du: solo, Anfang 20 bis Anfang 30, bleiben ein paar Tage. Outpost, Mad Monkey und Spin Designer Hostel haben ein aktives Abendprogramm.</p><p>Anreise: Manila → El Nido direkt mit AirSWIFT (110–150 €) oder billiger über Puerto Princesa plus 6 h Van.</p><p>Budget 250–330 €.</p>"},
+
+  {h:"Expedition El Nido → Coron", when:"24.–27.02 · 4 Tage / 3 Nächte", star:2, p:"Das Highlight der ganzen Reise. Vier Tage Bangka-Boot durch die Linapacan-Inseln, Übernachtung auf unbewohnten Inseln.",
+   table:[["Buhay Isla · 4T/3N","26.900 PHP"],["Big Dream Boatman · 4T/3N","~530–590 €"],["Tao Philippines · 5T/4N","~550–700 €"]],
+   warn:"3–5 Monate Vorlauf. Das ist die eine Buchung, die dir sonst die Reise umwirft.",
+   long:"<p>Kein Netz, kein Strom, kein Zugriff aufs Hauptgepäck. Du bist vier Tage mit 10–20 Leuten auf einem Boot, ohne Ablenkung. Für jemanden, dem soziale Kontakte wichtig sind, gibt es nichts Effektiveres.</p><p><b>Nimm die 4-Tage-Variante.</b> Preisunterschied gering, Erlebnisunterschied groß.</p><p><b>Wetterrisiko:</b> Bei rauem Seegang entscheidet die Küstenwache morgens gegen 3–4 Uhr, ob Boote auslaufen. Absagen kommen vor. Leg den Weiterflug nach Hanoi nicht auf den Ankunftstag.</p><p>Beim Buchen direkt zum Anbieter, nicht über Klook oder GetYourGuide — die schlagen 15–20 % auf. Alle antworten schnell per WhatsApp.</p><p>Drybag ist Pflicht.</p>"},
+
+  {h:"Coron", when:"27.02.–01.03 · 2 Nächte", star:1, p:"Hier zahlt sich der frische Tauchschein aus: japanische Kriegswracks in 10–40 m Tiefe.",
+   li:["Wracktauchen, 2 Tauchgänge ~3.500–5.000 PHP. Skeleton Wreck und Lusong Gunboat sind auf Open-Water-Niveau.","Kayangan Lake — meistfotografierter See der Philippinen","Barracuda Lake — Süß- und Salzwasser geschichtet, das Wasser wird beim Abtauchen plötzlich 38 °C warm"],
+   long:"<p>Eines der bekanntesten Wracktauchgebiete der Welt, und du bist gerade frisch zertifiziert. Der perfekte erste „echte“ Tauchgang nach der Ausbildung.</p><p><b>Achtung Flugregel:</b> 18–24 Stunden zwischen letztem Tauchgang und Flug. Du tauchst am 27./28.2. und fliegst am 1.3. — passt, aber nicht am letzten Tag noch tauchen.</p><p>Am 1.3. Flug Busuanga → Manila (~1 h 13, 7 Flüge täglich) → Hanoi. Budget 250–330 €.</p>"}
+]},
+
+{id:"vietnam", cat:"vn", n:"05", title:"Vietnam", cards:[
+  {h:"Hanoi", when:"02.–04.03 · 2 Nächte", p:"Tết ist seit dreieinhalb Wochen vorbei, das Land läuft wieder normal.",
+   li:["<span class='star'>Bia-Hoi-Ecke, Tạ-Hiện-Straße</span> — frisch gebrautes Bier für ~25 Cent, alle auf Plastikhockern auf der Straße","Bún chả, Bánh mì, Egg Coffee. Am Straßenrand ist es am besten.","Hoàn-Kiếm-See morgens um sechs","Hostels im Old Quarter sind der Umschlagplatz für Ha-Giang-Gruppen"],
+   long:"<p>Von Molly, Leni und Niclas gleichzeitig empfohlen — der klarste Konsens deiner ganzen Liste. Chaotisch und lebendig auf eine Art, die Bangkok nicht hat.</p><p>Train Street: Status wechselt regelmäßig, mal offen, mal gesperrt.</p><p>„Dong Anh“ aus Mollys Liste ist ein Vorort von Hanoi, kein eigenes Ziel.</p><p>Budget 90–130 €.</p>"},
+
+  {h:"Ha Giang Loop", when:"04.–09.03 · 4 Tage", star:2, p:"Von vier Freunden empfohlen. Als Easy Rider, hinten beim Fahrer.",
+   li:["Sleeper-Bus Hanoi → Ha Giang am Abend des 4.3., 6–7 h","<span class='star'>Mã Pí Lèng Pass</span> und die Nho-Quế-Schlucht","Preis 200–260 € inkl. Fahrer, Benzin, Mahlzeiten, Homestays, Bus","Anbieter: Bong Hostel, Jasmine, Mama's Homestay, QT Motorbikes"],
+   warn:"Border Area Permit seit Juni 2026 Pflicht: 200.000–265.000 VND. Wird an den Pässen bei Bac Sum und Yen Minh kontrolliert, ohne drohen 2–6 Mio. VND Bußgeld. Beim Buchen ausdrücklich fragen, ob es im Preis ist.",
+   long:"<p><b>Warum Easy Rider:</b> Vietnam erkennt internationale Führerscheine nur für Klassen an, die du hast. Mit Klasse B fährst du illegal und ohne Versicherungsschutz. Als Sozius hast du keins dieser Probleme, siehst mehr von der Landschaft, und der Fahrer erzählt dir unterwegs, was du sonst nie erfährst.</p><p><b>Sozial identisch:</b> Du fährst im Konvoi mit 8–15 anderen Backpackern, abends wird gemeinsam gegessen und getrunken.</p><p>Nimm die 4-Tage- statt der 3-Tage-Variante, die kurze ist merklich gehetzt.</p><p><b>Warm anziehen.</b> März ist besser als Februar, aber auf 1.500 m und im Fahrtwind ist es morgens kalt, nachts 8–14 °C.</p><p>4–6 Wochen vorher buchen, Anzahlung 30–50 %.</p>"},
+
+  {h:"Ninh Bình", when:"09.–12.03 · 3 Nächte", star:1, p:"Halong-Bucht ohne Meer: Kalksteintürme zwischen Reisfeldern.",
+   li:["<span class='star'>Ruderboottour Trang An</span> statt Tam Cốc — schöner, ruhiger, weniger Verkaufsdruck. ~250.000 VND.","Hang Mua Viewpoint, 500 Stufen","Fahrräder gratis im Hostel — kein Führerschein nötig","Banana Tree Hostel (Lenis Tipp), vorher buchen"],
+   long:"<p>Molly nennt es „echt schön mit Bergen im Wasser“, Leni setzt drei Ausrufezeichen. Beide untertreiben nicht.</p><p>Die Ruderinnen in Trang An rudern mit den Füßen. Ziegenfleisch (Dê núi) ist die lokale Spezialität.</p><p>Anreise 2–2,5 h ab Hanoi. Budget 120–170 €.</p>"},
+
+  {h:"Letzte Nacht Hanoi", when:"12.–13.03", p:"Muss in Hanoi sein, nicht in Ninh Binh. Flug am 13.3. um 08:55 heißt gegen 05:00 aus dem Hotel.",
+   warn:"Kein Puffertag mehr. Wenn auf den Philippinen etwas ausfällt, kürzt du Ninh Binh von drei auf zwei Nächte. Cat Ba fällt damit raus."}
+]},
+
+{id:"budget", cat:"geld", n:"06", title:"Budget", cards:[
+  {h:"Vor Ort", when:"Zielgröße 3.000 €", table:[
+    ["Thailand · 18 Tage","1.100–1.450 €"],["Philippinen · 10 Tage","900–1.300 €"],["Vietnam · 11 Tage","560–790 €"],["Regionalflüge","310–550 €"],["Summe","2.870–4.090 €"]],
+   p:"Realistisch landest du bei 3.100–3.500 €, wenn du nicht gegensteuerst. Der Grund sind die Philippinen.",
+   long:"<p><b>Drei Hebel, in der Reihenfolge, in der ich sie ziehen würde:</b></p><p>1. <b>Beim Bootsanbieter sparen.</b> Buhay Isla statt Big Dream spart 150–200 €. Ehrlich gesagt würde ich bei diesem einen Erlebnis eher nicht sparen.</p><p>2. <b>Konsequent Dorms und Streetfood.</b> Über sechs Wochen leicht 700 € Unterschied. Alkohol ist der Posten, der bei Backpackern in Thailand am zuverlässigsten das Budget sprengt.</p><p>3. Wracktauchen in Coron streichen (80 €) oder Koh Phangan weglassen (~110 €).</p><p>Billiger als gedacht: Essen (Streetfood 1,50–3 €), Vietnam insgesamt, Inlandstransport in Thailand.</p>"},
+
+  {h:"Bereits ausgegeben", table:[["Flüge Qatar (Ref. 89KMNH)","658 €"],["Hostel Bangkok (Abbuchung 30.1.)","109 $"]],
+   long:"<p>Dazu kommen vor der Reise noch: Impfungen 200–400 €, Versicherung 30–60 €, Ausrüstung nach Bedarf. Plus eine Notfallrücklage von 300–500 €, die du idealerweise nicht anfasst.</p>"},
+
+  {h:"Tageskosten", table:[["Hostel-Dorm TH / PH / VN","8–16 / 12–22 / 6–12 €"],["Essen pro Tag","10–25 €"],["Bier","0,80–3 €"],["Basis ohne Aktivitäten","25–60 €"]]}
+]},
+
+{id:"freunde", cat:"info", n:"07", title:"Empfehlungen der Freunde", cards:[
+  {h:"Übernommen", p:"Bangkok als Start (Mati) · Krabi und Ao Nang (Mati, Molly) · Koh Tao mit Tauchschein (Nam, Leni) · Khao Sok (Nam) · Rajadamnern · El Nido–Coron (Leni) · Hanoi (Molly, Leni, Niclas) · Ha Giang (alle vier) · Ninh Binh mit Banana Tree (Molly, Leni)"},
+  {h:"Weggelassen", p:"Chiang Mai und Pai wegen Brandrodungssaison. Phuket — Mati sagt es selbst. Koh Chang/Mak/Kood liegen an der Ostküste, zwei Transfertage. Koh Lipe ganz im Süden, je ein Reisetag. Bali im Februar ist der nasseste Monat. Banggai Islands zwei Tage Anreise pro Richtung. Sri Lanka, Kambodscha, Laos, Singapur — kein Platz.",
+   long:"<p><b>Koh Lipe</b> ist wahrscheinlich Matis bester Tipp und ich lasse ihn ungern weg. Wenn du tauschen willst: Ao Nang raus, Koh Lipe rein, dafür einen Reisetag opfern.</p><p><b>Koh Chang / Mak / Kood</b> wären die perfekten Ziele, falls du Vietnam doch streichst und stattdessen Thailand plus Kambodscha machst.</p><p><b>Hoi An, Ho-Chi-Minh-Stadt, Hai Phong:</b> Vietnam ist 1.700 km lang. Mit 11 Tagen bleibst du im Norden, sonst sitzt du nur in Nachtbussen.</p>"},
+  {h:"Nicht entschlüsselt", p:"„Rainbowfish“ (Nams Tauchschule) · „Ban Tal Thai“ · „Thai boxing anachaeun“. Bei Gelegenheit nachfragen.",
+   long:"<p>Nams „Koh Tao in Vietnam“ ist ein Mix-up — Koh Tao liegt im Golf von Thailand.</p><p>„Ban Tal Thai“ könnte Ban Tai auf Koh Phangan sein, was zum eingeplanten Stopp passen würde.</p>"}
+]},
+
+{id:"leute", cat:"info", n:"08", title:"Leute treffen", cards:[
+  {h:"Drei Gruppenformate", p:"Die Route ist bewusst darauf gebaut — nicht über Partys, sondern über mehrtägige Gruppenerlebnisse.",
+   li:["<b>Tauchkurs Koh Tao</b> — 3 Tage, dieselbe Kleingruppe, bewusst in Woche eins","<b>Boot-Expedition</b> — 4 Tage, ~20 Leute, kein Handyempfang","<b>Ha Giang Loop</b> — 4 Tage Konvoi, gemeinsame Homestay-Abende"],
+   long:"<p>In einer Hostelbar redest du eine Nacht mit jemandem. Auf einem Boot ohne Empfang lebst du vier Tage mit denselben Leuten. Daraus entstehen die Konstellationen, in denen man beschließt, gemeinsam weiterzureisen.</p><p><b>Praktisch:</b> Dorms mit 6–8 Betten buchen, nicht die 20-Bett-Hallen — in großen Schlafsälen redet niemand. Hostels mit Gemeinschaftsküche, Rooftop oder Family Dinner wählen; drei Euro mehr pro Nacht sind der beste Euro der Reise.</p><p>Ab Tag elf ist fast nichts mehr fest gebucht. Wenn sich eine Gruppe bildet: tu es.</p><p>Nachtbusse und Fähren sind soziale Orte, keine verlorene Zeit.</p>"}
+]}
+];
+
+const TODOS = [
+{ph:"Diese Woche", items:[
+ {t:"Reisepass-Gültigkeit prüfen", d:"Muss über den 13. September 2027 hinaus gültig sein. Neuausstellung dauert in München 4–8 Wochen — längste Vorlaufzeit von allem."},
+ {t:"Langstreckenflüge buchen", d:"Qatar Airways, Ref. 89KMNH, 658 € inkl. Gepäck.", s:"done"},
+ {t:"Hostel Bangkok buchen", d:"Khao San Social Capsule, 1.–6.2., freie Stornierung.", s:"done"},
+ {t:"Early Check-in bestätigen lassen", d:"Hostel hat 09:00 am 2.2. schriftlich zugesagt.", s:"done"},
+ {t:"Tauchkurs anfragen", d:"IHASIA Diving für 8.–10.2. Anfrage raus, Antwort ausstehend.", s:"pending"},
+ {t:"Zweite Tauchschule als Backup anschreiben", d:"Crystal Dive, Scuba Shack oder Hang Loose. Falls IHASIA für den 8.–10.2. voll ist."},
+ {t:"Bootsanbieter nach Abfahrtstagen fragen", d:"Noch nicht buchen — nur klären, ob sie am 24.2. fahren. Sonst verschiebt sich der ganze Philippinen-Block."},
+]},
+{ph:"September / Oktober", items:[
+ {t:"Reisemedizinische Beratung buchen", d:"Termine sind oft Wochen im Voraus vergeben. Tollwut braucht 2–3 Dosen über 3–4 Wochen."},
+ {t:"Impfungen erledigen", d:"Hepatitis A, Typhus, Tollwut, Standardimpfungen auffrischen. 200–400 €."},
+ {t:"Auslandskrankenversicherung abschließen", d:"Rücktransport „sinnvoll und vertretbar“, mind. 56 Tage, Tauchausbildung und Motorrad eingeschlossen."},
+ {t:"Führerscheinfrage entscheiden", d:"A1 machen oder konsequent auf Songthaews, Boote und Fahrräder umstellen."},
+ {t:"Trade-Republic-Karte aktivieren", d:"Einmal mit PIN zahlen, PIN merken, Cash-Guthaben auffüllen."},
+ {t:"DKB-Aktivstatus entscheiden", d:"Ab November Dauerauftrag (700 €/Monat) oder DKB nur als Notfallkarte nutzen."},
+]},
+{ph:"Oktober / November", items:[
+ {t:"Boot-Expedition El Nido → Coron buchen", d:"Für den 24.–27.2. Der größte Engpass der Reise: feste Abfahrtstage, begrenzte Plätze, in der Hochsaison zwei bis drei Monate vorher voll."},
+]},
+{ph:"Dezember", items:[
+ {t:"Flug Krabi → Manila buchen", d:"20.2. Brauchst du auch als Weiterflugnachweis für Thailand."},
+ {t:"Flug Manila → El Nido buchen", d:"21.2. Direkt mit CebGo, Cebu Pacific oder AirSWIFT."},
+ {t:"Flug Coron → Manila → Hanoi buchen", d:"1.3. In Manila mindestens 3 h Umsteigezeit einplanen."},
+ {t:"Ha Giang Loop buchen", d:"4.–9.3. Ausdrücklich fragen, ob das Border Permit im Preis ist."},
+ {t:"Tauchkurs-Anzahlung leisten", d:"Erst nach zufriedenstellender Antwort. Nicht die volle Summe."},
+ {t:"Koh-Phangan-Party-Termine prüfen", d:"Wenn im Fenster 11.–14.2. nichts läuft: Stopp streichen."},
+]},
+{ph:"Januar", items:[
+ {t:"Khao Sok Floating Bungalow reservieren", d:"14.–17.2. Begrenzte Anzahl Rafthouses am Cheow-Lan-See."},
+ {t:"Restliche Hostels buchen", d:"Koh Tao, Krabi, El Nido, Hanoi, Ninh Binh. Kurzfristig lassen, damit du Leuten hinterherreisen kannst."},
+ {t:"Ausrüstung besorgen", d:"Drybag, 40–50 l Rucksack, warme Schicht für Ha Giang, Stirnlampe, Weltadapter."},
+ {t:"SSI-Theorie online durcharbeiten", d:"Spart einen Kurstag auf Koh Tao. Geht im Hostel-WLAN oder im Nachtbus."},
+]},
+{ph:"Letzte Tage", items:[
+ {t:"TDAC ausfüllen", d:"Thailand, frühestens 72 h vor Ankunft. Nur tdac.immigration.go.th."},
+ {t:"eTravel registrieren", d:"Philippinen, 72 h vorher. Ohne QR-Code lässt dich die Airline nicht einchecken."},
+ {t:"Vietnam Pre-Arrival prüfen", d:"Pflicht wird gerade auf alle Flughäfen ausgeweitet. Drei Tage vorher checken."},
+ {t:"Dokumente digitalisieren", d:"Pass, Impfpass, Versicherung, Tickets, QR-Codes. Cloud plus einmal ausgedruckt."},
+ {t:"Freunde nach den unklaren Tipps fragen", d:"„Rainbowfish“, „Ban Tal Thai“, „Thai boxing anachaeun“."},
+]}
+];
+
+const CATS=[["all","Alles"],["start","Status"],["prep","Vorbereitung"],["th","Thailand"],["ph","Philippinen"],["vn","Vietnam"],["geld","Budget"],["info","Kontext"],["todo","To-dos"]];
+
+/* ============ STATE ============ */
+const KEY="asia27.v1";
+let store={};
+try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
+
+TODOS.forEach((g,gi)=>g.items.forEach((it,ii)=>{
+  it.key=gi+"."+ii;
+  if(store[it.key]===undefined) store[it.key]=it.s||"open";
+}));
+save();
+
+let cat="all", tFilter="all";
+
+/* ============ RENDER ============ */
+const main=document.getElementById("main");
+
+function cardHTML(c){
+  let h='<article class="card">';
+  h+='<h3>'+(c.star?'<span class="star">'+"★".repeat(c.star)+'</span> ':'')+c.h+'</h3>';
+  if(c.when) h+='<div class="when">'+c.when+'</div>';
+  if(c.p) h+='<p>'+c.p+'</p>';
+  if(c.table){h+='<table><tbody>';c.table.forEach(r=>{h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'});h+='</tbody></table>'}
+  if(c.li){h+='<ul>'+c.li.map(x=>'<li>'+x+'</li>').join("")+'</ul>'}
+  if(c.warn) h+='<p class="warn">'+c.warn+'</p>';
+  if(c.long) h+='<div class="long">'+c.long+'</div>';
+  return h+'</article>';
+}
+
+function renderSections(){
+  main.innerHTML = SECTIONS.filter(s=>cat==="all"||s.cat===cat).map(s=>
+    '<section id="s-'+s.id+'"><div class="s-head"><h2>'+s.title+'</h2><span class="mono">'+s.n+'</span></div>'
+    + s.cards.map(cardHTML).join("") + '</section>'
+  ).join("");
+}
+
+function renderTodos(){
+  const groups = TODOS.map((g,gi)=>{
+    const items = g.items.filter(it=>tFilter==="all"||store[it.key]===tFilter);
+    if(!items.length) return "";
+    return '<div class="phase"><span class="mono">'+g.ph+'</span>'
+      + items.map(it=>
+        '<button class="todo" data-k="'+it.key+'" data-s="'+store[it.key]+'">'
+        +'<span class="mark"></span><span class="body"><span class="t">'+it.t+'</span>'
+        +(it.d?'<span class="d">'+it.d+'</span>':'')+'</span></button>').join("")
+      + '</div>';
+  }).join("");
+
+  const all=TODOS.flatMap(g=>g.items);
+  const done=all.filter(i=>store[i.key]==="done").length;
+  const pend=all.filter(i=>store[i.key]==="pending").length;
+  const pct=Math.round(done/all.length*100);
+
+  main.innerHTML =
+    '<section><div class="s-head"><h2>To-dos</h2><span class="mono">'+done+'/'+all.length+'</span></div>'
+    +'<div class="prog"><span class="mono">'+pct+'%</span><span class="track"><span class="fill" style="width:'+pct+'%"></span></span>'
+    +'<span class="mono">'+pend+' laufend</span></div>'
+    +'<div class="chips" style="margin-bottom:16px">'
+    +[["all","Alle"],["open","Offen"],["pending","Laufend"],["done","Erledigt"]].map(([v,l])=>
+      '<button class="chip tf" data-t="'+v+'" aria-pressed="'+(tFilter===v)+'">'+l+'<span class="dot"></span></button>').join("")
+    +'</div>'
+    +(groups||'<p class="empty">Nichts in dieser Ansicht.</p>')
+    +'<p class="hint">Tippen wechselt: offen → laufend → erledigt.</p></section>';
+}
+
+function render(){
+  if(cat==="todo") renderTodos(); else renderSections();
+  document.getElementById("metaline").textContent =
+    cat==="todo" ? "" : (document.body.dataset.view==="full" ? "alle Details" : "nur das Wichtigste");
+}
+
+/* chips */
+const chips=document.getElementById("chips");
+chips.innerHTML=CATS.map(([v,l])=>'<button class="chip cf" data-c="'+v+'" aria-pressed="'+(cat===v)+'">'+l+'<span class="dot"></span></button>').join("");
+
+document.addEventListener("click",e=>{
+  const cf=e.target.closest(".cf");
+  if(cf){cat=cf.dataset.c;[...chips.children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.c===cat));render();window.scrollTo({top:0,behavior:"smooth"});return}
+  const tf=e.target.closest(".tf");
+  if(tf){tFilter=tf.dataset.t;renderTodos();return}
+  const td=e.target.closest(".todo");
+  if(td){
+    const k=td.dataset.k, order=["open","pending","done"];
+    store[k]=order[(order.indexOf(store[k])+1)%3]; save();
+    td.dataset.s=store[k];
+    const all=TODOS.flatMap(g=>g.items), done=all.filter(i=>store[i.key]==="done").length;
+    const pct=Math.round(done/all.length*100);
+    const fill=document.querySelector(".fill"); if(fill) fill.style.width=pct+"%";
+    if(tFilter!=="all") setTimeout(renderTodos,260); else {
+      const hs=document.querySelector(".s-head .mono"); if(hs) hs.textContent=done+"/"+all.length;
+      const ms=document.querySelectorAll(".prog .mono");
+      if(ms[0]) ms[0].textContent=pct+"%";
+      if(ms[1]) ms[1].textContent=all.filter(i=>store[i.key]==="pending").length+" laufend";
+    }
+  }
+});
+
+/* view toggle */
+const seg=document.getElementById("seg"), glass=document.getElementById("glass");
+function moveGlass(){
+  const b=seg.querySelector('button[aria-pressed="true"]');
+  glass.style.width=b.offsetWidth+"px";
+  glass.style.transform="translateX("+(b.offsetLeft-3)+"px)";
+}
+seg.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  document.body.dataset.view=b.dataset.v;
+  seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  moveGlass(); render();
+});
+addEventListener("resize",moveGlass);
+
+document.getElementById("reset").addEventListener("click",()=>{
+  if(!confirm("Alle To-dos auf offen zurücksetzen?"))return;
+  Object.keys(store).forEach(k=>store[k]="open"); save();
+  if(cat==="todo") renderTodos();
+});
+
+/* countdown */
+(function(){
+  const d=Math.ceil((DEPART-new Date())/864e5);
+  const el=document.getElementById("dleft"), tx=document.getElementById("dtxt");
+  if(d>1){el.textContent=d;tx.textContent="Tage bis zum Abflug · 1. Februar 2027, 08:40 ab München"}
+  else if(d===1){el.textContent="1";tx.textContent="Tag bis zum Abflug"}
+  else if(d===0){el.textContent="Heute";tx.textContent="Abflug 08:40 ab München"}
+  else {el.textContent="—";tx.textContent="unterwegs"}
+})();
+
+render(); moveGlass();
+</script>
+</body>
+</html>
