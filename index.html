@@ -213,7 +213,7 @@ const SECTIONS = [
 {id:"status", cat:"start", n:"00", title:"Buchungsstatus", cards:[
   {h:"Was steht", when:"Stand 31.08.2026", table:[
     ["Langstreckenflüge","gebucht"],["Hostel Bangkok","gebucht"],["Tauchkurs Koh Tao","angefragt"],
-    ["Boot-Expedition","offen"],["Regionalflüge (3×)","offen"],["Ha Giang Loop","offen"],
+    ["Boot-Expedition","angefragt"],["Regionalflüge (3×)","offen"],["Ha Giang Loop","offen"],
     ["Khao Sok Bungalow","offen"],["Impfungen / Versicherung","offen"]],
    p:"Der nächste echte Engpass ist die Boot-Expedition. Alles andere hat Luft.",
    long:"<p><b>Qatar Airways, Ref. 89KMNH, 658 € inkl. Gepäck.</b> Hinflug MUC 08:40 → Doha (4 h 10 Transit) → Bangkok 06:40 am 2.2. Rückflug Hanoi 08:55 am 13.3. → Doha (14 h Transit) → München 06:55 am 14.3.</p><p><b>Khao San Social Capsule Hostel</b>, 1.–6.2., 109 $, freie Stornierung, Zahlung am 30.1.2027. Check-in um 09:00 vom Hostel schriftlich bestätigt.</p>"}
@@ -342,7 +342,7 @@ const TODOS = [
  {t:"Early Check-in bestätigen lassen", d:"Hostel hat 09:00 am 2.2. schriftlich zugesagt.", s:"done"},
  {t:"Tauchkurs anfragen", d:"IHASIA Diving für 8.–10.2. Anfrage raus, Antwort ausstehend.", s:"pending"},
  {t:"Zweite Tauchschule als Backup anschreiben", d:"Crystal Dive, Scuba Shack oder Hang Loose. Falls IHASIA für den 8.–10.2. voll ist."},
- {t:"Bootsanbieter nach Abfahrtstagen fragen", d:"Noch nicht buchen — nur klären, ob sie am 24.2. fahren. Sonst verschiebt sich der ganze Philippinen-Block."},
+ {t:"Bootsanbieter nach Abfahrtstagen fragen", d:"Anfrage an Buhay Isla raus (4D3N, 24.–27.2.), Antwort ausstehend. Big Dream hat das Datum bereits online frei.", s:"pending"},
 ]},
 {ph:"September / Oktober", items:[
  {t:"Reisemedizinische Beratung buchen", d:"Termin steht. Tollwut braucht 2–3 Dosen über 3–4 Wochen.", s:"done"},
@@ -387,7 +387,7 @@ try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 
 /* Bumping SEED re-applies the authored s:-defaults once; manual taps stick after that. */
-const SEED="2026-08-31.impf";
+const SEED="2026-08-31.boot";
 let seeded=false;
 try{seeded=localStorage.getItem(KEY+".seed")===SEED}catch(e){}
 TODOS.forEach((g,gi)=>g.items.forEach((it,ii)=>{
