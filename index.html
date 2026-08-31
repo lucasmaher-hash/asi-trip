@@ -336,7 +336,7 @@ const SECTIONS = [
 
 const TODOS = [
 {ph:"Diese Woche", items:[
- {t:"Reisepass-Gültigkeit prüfen", d:"Muss über den 13. September 2027 hinaus gültig sein. Neuausstellung dauert in München 4–8 Wochen — längste Vorlaufzeit von allem."},
+ {t:"Reisepass-Gültigkeit prüfen", d:"Geprüft. Muss über den 13. September 2027 hinaus gültig sein. Neuausstellung dauert in München 4–8 Wochen — längste Vorlaufzeit von allem.", s:"done"},
  {t:"Langstreckenflüge buchen", d:"Qatar Airways, Ref. 89KMNH, 658 € inkl. Gepäck.", s:"done"},
  {t:"Hostel Bangkok buchen", d:"Khao San Social Capsule, 1.–6.2., freie Stornierung.", s:"done"},
  {t:"Early Check-in bestätigen lassen", d:"Hostel hat 09:00 am 2.2. schriftlich zugesagt.", s:"done"},
@@ -345,8 +345,8 @@ const TODOS = [
  {t:"Bootsanbieter nach Abfahrtstagen fragen", d:"Noch nicht buchen — nur klären, ob sie am 24.2. fahren. Sonst verschiebt sich der ganze Philippinen-Block."},
 ]},
 {ph:"September / Oktober", items:[
- {t:"Reisemedizinische Beratung buchen", d:"Termine sind oft Wochen im Voraus vergeben. Tollwut braucht 2–3 Dosen über 3–4 Wochen."},
- {t:"Impfungen erledigen", d:"Hepatitis A, Typhus, Tollwut, Standardimpfungen auffrischen. 200–400 €."},
+ {t:"Reisemedizinische Beratung buchen", d:"Termin steht. Tollwut braucht 2–3 Dosen über 3–4 Wochen.", s:"done"},
+ {t:"Impfungen erledigen", d:"Termin steht. Hepatitis A, Typhus, Tollwut, Standardimpfungen auffrischen. 200–400 €.", s:"pending"},
  {t:"Auslandskrankenversicherung abschließen", d:"Rücktransport „sinnvoll und vertretbar“, mind. 56 Tage, Tauchausbildung und Motorrad eingeschlossen."},
  {t:"Führerscheinfrage entscheiden", d:"A1 machen oder konsequent auf Songthaews, Boote und Fahrräder umstellen."},
  {t:"Trade-Republic-Karte aktivieren", d:"Einmal mit PIN zahlen, PIN merken, Cash-Guthaben auffüllen."},
@@ -386,10 +386,15 @@ let store={};
 try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 
+/* Bumping SEED re-applies the authored s:-defaults once; manual taps stick after that. */
+const SEED="2026-08-31.impf";
+let seeded=false;
+try{seeded=localStorage.getItem(KEY+".seed")===SEED}catch(e){}
 TODOS.forEach((g,gi)=>g.items.forEach((it,ii)=>{
   it.key=gi+"."+ii;
-  if(store[it.key]===undefined) store[it.key]=it.s||"open";
+  if(store[it.key]===undefined || (it.s && !seeded)) store[it.key]=it.s||"open";
 }));
+try{localStorage.setItem(KEY+".seed",SEED)}catch(e){}
 save();
 
 let cat="all", tFilter="all";
