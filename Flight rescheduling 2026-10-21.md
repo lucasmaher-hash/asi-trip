@@ -1,5 +1,27 @@
 # Flight rescheduling · 21 October 2026
 
+## Status 23 October 2026: beide Flüge umgebucht
+
+Quelle: zwei Screenshots der Qatar-App von Lucas, 23. Oktober 2026, 01:05. Lucas bestätigt, dass er beide Flüge umgebucht hat. Gezahlte Umbuchungskosten, Gepäckfreigrenze und Ticketnummern sind nicht angegeben und nicht erfasst.
+
+| Richtung | Referenz | Abflug | Umstieg Doha | Ankunft |
+|---|---|---|---|---|
+| München → Bangkok | **89KMNH** | **Di 19.01.2027, MUC 15:25** → DOH 23:00 (5 h 35) | **10 h 10**, Nacht | **DOH 09:10 → BKK 19:25 am Mi 20.01.2027** (6 h 15) |
+| Hanoi → München | **89RPEW** | **So 28.02.2027, HAN 19:10** → DOH 23:10 (8 h 00) | **10 h 15**, Nacht | **DOH 09:25 → MUC 13:25 am Mo 01.03.2027** (6 h 00) |
+
+![Hinflug 89KMNH](evidence/2026-10-23/qatar-rebooked-outbound-89KMNH.webp)
+![Rückflug 89RPEW](evidence/2026-10-23/qatar-rebooked-return-89RPEW.webp)
+
+Folgen für den Plan:
+
+- **Ankunft Bangkok erst abends (19:25 am 20.01.)**, nicht morgens. Early Check-in beim Hostel ist nicht mehr nötig; das Hostel ab 20.01. passt (Check-in 14:00). Spätes Ankommen ankündigen.
+- **Rückflug landet am 01.03. um 13:25 in München, einen Tag nach der bisherigen Frist (28.02.).** Aus Abflug 19:10 plus 10 h 15 Umstieg abgeleitet. Prüfen, ob der 01.03. mit APE und Kalender vereinbar ist.
+- **Zusätzlicher Tag in Vietnam:** letzter Tag in Hanoi 28.02. bis ca. 16:00.
+- **Beide Doha-Umstiege liegen nachts** (ca. 23:00–09:10). Für einen Stadtbesuch ungeeignet.
+- Online-Check-in öffnet 48 Stunden vor Abflug.
+
+Die folgenden Abschnitte sind der Stand vom 21. Oktober (Verlauf).
+
 ## Confirmed booking references
 
 Source: Lucas’s Qatar Privilege Club dashboard screenshot, 21 October 2026, 20:38.
