@@ -97,6 +97,13 @@ section[hidden]{display:none}
   background:linear-gradient(160deg,var(--raised),var(--surface));
   box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo),0 10px 22px -14px var(--shadow-hi);
 }
+.card.flight{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px dashed var(--muted);background:var(--surface);box-shadow:none}
+.flight-icon{flex:0 0 36px;display:grid;place-items:center;color:var(--ink-2)}
+.flight-icon svg{width:25px;height:25px;fill:currentColor;transform:rotate(45deg)}
+.flight-body{min-width:0}
+.card.flight .when{margin-bottom:4px}
+.card.flight h3{overflow-wrap:anywhere}
+.card.flight p{font-size:.85rem;color:var(--ink-2);margin-top:5px}
 .card h3{margin:0 0 3px;font-size:1.02rem;font-weight:610;letter-spacing:-.016em}
 .card .when{color:var(--muted);font-family:ui-monospace,monospace;font-size:.71rem;letter-spacing:.03em;margin-bottom:11px}
 .card p{margin:0 0 9px}
@@ -1137,6 +1144,10 @@ Ninh Binh: eher grau und nieselig, Reisfelder noch kahl oder geflutet statt grü
 
 ### 4 · Was sich gegenüber dem alten Plan ändert
 Nicht mehr relevant: Makha Bucha am 21.2. (Alkoholverbot), da du dann schon in Vietnam bist.
+
+
+## Flug-Karten im Reiseverlauf · 27.10.2026
+Zwischen den Orten sind kompakte Karten mit Fliegersymbol, Datum, Strecke und Buchungsstatus eingefügt: 19.–20.1. München → Doha → Bangkok (gebucht); 6.2. Krabi → Manila (offen); 7.2. Manila → El Nido (offen); 15.2. Coron/Busuanga → Manila → Hanoi (offen); 28.2.–1.3. Hanoi → Doha → München (gebucht). Manila 6.–7.2. ist als geplanter Übernachtungsstopp dargestellt. Regionale Flugzeiten und tatsächliche Verbindungen sind noch nicht bestätigt; keine Regionalflugbuchung aus der Darstellung ableiten.
 </pre>
   </div>
 </details>
@@ -1284,6 +1295,12 @@ const SECTIONS = [
     "title": "Thailand",
     "cards": [
       {
+        "flight": true,
+        "h": "München → Doha → Bangkok",
+        "when": "19.–20.01 · Flug · gebucht",
+        "p": "Abflug München 19.1., 15:25 · Ankunft Bangkok 20.1., 19:25."
+      },
+      {
         "h": "Bangkok",
         "ic": "🏙️",
         "img": [
@@ -1364,6 +1381,12 @@ const SECTIONS = [
           "Phi Phi als Tagesausflug, nicht als Übernachtung"
         ],
         "long": "<p>Phi Phi als Tagesausflug ab Ao Nang (1.200–1.800 THB). Um das chinesische Neujahr sehr voll; Hong Islands sind leerer bei ähnlicher Landschaft.</p><p>Unterkunft für diese Nächte vorab buchen, Preise steigen zum Neujahr. Budget 220–320 €. Am 6.2. Flug Richtung Manila.</p>"
+      },
+      {
+        "flight": true,
+        "h": "Krabi → Manila",
+        "when": "06.02 · Flug · noch zu buchen",
+        "p": "Übernachtung in Manila; am 7.2. weiter nach El Nido. Flugzeiten und Verbindung noch offen."
       }
     ]
   },
@@ -1375,13 +1398,24 @@ const SECTIONS = [
     "title": "Philippinen",
     "cards": [
       {
-        "h": "Anreise und El Nido",
+        "h": "Manila",
+        "when": "06.–07.02 · 1 Nacht",
+        "p": "Übernachtung zwischen den Flügen. Unterkunft noch offen."
+      },
+      {
+        "flight": true,
+        "h": "Manila → El Nido",
+        "when": "07.02 · Flug · noch zu buchen",
+        "p": "Geplante Anreise nach El Nido. Spätestens am 9.2. zum Briefing um 18:30 vor Ort sein."
+      },
+      {
+        "h": "El Nido",
         "ic": "🌴",
         "img": [
           "elnido.jpg",
           "Marciano Villavito · CC BY-SA 4.0"
         ],
-        "when": "06.02 Manila · 07.–10.02 El Nido · 3 Nächte",
+        "when": "07.–10.02 · 3 Nächte",
         "p": "Februar ist Trockenzeit in Palawan. Anfang Februar kann es etwas windiger sein als Ende Februar.",
         "li": [
           "Island Hopping Tour A — im Ort buchen, plus 200 PHP Umweltgebühr",
@@ -1426,6 +1460,12 @@ const SECTIONS = [
           "Barracuda Lake — Süß- und Salzwasser geschichtet"
         ],
         "long": "<p><b>Flugregel:</b> 18–24 Stunden zwischen letztem Tauchgang und Flug. Tauchen am 14.2., Flug am 15.2. — passt, aber nicht am Abflugtag tauchen.</p><p>Am 15.2. Flug Busuanga → Manila → Hanoi, in Manila mindestens 3 h Umsteigezeit. Budget 250–330 €.</p>"
+      },
+      {
+        "flight": true,
+        "h": "Coron / Busuanga → Manila → Hanoi",
+        "when": "15.02 · Flug · noch zu buchen",
+        "p": "Verbindung und Flugzeiten noch offen. In Manila mindestens 3 Stunden Umstieg einplanen."
       }
     ]
   },
@@ -1501,6 +1541,12 @@ const SECTIONS = [
         "when": "25.–28.02 · 3 Nächte",
         "p": "28.2.: Check-out gegen 12:00, gegen 16:00 zum Flughafen. Rückflug 19:10.",
         "warn": "Ankunft München: 1.3., 13:25. Bei Verzögerungen Ninh Binh oder eine Hanoi-Nacht kürzen."
+      },
+      {
+        "flight": true,
+        "h": "Hanoi → Doha → München",
+        "when": "28.02–01.03 · Flug · gebucht",
+        "p": "Abflug Hanoi 28.2., 19:10 · Ankunft München 1.3., 13:25."
       }
     ]
   },
@@ -1783,6 +1829,7 @@ let cat="all", tFilter="all";
 const main=document.getElementById("main");
 
 function cardHTML(c){
+  if(c.flight) return '<article class="card flight"><span class="flight-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"/></svg></span><div class="flight-body"><div class="when">'+c.when+'</div><h3>'+c.h+'</h3><p>'+c.p+'</p></div></article>';
   let h='<article class="card">';
   if(c.img) h+='<div class="ph"><img loading="lazy" src="images/'+c.img[0]+'" alt="'+c.h.replace(/"/g,"")+'"><span class="cr">Foto: '+c.img[1]+'</span></div>';
   h+='<h3>'+(c.ic?'<span class="ic">'+c.ic+'</span>':'')+(c.star?'<span class="star">'+"★".repeat(c.star)+'</span> ':'')+c.h+'</h3>';
