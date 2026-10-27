@@ -155,6 +155,34 @@ td:last-child,th:last-child{text-align:right;padding-right:0;white-space:nowrap;
 .reset{border:0;background:none;color:var(--muted);font:inherit;font-size:.8rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;margin-top:18px}
 footer{color:var(--muted);font-size:.8rem;padding:26px 0 44px;border-top:1px solid var(--line-soft);margin-top:34px;line-height:1.7}
 
+/* ---------- images, icons, country colours ---------- */
+section[data-c]{--c:var(--accent)}
+section[data-c="th"]{--c:#2F7BF6}
+section[data-c="ph"]{--c:#12A594}
+section[data-c="vn"]{--c:#E5484D}
+section[data-c] .s-head{border-bottom-color:var(--c)}
+section[data-c] .s-head h2::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:9px;vertical-align:middle}
+section[data-c] .card{border-left:3px solid var(--c)}
+.card{overflow:hidden}
+.card .ph{position:relative;margin:-19px -20px 14px;height:168px;background:var(--surface)}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph .cr{position:absolute;right:8px;bottom:7px;max-width:calc(100% - 16px);font-size:.62rem;line-height:1.4;color:#fff;background:rgba(0,0,0,.42);padding:1px 8px;border-radius:100px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ic{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;margin-right:9px;font-size:.95rem;vertical-align:middle;background:color-mix(in srgb,var(--c,var(--accent)) 16%,transparent)}
+.phase{--c:var(--muted)}
+.phase .todo{border-left:3px solid var(--c)}
+.phase > .mono{color:var(--ink-2);font-size:.78rem}
+
+/* ---------- project context (for Claude) ---------- */
+.kontext{margin:0 0 26px;border-radius:var(--r-lg);background:linear-gradient(160deg,var(--raised),var(--surface));box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo)}
+.kontext summary{cursor:pointer;padding:16px 20px;font-weight:600;letter-spacing:-.012em;list-style:none}
+.kontext summary::-webkit-details-marker{display:none}
+.kontext summary::before{content:"▸";display:inline-block;margin-right:9px;color:var(--muted);transition:transform .25s var(--ease)}
+.kontext[open] summary::before{transform:rotate(90deg)}
+.kontext .kd{display:block;color:var(--muted);font-weight:400;font-size:.82rem;margin:3px 0 0 19px}
+.kontext .kbody{padding:0 20px 20px}
+.kontext button{border:0;cursor:pointer;font:inherit;font-size:.83rem;font-weight:540;padding:8px 16px;border-radius:100px;color:var(--ink);background:var(--surface);box-shadow:inset 1px 2px 4px var(--shadow-lo),inset -1px -1px 2px var(--rim);margin-bottom:12px}
+.kontext pre{margin:0;white-space:pre-wrap;word-wrap:break-word;font:inherit;font-size:.84rem;line-height:1.55;color:var(--ink-2)}
+
 .empty{padding:34px 4px;color:var(--muted)}
 .switch{display:inline-flex;align-items:center;gap:6px;margin:0 0 18px;padding:8px 15px;border-radius:100px;font-size:.83rem;font-weight:540;text-decoration:none;color:var(--ink-2);background:linear-gradient(160deg,var(--raised),var(--surface));box-shadow:0 1px 0 var(--rim) inset,0 1px 2px var(--shadow-lo);transition:transform .32s var(--spring),color .2s}
 .switch:hover{transform:translateY(-1px);color:var(--ink)}
@@ -169,12 +197,9 @@ footer{color:var(--muted);font-size:.8rem;padding:26px 0 44px;border-top:1px sol
 
 <div class="wrap">
 <header>
-  <div class="kicker mono">Neuer Plan · Stand 23.10.2026 · Flüge umgebucht</div>
   <h1>Südostasien 2027</h1>
-  <p class="sub">Thailand · Philippinen · Vietnam. 39 Nächte, solo, Hostels.</p>
   <a class="switch" href="alter-plan.html">Alter Plan ansehen · 1.2.–14.3. →</a>
 
-  <div class="count"><b>39</b><span>Nächte vor Ort · 20.1.–28.2.2027<br>Hin 19.1. ab München (Ankunft Bangkok 20.1., 19:25) · zurück 28.2. ab Hanoi (Ankunft München 1.3., 13:25)</span></div>
 
   <div class="route">
     <div class="leg"><em>Thailand</em><i>20.01 – 06.02 · 17 N</i></div>
@@ -203,9 +228,468 @@ footer{color:var(--muted);font-size:.8rem;padding:26px 0 44px;border-top:1px sol
 <main id="main"></main>
 <footer>
   Abhak-Status wird nur auf diesem Gerät gespeichert und nicht synchronisiert.<br>
-  Preise sind Schätzungen. Visa-, Einreise- und Impfregeln vor Abflug auf auswaertiges-amt.de gegenprüfen.
+  Fotos: Wikimedia Commons, Urheber und Lizenz stehen im Bild. Preise sind Schätzungen. Visa-, Einreise- und Impfregeln vor Abflug auf auswaertiges-amt.de gegenprüfen.
   <br><button class="reset" id="reset">Alle To-dos zurücksetzen</button>
 </footer>
+</div>
+
+<div class="wrap">
+<details class="kontext" id="kontext">
+  <summary>Projektkontext für Claude<span class="kd">Alle Infos zur Reise als Text. Für eine Claude-Session am Handy: Seite anhängen oder Text kopieren.</span></summary>
+  <div class="kbody">
+    <button type="button" id="kcopy">Text kopieren</button>
+    <pre id="ktext"># Projektkontext Asien-Reise 2027 (für Claude)
+
+Stand: 27.10.2026. Diese Datei ersetzt eine CLAUDE.md/project.md: Wer sie in einer Claude-Session bekommt, hat den vollen Reisekontext. Bei Widersprüchen zwischen Abschnitten gilt "Aktueller Stand" weiter unten, der Rest ist Hintergrund.
+
+## Wie Claude mit Lucas arbeiten soll
+- Antworte auf Deutsch, kurz, Urteil zuerst, kein Zustimmungs-Einstieg. Widersprich, wenn Lucas falsch liegt. Kernaussagen mit [geprüft], [sicher] oder [vermutet] markieren; Ungeprüftes immer nennen.
+- Farb-Emojis sparsam als Marker: 🔴 kritisch/Frist, 🟡 offen/Entscheidung nötig, 🟢 erledigt/Empfehlung, 🔵 Info, ⚪ Nebensache.
+- Lucas ist unterwegs und liest am Handy: knappe Stichpunkte, keine langen Absätze.
+- Preise, Zeiten und Verfügbarkeit nie aus dem Gedächtnis nennen, sondern nachschlagen und Quelle angeben.
+- Neue Infos zur Reise gehören hier hinein (Abschnitt "Aktueller Stand" und passende Fachabschnitte), damit die nächste Session sie hat.
+
+## Lucas und Ziel der Reise
+- Solo-Reise, Hostels (Dorms mit 6–8 Betten), 39 Nächte vor Ort: Thailand → Philippinen → Vietnam, 19.1.–1.3.2027.
+- Wichtigstes Ziel: Leute treffen. Die Route ist um drei Gruppenerlebnisse gebaut: Tauchkurs Koh Tao, Boot-Expedition El Nido → Coron, Ha Giang Loop. Diese drei nicht streichen.
+- Reist durchgehend mit dem deutschen Pass (Vietnam 45 Tage visumfrei; mit dem irischen Pass wäre ein E-Visum nötig). Thailand 30 Tage und Philippinen 30 Tage visumfrei.
+- Kein Moped/Roller (kein A1): Songthaew, Boot, Fahrrad, Ha Giang nur als Sozius (Easy Rider).
+- Budget: Zielgröße vor Ort 3.000 €, realistisch 3.100–3.500 €.
+
+## Flexibilitäts-Regel (wichtig)
+Lucas will Spielraum, falls er unterwegs Leute trifft und Pläne ändern will. Nur feste Anker vorab buchen (Langstrecke, Tauchkurs, Boot-Expedition, knappe Flüge um das chinesische Neujahr am 6.2.). Alles andere (Hostels, Busse, Fähren, Touren, Ha Giang, Khao Sok) erst in Asien buchen. Wenn vorab gebucht wird: möglichst umbuchbare Tarife.
+- Koh Phangan (29.–31.1.) und Ninh Binh (22.–25.2.) sind optional und werden spontan vor Ort entschieden (entschieden 24.10.2026).
+- Sparhebel falls nötig (Gedanke 24.10.: ca. 300 € sparen): Ninh Binh weglassen (120–170 €), Koh Phangan weglassen (90–130 €), Buhay Isla statt Big Dream (ca. 100 €), Wracktauchen Coron weglassen.
+
+## Aktueller Stand (27.10.2026)
+Gebucht und erledigt:
+- Qatar Airways, umgebucht am 23.10.: Hinflug 89KMNH Di 19.1.2027 MUC 15:25 → Doha 23:00 (10 h 10 Umstieg) → Bangkok 19:25 am 20.1. Rückflug 89RPEW So 28.2. Hanoi 19:10 → Doha 23:10 (10 h 15) → München 13:25 am 1.3. Gesamt 658 € inkl. Gepäck (vor Umbuchung). Umbuchungskosten, Gepäckfreigrenze und Ticketnummern nicht erfasst. Lucas nannte vorher grob 150 € Umbuchungsgebühr pro Buchung (Schätzung).
+- Bangkok-Hostel: Khao San Social Capsule Hostel (Booking.com), 20.–23.1., 3 Nächte, 1 Dorm-Bett, 57,27 €, Zahlung später, noch nicht bezahlt. Ankunft erst 19:25, Hostel über späte Ankunft informieren.
+- Tauchkurs: Big Blue Diving, Koh Tao, Open Water Diver, Ref. BBD-002058, bezahlt 13.000 THB. Umgebucht: Dorm-Bett ab 24.1., Kurs ab 25.1. (Jim Donaldson, GM, 23.10.). Kurszeit und ob das Dorm im Preis enthalten ist: unklar. Kostenlos umbuchbar bis 18:00 am Vortag. Kontakt info@bigbluediving.com.
+- Boot-Expedition: Buhay Isla, Seeker's Realm 4T/3N, El Nido → Coron, 10.–13.2.2027, 1 Person. Am 27.10. gebucht und vollständig bezahlt: 378 € (Angebot: 26.900 PHP). Zahlungseingang und Buchung vom Anbieter bestätigt; keine Restzahlung. Briefing 9.2. um 18:30, Treffpunkt 10.2. um 08:00 im El-Nido-Büro; Abfahrt San Fernando Port 09:30, Transfer inklusive. Ankunft Coron Ferry Port 13.2. ca. 16:30–17:00, wetterabhängig.
+- Versicherung: Envivas TravelXN, ab 19.1.2027, 19,40 €/Jahr. Kündigung bis 18.10.2027, sonst Verlängerung. Noch schriftlich fragen: Tauchen und Mitfahren auf dem Motorrad (Ha Giang). Unterlagen im Repo-Ordner versicherung/.
+- Reisemedizinische Beratung 6.10. erledigt. APE- und HM-Termine inkl. Landung am 1.3. laut Lucas geklärt (23.10.).
+
+Offen, nächste Schritte:
+1. 🟡 Buhay-Isla-Gästeformular ausfüllen/aktualisieren: https://forms.gle/jxXbu8mkmSJ3pxZg8 (Einreichung nicht bestätigt). El Nido 7.–10.2. und Coron 13.–15.2. sind geplant, Unterkünfte noch nicht gebucht; Daten können variieren. Unterkunft und Kontaktdaten nachreichen. Briefing am 9.2. um 18:30 einplanen.
+2. 🔴 Regionalflüge buchen; Expeditionstermin ist bestätigt: Krabi → Manila 6.2. (Neujahrstag, zugleich Weiterflugnachweis Thailand), Manila → El Nido 7.2. (spätestens am 9.2. in El Nido wegen Briefing), Coron → Manila → Hanoi 15.2. (Weiterflugnachweis Philippinen, in Manila mind. 3 h Umstieg).
+3. 🟡 Impfplan: Tollwut-Serie bis Mitte Januar abschließen.
+4. 🟡 Envivas-Rückfrage (Tauchen, Sozius), Trade-Republic-Karte aktivieren, DKB-Status entscheiden, Ausrüstung (Drybag Pflicht).
+5. Später: TDAC ab 17.1., eTravel Philippinen 72 h vor 6.2., Online-Check-in Qatar ab 17.1. und 26.2.
+Vor Ort buchen: Hostels (Ausnahme Neujahr: Krabi 3.–6.2., El Nido 7.–10.2. etwa 1–2 Wochen vorher), Fähren/Busse, Khao Sok Bungalow (31.1.–3.2.), Ha Giang Loop (Wochenende 20.–21.2. voll), Touren.
+
+## Route in Kurzform
+Bangkok 20.–23.1. · Koh Tao 24.–29.1. (Kurs 25.–27.1., 28.1. Puffer) · Koh Phangan 29.–31.1. (optional) · Khao Sok 31.1.–3.2. · Krabi 3.–6.2. · 6.2. Flug nach Manila · El Nido 7.–10.2. · Expedition 10.–13.2. · Coron 13.–15.2. · 15.2. Flug Hanoi · Hanoi 15.–17.2. · Ha Giang Loop 17.–22.2. · Ninh Binh 22.–25.2. (optional) · Hanoi 25.–28.2. · Rückflug 28.2. 19:10.
+
+## Boot-Expedition: bestätigt (27.10.2026), frühere Anbieter-Recherche
+- Buhay Isla (gebucht): 4T/3N "Seeker's Realm", El Nido → Coron, 10.–13.2.2027, 1 Person; 378 € vollständig bezahlt (Angebot: 26.900 PHP). Zahlungseingang und Buchung bestätigt am 27.10.2026. Keine Restzahlung. Inklusive Mahlzeiten, Getränke, Masken/Schnorchel, Kajaks, Huts/Zelte und Transfer vom Büro zum Hafen; Flossen nur nach Voranmeldung gegen Mietgebühr.
+- Verbindliche Logistik laut Bestätigung: Briefing am 9.2.2027 um 18:30 im Buhay-Isla-Büro, Corong-Corong, Sitio Lugadia Highway, neben Adventist Clinic/Pops District. Treffpunkt am 10.2. um 08:00 im selben Büro, inkl. Jeepney-Transfer zum San Fernando Port, Abfahrt 09:30. Ende am 13.2. ca. 16:30–17:00 am Coron Ferry Port, vorbehaltlich Wetterverzögerungen. WhatsApp: +63 939 936 2095.
+- Bedingungen laut neuer Bestätigung: volle Erstattung nur bei wetterbedingter Absage durch die Küstenwache; Umbuchung bei freien Plätzen möglich. Bei Krankheit/Flugverspätung kann der Anbieter eine Bescheinigung für die Reiseversicherung ausstellen; dies ist keine Versicherungs- oder Erstattungszusage. Ältere Angaben zu 50 % Anzahlung und pauschalen Stornofristen sind überholt.
+- Gästeformular: https://forms.gle/jxXbu8mkmSJ3pxZg8 – später editierbar, Einreichung nicht bestätigt. Geplante Aufenthalte El Nido 7.–10.2. und Coron 13.–15.2.; Unterkünfte noch offen, Angaben nachreichen.
+- Packen: 1 Hauptgepäckstück wird bis Reiseende verstaut; alles für vier Tage in separatem Rucksack/Drybag mitführen. Wertsachen wasserdicht sichern. Eigenes Handtuch, Wasserflasche, Wasserschuhe, Rashguard, leichte Regenjacke, Sonnenschutz, Mückenschutz, Powerbank, Stirnlampe und persönliche Medikamente. Stromzugang begrenzt.
+- Big Dream Boatman (frühere Alternative, keine Buchung nötig): 4T/3N El Nido → Coron, $599 (regulär $649), alles inklusive außer Trinkgeld und Umweltgebühr. 10.–13.2.2027 buchbar, "Seats Left: 10+" (Stand 24.10.). Online-Buchung auf bigdreamboatmancoron.com, 40 % Anzahlung, Rest mind. 7 Tage vorher. Storno ab 30 Tage vorher: Anzahlung zurück minus $50, danach nichts. Umbuchung ab 30 Tage vorher kostenlos, danach $50. Treffpunkt 9:00 Uhr 86'd Gourmet Cafe &amp; Bar, El Nido; Abfahrt San Fernando ca. 11:00; Ankunft Coron ca. 15:00–16:00 am Tag 4.
+- Seatours Palawan: nur 3T/2N, 22.900 PHP, Live-Buchung. Tao Philippines: nur 5T/4N, ca. 35.000 PHP+, passt nicht.
+- Packen: eigener Drybag Pflicht, großes Gepäck liegt unter dem Boot, Tagesrucksack, reef-safe Sonnencreme, Wasserschuhe, Reisetabletten, Stirnlampe.
+
+## Quellen und Belege im Repo
+- evidence/2026-10-27/buhay-isla-confirmation.txt: vom Nutzer eingefügte Anbieterbestätigung mit Zahlungseingang, Termin, Logistik, Packliste und Bedingungen. README.md verlinkt die Buchungsübersicht.
+- evidence/2026-10-23/: Qatar-App-Screenshots der umgebuchten Flüge. "Flight rescheduling 2026-10-21.md": Verlauf der Umbuchung. alter-plan.html: alter Plan (1.2.–14.3.2027), nur Archiv.
+- Nicht in diese Seite schreiben: Booking-PIN, Bankdaten.
+
+# Anhang A: Vollständiger Seiteninhalt (Stand 27.10.2026)
+Alle Abschnitte der Reiseseite, auch die, die nicht mehr in der Hauptansicht stehen (Warum diese Route, Führerschein, bereits Ausgegebenes, Tageskosten, Empfehlungen der Freunde, Leute treffen). Buchungsstatus und Expeditionsdetails wurden am 27.10.2026 nach der Anbieterbestätigung aktualisiert.
+
+### Umbuchung
+
+#### Ergebnis der Prüfung (Check · 22.10.2026)
+Alles Geplante passt ins neue Fenster: drei Länder und alle Highlights, nur eine Nacht weniger als vorher. Kein echtes No-Go. Die Reihenfolge Thailand → Philippinen → Vietnam bleibt richtig.
+- **Boot-Expedition** ist bestätigt und vollständig bezahlt (27.10.): 10.–13.2.2027, 1 Person, 378 €. Nächster Buchungsschritt: Regionalflüge.
+- **APE und HM:** Termine laut Lucas am 23.10.2026 geklärt, auch die Landung am 1.3.
+- **Reisepass:** durchgehend den **deutschen** nutzen. Vietnam 45 Tage visumfrei; mit dem irischen Pass wäre ein E-Visum nötig.
+- **Rückflug** 28.2. ab Hanoi landet am **1.3. um 13:25** in München, einen Tag nach der ursprünglichen Frist (28.2.). Laut Lucas mit APE und HM geklärt (23.10.2026).
+- **Ha Giang im Februar**: kälter und nebliger als im März. Machbar, aber schlechtere Chancen auf klare Sicht.
+- **Tết-Puffer** schrumpft von 3,5 Wochen auf etwa eine. Reicht, Vietnam aber nicht nach vorne ziehen.
+- **Chinesisches Neujahr (6.2.)** liegt jetzt mitten in der Reise: Thailand und Philippinen voller und teurer.
+- Alle Buchungsfristen rücken etwa zwei Wochen nach vorne.
+Der alte Plan mit allen Daten liegt unter Alter Plan (alter-plan.html). Dort bleiben auch die bisherigen Abhak-Stände erhalten.
+
+#### 1 · Qatar-Flüge: umgebucht (Erledigt am 23.10.2026 · Hinflug 89KMNH · Rückflug 89RPEW)
+**Hin:** Di 19.1., München 15:25 → Doha 23:00 · 10 h 10 Umstieg · Doha 09:10 → **Bangkok 19:25 am 20.1.**
+**Zurück:** So 28.2., Hanoi 19:10 → Doha 23:10 · 10 h 15 Umstieg · Doha 09:25 → **München 13:25 am 1.3.**
+- **Belege:** Hinflug 89KMNH (evidence/2026-10-23/qatar-rebooked-outbound-89KMNH.webp) · Rückflug 89RPEW (evidence/2026-10-23/qatar-rebooked-return-89RPEW.webp) (Qatar-App, 23.10.2026).
+- Beide Umstiege in Doha liegen nachts (ca. 23:00–09:10): kein Stadtbesuch, eher Lounge oder Ruhebereich.
+- Online-Check-in öffnet 48 h vorher: Hinflug ab 17.1., Rückflug ab 26.2.
+- Bangkok erst am Abend: Hostel über späte Ankunft informieren; Early Check-in ist nicht mehr nötig. TDAC ab 17.1. ausfüllen.
+- Noch festhalten: gezahlte Umbuchungskosten, Gepäckfreigrenze, Ticketnummern. Bestätigungsmails und Rechnungen sichern.
+- Bei Bedarf Qatar: +49 69 1748 9914 (08:00–17:00 laut Lucas).
+Achtung: Der Rückflug landet am 1.3. um 13:25, einen Tag nach der zuvor genannten Frist (28.2.). Aus Abflug 19:10 plus 10 h 15 Umstieg abgeleitet. Laut Lucas mit APE und HM geklärt (23.10.2026).
+
+#### 2 · Bangkok-Hostel: umgebucht (Erledigt am 22.10.2026 · Booking.com)
+Khao San Social Capsule Hostel: Datum geändert von 1.–6. Februar (€ 92,58) auf **20.–23. Januar, 3 Nächte, 1 Dorm-Bett, € 57,27**. Booking.com bestätigt die Änderung. **Noch nicht bezahlt** (Zahlung vor Ort / später); es wurde nichts erstattet, weil nichts abgebucht war.
+- Bestätigungsmail abwarten und prüfen: Zahlungstermin und kostenlose Stornofrist für die **neuen** Daten stehen dort, nicht mehr die alten.
+- Wenn die Flüge später anders fallen: Datum auf Booking.com erneut ändern, solange die Frist läuft.
+- Early Check-in für 20.1., 09:00 neu schriftlich beim Hostel bestätigen lassen (Check-in laut Buchung 14:00). Die alte Zusage gilt nicht automatisch.
+
+#### 3 · Expedition und Tauchkurs bestätigt (Stand 27.10.2026)
+Buhay Isla und Big Blue sind gebucht und bezahlt.
+- **Buhay Isla:** Seeker's Realm, 4T/3N El Nido → Coron, **10.–13.2.2027**, 1 Person; **378 € vollständig bezahlt**, Zahlungseingang und Buchung bestätigt am 27.10. Briefing **9.2., 18:30**, Treffpunkt **10.2., 08:00** im El-Nido-Büro. Gästeformular/Unterkunftsdaten bleiben offen.
+- **Big Blue Diving (Koh Tao), Ref. BBD-002058:** umgebucht. Antwort von Jim Donaldson (General Manager), 23.10.2026: **Dorm-Bett ab 24.1.2027, Kurs startet am Folgetag (25.1.)**. Bezahlt 13.000 THB. WhatsApp +66 8 1920 5698.
+- Die alten Anfragen bei IHASIA &amp; Co. sind damit hinfällig; keine Doppelbuchung.
+
+#### 4 · Was sich gegenüber dem alten Plan ändert (Machbar, aber anders)
+- **Länge:** 39 Nächte vor Ort, wie vorher. Ankunft Bangkok erst 20.1. um 19:25, Rückflug 28.2. um 19:10; Landung München 1.3., 13:25.
+- **Koh Tao Ende Januar:** Ausläufer des Nordost-Monsuns. Etwas höheres Risiko für raue See, schlechtere Sicht und ausfallende Fähren als im Februar.
+- **Chinesisches Neujahr:** nicht mehr in Bangkok, sondern am Tag des Flugs Krabi → Manila. Yaowarat-Nacht fällt weg.
+- **Chatuchak:** passt jetzt, Bangkok umfasst das Wochenende 23.–24.1.
+- **Koh Phangan:** Full Moon um den 22.1. (vorläufig) ist vorbei; um den 29.–30.1. ist Halbmond. Termine im Dezember prüfen.
+- **Expedition:** 10.–13.2. statt 24.–27.2.; überschneidet sich mit chinesischem und koreanischem Neujahr und dem Valentinswochenende.
+- **Vietnam:** Ankunft 15.2., fünf Tage nach Ende der offiziellen Tết-Feiertage (4.–10.2.2027). Danach Pilgersaison, an Wochenenden voll.
+- **Ha Giang:** Februar statt März. Tags 8–15 °C, nachts um 5 °C, Nebel am Morgen, Frost bei Dong Van möglich. Pfirsichblüte als Bonus.
+- **Ninh Binh:** eher grau und nieselig, Reisfelder noch kahl oder geflutet statt grün.
+- **Nicht mehr relevant:** Makha Bucha am 21.2. (Alkoholverbot), da du dann schon in Vietnam bist.
+
+#### 5 · Weitere Reservierungen und Zahlungen abgleichen (Einmal vollständig prüfen)
+- Bestätigungsmails, Buchungsportale und Kartenumsätze auf zusätzliche Buchungen seit August prüfen.
+- Für jede Buchung notieren: Anbieter, Buchungsnummer, alter Termin, bezahlter Betrag, Änderungsgebühr, Stornofrist.
+- Stornierungen und Erstattungen erst nach Bestätigung als erledigt markieren.
+
+### Buchungsstatus
+
+#### Was steht (Stand 27.10.2026)
+Expedition 10.–13.2. bestätigt und bezahlt. Jetzt Regionalflüge buchen; Gästeformular und Unterkunftsdaten ergänzen.
+- Langstreckenflüge: gebucht · umbuchen
+- Hostel Bangkok: umgebucht auf 20.–23.1. · zahlt später
+- Tauchkurs Koh Tao (Big Blue): bezahlt · umgebucht: Dorm ab 24.1., Kurs ab 25.1.
+- Boot-Expedition: Buhay Isla · 10.–13.2.2027 · 1 Person · bestätigt · 378 € bezahlt
+- Regionalflüge (3×): offen
+- Ha Giang Loop: offen
+- Khao Sok Bungalow: offen
+- Impfungen: laufend
+- Boot-Expedition: Buhay Isla, Seeker's Realm 4T/3N, El Nido → Coron, 10.–13.2.2027, 1 Person. Am 27.10. gebucht und vollständig bezahlt: 378 € (Angebot: 26.900 PHP). Zahlungseingang und Buchung vom Anbieter bestätigt; keine Restzahlung. Briefing 9.2. um 18:30, Treffpunkt 10.2. um 08:00 im El-Nido-Büro; Abfahrt San Fernando Port 09:30, Transfer inklusive. Ankunft Coron Ferry Port 13.2. ca. 16:30–17:00, wetterabhängig.
+- Versicherung: Envivas TravelXN · abgeschlossen 23.10.
+**Qatar Airways, Refs. 89KMNH (hin) und 89RPEW (zurück), 658 € inkl. Gepäck.** Umgebucht am 23.10.2026: Hinflug 19.1. MUC 15:25 → Doha → Bangkok 19:25 am 20.1.; Rückflug 28.2. HAN 19:10 → Doha (10 h 15 Umstieg) → München 13:25 am 1.3.
+
+**Khao San Social Capsule Hostel** (Booking.com): am 22.10.2026 umgebucht auf 20.–23.1., 3 Nächte, € 57,27, noch nicht bezahlt.
+
+### Warum diese Route
+
+#### Drei Zwänge
+Tết vom 4. bis 10. Februar, das Wetter in Nordvietnam und der Monsun im Golf von Thailand. Vietnam bleibt deshalb am Ende.
+- **Tết (6.2.)** — offizielle Feiertage 4.–10.2.2027. Davor ist Transport ausgebucht, währenddessen vieles zu. Vietnam erst ab 15.2.
+- **Nordvietnam im Januar** ist am kältesten. Februar ist kühl und neblig, aber machbar; März wäre besser, liegt aber außerhalb des Fensters.
+- **Golf von Thailand** beruhigt sich Ende Januar. Koh Tao deshalb nicht vor dem 24.1.
+Innerhalb Thailands läuft die Route weiter von Ost nach West: Bangkok → Golf (Koh Tao, Koh Phangan) → Khao Sok → Andamanenseite (Krabi) → Abflug ab Krabi. Kein Rückweg.
+
+Chiang Mai wäre Ende Januar sogar möglich, weil die Brandrodungssaison erst später beginnt. Kostet aber Reisetage, deshalb weiter nicht eingeplant.
+
+2027 fällt Tết auf denselben Tag wie das chinesische Neujahr. Das treibt Flug- und Unterkunftspreise in der ganzen Region etwa vom 1. bis 14. Februar hoch.
+
+### Vorbereitung
+
+#### Impfungen (bis Mitte Januar abschließen)
+Beratung am 6.10. erledigt. Tollwut braucht 2–3 Dosen über 3–4 Wochen. Mit dem früheren Abflug muss der Impfplan bis etwa Mitte Januar fertig sein.
+- Standard: Tetanus, Diphtherie, Polio, MMR
+- Hepatitis A — praktisch Pflicht in Südostasien
+- Typhus — bei viel Streetfood
+- Tollwut — relevant wegen Ha Giang und Khao Sok
+Hepatitis B je nach Vorgeschichte, Japanische Enzephalitis nur bei viel Zeit im ländlichen Raum. Malaria ist auf deiner Route ein geringes Risiko. Das reale Thema ist **Dengue** — dagegen hilft nur Mückenschutz, und die Mücken stechen tagsüber. Was für dich gilt, entscheidet die Ärztin.
+
+Kosten grob 200–400 €. Viele Krankenkassen erstatten Reiseimpfungen ganz oder teilweise.
+
+#### Versicherung (vor der Buchung der Expedition)
+Die TK zahlt in keinem der drei Länder. Rücktransport zahlt die gesetzliche Kasse grundsätzlich nie.
+- Rücktransport „medizinisch **sinnvoll und vertretbar**“ — nicht „notwendig“
+- Zeitraum 19.1.–1.3.2027, also mindestens 42 Tage
+- Tauchausbildung und Sporttauchen bis 40 m eingeschlossen
+- Motorrad als Sozius
+- Such-, Rettungs- und Bergungskosten
+- Keine Selbstbeteiligung
+Über die TK gibt es Envivas-Tarife (TravelXN / TravelXF, bis 60 Tage) direkt im TK-Portal. Als Vergleichsbasis nehmen, nicht automatisch abschließen — HanseMerkur, ERGO, Barmenia, Würzburger und DKV sind für junge Einzelpersonen oft günstiger.
+
+„Notwendig“ heißt: Du wirst nur zurückgeflogen, wenn die Behandlung vor Ort nicht ausreicht — und in Bangkok reicht sie fast immer.
+
+Kosten 30–60 € für den Zeitraum.
+
+#### Führerschein (Entscheidung nötig)
+Mit Klasse B darfst du in Thailand und Vietnam kein Moped fahren. B196 gilt nur in Deutschland.
+Der Internationale Führerschein überträgt nur Klassen, die du tatsächlich hast. Bei einem Unfall greift die Haftpflicht nicht, und die Auslandskrankenversicherung kann die Leistung verweigern. Vietnam hat die Kontrollen verschärft, Bußgelder 2–8 Mio. VND plus Beschlagnahmung.
+
+**Konsequenz:** Ha Giang als Sozius ist richtig. In Thailand Songthaews und Longtailboote. A1 vor Januar ist zeitlich knapp.
+
+#### Geld (Trade Republic + DKB)
+Trade Republic ist deine Hauptkarte: keine Fremdwährungsgebühr, weltweit kostenlos abheben ab 100 €.
+- PIN in der App unter Profil → Karte → PIN anzeigen. Vor Abflug merken.
+- Karte einmal in Deutschland mit PIN nutzen, damit kontaktlos freigeschaltet ist.
+- Kartennummer und CVV stehen nur in der App — für Online-Buchungen nötig.
+- Cash-Guthaben auffüllen: Die Karte zieht nicht aus Wertpapieren.
+**DKB** ist weltweit nur mit Aktivstatus kostenlos (700 € monatlicher Geldeingang). Ohne Aktivstatus 2,20 % auf Fremdwährung. Entweder jetzt einen Dauerauftrag einrichten oder DKB als reine Notfallkarte nutzen.
+
+**DCC immer ablehnen.** Immer in Landeswährung abrechnen. Der angebotene Kurs liegt 3–6 % über dem echten.
+
+**Thailand:** 220 Baht Automatengebühr. Einmal 20.000 abheben statt fünfmal 4.000 spart ~25 €. **Vietnam:** TPBank und MB Bank gelten als gebührenfrei. **Philippinen:** ~250 PHP bei niedrigem Limit.
+
+Beide Karten getrennt verstauen. Sperrnotruf 116 116, aus dem Ausland +49 116 116.
+
+#### Packen (40–50 l Rucksack)
+Weniger als du denkst. Alles außer Elektronik kaufst du unterwegs nach, Wäsche kostet in Thailand ~1 €/kg.
+- Drybag (10–20 l) — auf der Expedition kommst du vier Tage nicht ans Hauptgepäck
+- Richtig warme Schicht für Ha Giang im Februar: nachts um 5 °C, Frost möglich, auf dem Motorrad gefühlt kälter. Dazu Regenschutz gegen Nieselregen.
+- Feste Schuhe für Khao Sok und Ninh Binh, dazu Flip-Flops
+- Stirnlampe, Powerbank, Weltadapter, Vorhängeschloss
+- Ohrstöpsel und Schlafmaske — bei 30 Nächten im Dorm nicht optional
+Kleidung: 5–6 T-Shirts, 2 Shorts, 1 lange leichte Hose, 2 Badehosen, 1 Longsleeve gegen Sonne und Mücken, Unterwäsche für sieben Tage, dünne Regenjacke.
+
+Reef-safe Sonnencreme, Mückenschutz mit DEET oder Icaridin, Mikrofasertuch, kleine Reiseapotheke mit Elektrolyten und Durchfallmittel.
+
+Warme Jacke, Handschuhe und Mütze für Ha Giang günstig in Hanoi nachkaufen.
+
+#### Einreise (kurz vor Abflug)
+Mit dem deutschen Pass sind alle drei Länder visumfrei. Dazu zwei Pflichtregistrierungen, beide erst 72 Stunden vorher.
+- **Thailand:** seit 15.9.2026 nur noch **30 Tage** visumfrei (vorher 60). Reicht für 17 Nächte.
+- **TDAC** Thailand — tdac.immigration.go.th, kostenlos, frühestens 72 h vor Ankunft am 20.1.
+- **eTravel** Philippinen — etravel.gov.ph, kostenlos, 72 h vor dem 6.2.
+- **Reisepass:** durchgehend den **deutschen** nutzen (Flug, TDAC, eTravel, Einreise). **Vietnam:** 45 Tage visumfrei (Regelung bis 14.3.2028); mit dem irischen Pass wäre ein E-Visum nötig.
+- Reisepass muss mindestens sechs Monate über die Ausreise hinaus gültig sein.
+Philippinen 30 Tage visumfrei. Nur die offiziellen Domains nutzen, es gibt viele Fake-Seiten mit Gebühren.
+
+Alle drei können einen **Weiterflugnachweis** verlangen. Deshalb den Flug Krabi → Manila buchen, bevor du nach Bangkok fliegst.
+
+### Thailand
+
+#### Bangkok (20.–23.01 · 3 Nächte)
+Ankommen, Jetlag abbauen, Anschluss finden. Landung 19:25 am 20.1. nach 10 h Umstieg in Doha, also erst abends im Hostel. Volle Tage sind der 21. und 22.1. Hostel über späte Ankunft informieren.
+- Rajadamnern Stadium — Muay Thai, Tickets ab ~1.000–2.000 THB. Günstige Ränge nehmen.
+- Yaowarat (Chinatown) abends ab 18 Uhr — beste Streetfood-Straße Asiens
+- Chatuchak am Samstag, 23.1., vor dem Nachtbus
+- Wat Pho und Wat Arun, früh hin
+- Express Boat auf dem Chao Phraya statt Taxi, 20 THB
+Khao San Social Capsule, Soi Rambuttri-Gegend. Eine Straße hinter der Khao San — gleiche Dichte, aber du kannst schlafen.
+
+Eine Nacht kürzer als im alten Plan, dafür bekommst du jetzt das Wochenende mit. Chinesisches Neujahr (6.2.) erlebst du nicht mehr in Bangkok.
+
+Am Abend des 23.1. Nachtbus/Zug plus Fähre nach Koh Tao. Budget 160–230 €.
+
+#### Koh Tao — Tauchschein (24.–29.01 · 5 Nächte)
+**Gebucht: Big Blue Diving, Open Water Diver, Ref. BBD-002058, bezahlt 13.000 THB. Umgebucht: Dorm-Bett ab 24.1.2027, Kurs ab 25.1. (25.–27.1.).** 3 Tage, 6 Tauchgänge.
+- Umbuchung bestätigt (Jim Donaldson, 23.10.): Dorm ab 24.1., Kurs ab 25.1.
+- Bestätigung kam über DiveOps.ai: erst „Payment received, checking availability“, dann „Booking confirmed“. Bestätigungsmail mit Kursdetails prüfen.
+- Bezahlte 13.000 THB (~320 €, mehr als die ursprünglich geschätzten 9.000 THB): Wetter-, Absage- und Umbuchungsregel erfragen
+- Ende Januar: Wind und Sicht schwanken noch. 28.1. als Puffer- oder Fun-Dive-Tag lassen
+Achtung: Ende Januar laufen die Ausläufer des Nordost-Monsuns aus. Bei hohen Wellen fallen Fähren aus. Weiterreise am 29.1. nicht eng an einen festen Termin koppeln.
+**Warum Koh Tao ganz nach vorne gehört:** Ein Tauchkurs ist die effektivste Freundschaftsmaschine der Reise. Drei Tage dieselbe Kleingruppe, und weil das in Woche eins passiert, begleiten dich diese Leute potenziell fünf Wochen statt einer.
+
+**Stundenplan laut Website:** Tag 1 — 08:30 Papierkram, 09:30 Theorie, 12:00 zwei Tauchgänge. Tag 2 — 09:00 Theorie, 10:00 Prüfung, 12:00 zwei Tauchgänge. Tag 3 — 06:30 zwei Tauchgänge, 12:00 Zertifizierung.
+
+**Noch klären:** Verfügbarkeit, Endpreis inkl. Zertifizierungskarte, Unterkunft während des Kurses, SSI-Theorie vorab online.
+
+Danach ein Fun Dive am Chumphon Pinnacle, wenn das Wetter mitspielt. Budget 350–450 €.
+
+#### Koh Phangan (29.–31.01 · 2 Nächte)
+Liegt umwegfrei auf der Fährstrecke. Keine Full Moon Party — die ist um den 22.1. (vorläufig), da bist du noch in Bangkok.
+Achtung: Termine für Ende Januar 2027 stehen noch nicht fest. Um den 29.–30.1. ist Halbmond; im Dezember prüfen, ob Half Moon Festival oder Jungle Experience im Fenster liegen. Sonst Stopp streichen und die Nächte an Koh Tao oder Krabi hängen.
+Nordbuchten statt Haad Rin: Haad Yao, Chaloklum, Bottle Beach. Budget 90–130 €.
+
+#### Khao Sok Nationalpark (31.01–03.02 · 3 Nächte)
+Ältester Regenwald der Welt, Karstberge im Stausee. Der Natur-Reset.
+- Floating Bungalow auf dem Cheow-Lan-See, 2 Tage / 1 Nacht, 3.000–5.000 THB
+- Höhlenwanderung Nam Talu — teils durch Wasser, nur mit Guide
+- Dschungeltrek, halbtags 800–1.200 THB
+Achtung: Kurz vor dem chinesischen Neujahr sind Rafthouses gefragt. Im Dezember reservieren, nicht erst im Januar.
+Anreise: Fähre von Koh Phangan nach Surat Thani, dann Minivan. Khao Sok liegt genau auf dem Weg zur Andamanenseite. Budget 200–280 €.
+
+#### Krabi — Ao Nang und Railay (03.–06.02 · 3 Nächte)
+Januar/Februar ist Hochsaison an der Andamanenküste: ruhige See und Postkartenwetter.
+- Railay Beach — nur per Longtailboot, 100–150 THB ab Ao Nang
+- Klettern in Railay, Halbtageskurs ab 1.000–1.500 THB
+- Kajaktour durch die Wasserhöhlen bei Ao Thalane
+- Phi Phi als Tagesausflug, nicht als Übernachtung
+Phi Phi als Tagesausflug ab Ao Nang (1.200–1.800 THB). Um das chinesische Neujahr sehr voll; Hong Islands sind leerer bei ähnlicher Landschaft.
+
+Unterkunft für diese Nächte vorab buchen, Preise steigen zum Neujahr. Budget 220–320 €. Am 6.2. Flug Richtung Manila.
+
+### Philippinen
+
+#### Anreise und El Nido (06.02 Manila · 07.–10.02 El Nido · 3 Nächte)
+Februar ist Trockenzeit in Palawan. Anfang Februar kann es etwas windiger sein als Ende Februar.
+- Island Hopping Tour A — im Ort buchen, plus 200 PHP Umweltgebühr
+- Nacpan Beach, 4 km Sandstrand, 45 Min außerhalb
+- Taraw Cliff Viewpoint bei Sonnenaufgang
+Achtung: Flug Krabi → Manila am 6.2. ist der Tag des chinesischen Neujahrs; dazu koreanisches Neujahr. Flüge und Unterkünfte im November buchen.
+El Nido als Ort ist laut, aber die Hostel-Szene ist extrem gut fürs Leutekennenlernen. Outpost, Mad Monkey und Spin Designer Hostel haben ein aktives Abendprogramm.
+
+Anreise: Manila → El Nido direkt mit AirSWIFT (110–150 €) oder billiger über Puerto Princesa plus 6 h Van.
+
+Budget 250–330 €.
+
+#### Expedition El Nido → Coron (10.–13.02 · 4 Tage / 3 Nächte)
+Gebucht und vollständig bezahlt am 27.10.2026: Buhay Isla, Seeker's Realm, 1 Person, 10.–13.2.2027. Vier Tage Bangka-Boot durch die Linapacan-Inseln, Übernachtung in einfachen Hütten/Zelten.
+- Buhay Isla · Seeker's Realm 4T/3N: 378 € vollständig bezahlt (Angebot 26.900 PHP); keine Restzahlung.
+Achtung: Briefing 9.2., 18:30 im El-Nido-Büro (Corong-Corong, neben Adventist Clinic/Pops District). Am 10.2. um 08:00 dort treffen; Transfer inklusive, Abfahrt San Fernando Port 09:30. Ankunft Coron Ferry Port 13.2., ca. 16:30–17:00, wetterabhängig.
+Begrenzter Stromzugang; Hauptgepäck bis Reiseende verstaut. Alles für vier Tage in separaten Rucksack/Drybag packen, Wertsachen wasserdicht sichern. Eigenes Handtuch, Wasserflasche, Wasserschuhe, Rashguard, leichte Regenjacke, Powerbank, Stirnlampe und persönliche Medikamente mitnehmen. Masken/Schnorchel inklusive; Flossen nur auf Anfrage gegen Mietgebühr.
+
+**Bedingungen laut Bestätigung:** volle Erstattung nur bei wetterbedingter Absage durch die Küstenwache; Umbuchung bei freien Plätzen möglich. Bei Krankheit/Flugverspätung kann der Anbieter eine Bescheinigung für die Reiseversicherung ausstellen. Weiterflug am 15.2. bleibt geplant, noch nicht gebucht.
+
+Gästeformular (Einreichung nicht bestätigt): https://forms.gle/jxXbu8mkmSJ3pxZg8. Geplant: El Nido 7.–10.2., Coron 13.–15.2.; Unterkünfte noch nicht gebucht, Daten können variieren. Angaben nachreichen. WhatsApp El-Nido-Büro: +63 939 936 2095.
+
+#### Coron (13.–15.02 · 2 Nächte)
+Hier zahlt sich der frische Tauchschein aus: japanische Kriegswracks in 10–40 m Tiefe.
+- Wracktauchen, 2 Tauchgänge ~3.500–5.000 PHP. Skeleton Wreck und Lusong Gunboat sind auf Open-Water-Niveau.
+- Kayangan Lake
+- Barracuda Lake — Süß- und Salzwasser geschichtet
+**Flugregel:** 18–24 Stunden zwischen letztem Tauchgang und Flug. Tauchen am 14.2., Flug am 15.2. — passt, aber nicht am Abflugtag tauchen.
+
+Am 15.2. Flug Busuanga → Manila → Hanoi, in Manila mindestens 3 h Umsteigezeit. Budget 250–330 €.
+
+### Vietnam
+
+#### Hanoi (15.–17.02 · 2 Nächte)
+Tết-Feiertage enden am 10.2. Am 15.2. läuft das Land wieder, einzelne Familienbetriebe können noch zu sein.
+- Bia-Hoi-Ecke, Tạ-Hiện-Straße — frisch gebrautes Bier für ~25 Cent
+- Bún chả, Bánh mì, Egg Coffee
+- Hoàn-Kiếm-See morgens um sechs
+- Hostels im Old Quarter sind der Umschlagplatz für Ha-Giang-Gruppen
+- Warme Sachen für Ha Giang hier kaufen
+Februar in Hanoi: kühl, oft Nieselregen, Luftqualität häufig schlecht. Kein Grund zum Streichen, aber eine Maske kann sinnvoll sein.
+
+Train Street: Status wechselt regelmäßig. Budget 90–130 €.
+
+#### Ha Giang Loop (17.–22.02 · 4 Tage + Nachtbusse)
+Von vier Freunden empfohlen. Als Easy Rider, hinten beim Fahrer.
+- Sleeper-Bus Hanoi → Ha Giang am Abend des 17.2., 6–7 h
+- Mã Pí Lèng Pass und die Nho-Quế-Schlucht
+- Preis 200–260 € inkl. Fahrer, Benzin, Mahlzeiten, Homestays, Bus
+- Anbieter: Bong Hostel, Jasmine, Mama's Homestay, QT Motorbikes
+Achtung: Februar statt März: tags 8–15 °C, nachts um 5 °C, morgens Nebel, Frost bei Dong Van möglich. Sicht kann wegfallen. Nach Tết viele einheimische Reisende, Wochenende 20.–21.2. voll. Border Area Permit (200.000–265.000 VND) beim Buchen ausdrücklich abfragen.
+**Warum Easy Rider:** Mit Klasse B fährst du in Vietnam illegal und ohne Versicherungsschutz. Als Sozius hast du keins dieser Probleme.
+
+**Sozial identisch:** Konvoi mit 8–15 anderen Backpackern, gemeinsame Homestay-Abende.
+
+4-Tage-Variante nehmen. Im Februar spät losfahren, bis der Talnebel aufreißt; das machen gute Anbieter ohnehin.
+
+Pfirsich- und Pflaumenblüte rund um Tết ist der Bonus des Februars.
+
+Etwa Anfang Januar buchen, Anzahlung 30–50 %.
+
+#### Ninh Bình (22.–25.02 · 3 Nächte)
+Halong-Bucht ohne Meer: Kalksteintürme zwischen Reisfeldern.
+- Ruderboottour Trang An statt Tam Cốc — ~250.000 VND. Unter der Woche fahren.
+- Hang Mua Viewpoint, 500 Stufen
+- Fahrräder gratis im Hostel
+- Banana Tree Hostel (Lenis Tipp), vorher buchen
+Ende Februar eher grau, Reisfelder noch kahl oder geflutet. Nach Tết beginnt die Pilgersaison (Bái Đính), am Wochenende voll.
+
+Anreise 2–2,5 h ab Hanoi bzw. direkt mit dem Bus aus Ha Giang. Budget 120–170 €.
+
+#### Letzte Nächte Hanoi (25.–28.02 · 3 Nächte)
+Rückflug am 28.2. um 19:10: Check-out gegen 12:00, gegen 16:00 zum Flughafen. Der Vormittag bleibt frei, die zusätzliche Nacht ist dein Puffer.
+Achtung: Landung in München am 1.3. um 13:25, einen Tag nach der ursprünglichen Frist. Wenn auf den Philippinen etwas ausfällt, kürzt du Ninh Binh oder eine Hanoi-Nacht.
+
+### Budget
+
+#### Vor Ort (Zielgröße 3.000 €)
+Realistisch 3.100–3.500 €. Neu: Neujahrs-Aufschlag auf Flüge und Unterkünfte rund um den 6.2.
+- Thailand · 17 Nächte: 1.050–1.400 €
+- Philippinen · 9 Nächte: 850–1.250 €
+- Vietnam · 13 Nächte: 620–880 €
+- Regionalflüge: 350–600 €
+- Summe: 2.850–4.100 €
+**Hebel:** 1. Buhay Isla statt Big Dream spart 150–200 €. 2. Konsequent Dorms und Streetfood. 3. Wracktauchen in Coron oder Koh Phangan streichen.
+
+Die Werte sind aus dem alten Plan auf die neuen Nächte umgerechnet, nicht neu recherchiert.
+
+#### Bereits ausgegeben
+- Flüge Qatar (89KMNH + 89RPEW): 658 €
+- Umbuchung Qatar (Betrag nicht erfasst): offen
+- Tauchkurs Big Blue (BBD-002058, bezahlt): 13.000 THB
+- Buhay Isla Seeker's Realm, 10.–13.2., 1 Person: 378 € vollständig bezahlt; im Philippinen-Budget enthalten, nicht zusätzlich addieren.
+- Hostel Bangkok 20.–23.1. (zahlt später, offen): € 57,27
+Dazu vor der Reise: Impfungen 200–400 €, Versicherung 30–60 €. Plus 300–500 € Notfallrücklage.
+
+#### Tageskosten
+- Hostel-Dorm TH / PH / VN: 8–16 / 12–22 / 6–12 €
+- Essen pro Tag: 10–25 €
+- Bier: 0,80–3 €
+- Basis ohne Aktivitäten: 25–60 €
+
+### Empfehlungen der Freunde
+
+#### Übernommen
+Bangkok als Start (Mati) · Krabi und Ao Nang (Mati, Molly) · Koh Tao mit Tauchschein (Nam, Leni) · Khao Sok (Nam) · Rajadamnern · El Nido–Coron (Leni) · Hanoi (Molly, Leni, Niclas) · Ha Giang (alle vier) · Ninh Binh mit Banana Tree (Molly, Leni)
+
+#### Weggelassen
+Chiang Mai und Pai — Ende Januar wettermäßig möglich, kosten aber Reisetage. Phuket — Mati sagt es selbst. Koh Chang/Mak/Kood an der Ostküste, zwei Transfertage. Koh Lipe ganz im Süden. Bali im Februar nass. Banggai Islands zwei Tage Anreise. Sri Lanka, Kambodscha, Laos, Singapur — kein Platz.
+**Koh Lipe** ist wahrscheinlich Matis bester Tipp. Tausch: Ao Nang raus, Koh Lipe rein, dafür einen Reisetag opfern.
+
+**Hoi An, Ho-Chi-Minh-Stadt:** Mit 12 Tagen bleibst du im Norden. Mittelvietnam wäre im Februar wärmer, aber Ha Giang fiele dann weg.
+
+#### Nicht entschlüsselt
+„Rainbowfish“ (Nams Tauchschule) · „Ban Tal Thai“ · „Thai boxing anachaeun“. Bei Gelegenheit nachfragen.
+Nams „Koh Tao in Vietnam“ ist ein Mix-up — Koh Tao liegt im Golf von Thailand.
+
+„Ban Tal Thai“ könnte Ban Tai auf Koh Phangan sein.
+
+### Leute treffen
+
+#### Drei Gruppenformate
+Die Route ist darauf gebaut — nicht über Partys, sondern über mehrtägige Gruppenerlebnisse.
+- **Tauchkurs Koh Tao** — 3 Tage, dieselbe Kleingruppe, in Woche eins
+- **Boot-Expedition** — 4 Tage, ~20 Leute, kein Handyempfang
+- **Ha Giang Loop** — 4 Tage Konvoi, gemeinsame Homestay-Abende
+Dorms mit 6–8 Betten buchen, nicht die 20-Bett-Hallen. Hostels mit Gemeinschaftsküche, Rooftop oder Family Dinner wählen.
+
+Nach Koh Tao ist wenig fest gebucht, außer den Neujahrsnächten und der Expedition. Wenn sich eine Gruppe bildet: tu es.
+
+# Anhang B: To-dos mit Status
+(Status: offen / laufend / erledigt. Auf der Seite per Tippen änderbar, dort aber nur lokal gespeichert.)
+
+### 🔴 Vorab buchen (feste Anker)
+- [erledigt] Boot-Expedition buchen (Buhay Isla): Erledigt 27.10.2026: 10.–13.2.2027, Seeker's Realm 4T/3N, El Nido → Coron, 1 Person. 378 € vollständig bezahlt (26.900 PHP laut Angebot); Zahlungseingang und Buchung bestätigt. Keine Restzahlung.
+- [offen] Flug Krabi → Manila buchen: 6.2. Neujahrstag, früh buchen. Gilt auch als Weiterflugnachweis für Thailand. Wenn der Aufpreis klein ist: Tarif mit Umbuchungsoption.
+- [offen] Flug Manila → El Nido buchen: 7.2. AirSWIFT, Cebu Pacific oder CebGo. Spätestens am 9.2. in El Nido sein (Briefing 9.2., 18:30). Alternative: Puerto Princesa plus 6 h Van, vor Ort buchbar.
+- [offen] Flug Coron → Manila → Hanoi buchen: 15.2. Weiterflugnachweis für die Philippinen. In Manila mindestens 3 h Umsteigezeit. Boot endet 13.2. gegen 16:30, am Abflugtag nicht tauchen.
+
+### 🟢 Erst in Asien buchen (flexibel bleiben)
+- [offen] Hostels vor Ort buchen: Koh Tao (Dorm ab 24.1. über Big Blue geregelt), Manila, Coron, Hanoi. Ausnahme Neujahr: Krabi 3.–6.2. und El Nido 7.–10.2. etwa 1–2 Wochen vorher.
+- [offen] Fähre und Bus buchen: Bangkok → Koh Tao (rechtzeitig für 24.1.), Koh Tao → Khao Sok → Krabi. Vor Ort im Hostel oder am Pier.
+- [offen] Khao Sok Floating Bungalow reservieren: 31.1.–3.2. Erst 1–2 Wochen vorher, wenn klar ist, ob du hinwillst und mit wem.
+- [offen] Ha Giang Loop buchen: 17.–22.2. In Hanoi über Hostel oder Anbieter, einige Tage vorher. Wochenende 20.–21.2. nach Tết voll. Border Permit im Preis? 4-Tage-Variante.
+- [offen] Touren vor Ort buchen: Island Hopping, Railay-Klettern, Kajak. Kein Vorab-Buchen nötig.
+- [offen] Koh Phangan und Ninh Binh offen lassen: Spontan vor Ort entscheiden. Koh Phangan: Halbmond-Partys um 29.–30.1. prüfen. Ninh Binh optional (Banana Tree Hostel).
+
+### 🟡 Vor Abflug klären (kein Buchen)
+- [offen] Buhay-Isla-Gästeformular ausfüllen/aktualisieren: https://forms.gle/jxXbu8mkmSJ3pxZg8. Einreichung nicht bestätigt. Unterkunft El Nido 7.–10.2. und Coron 13.–15.2. noch offen, Angaben später nachreichen.
+- [offen] Expeditionsbriefing und Treffpunkt einplanen: 9.2.2027 um 18:30 im El-Nido-Büro; 10.2. um 08:00 dort treffen. Unterkunft nahe El Nido Town/Corong-Corong. WhatsApp +63 939 936 2095.
+- [laufend] Impfplan auf früheren Abflug abstimmen: Tollwut-Serie bis Mitte Januar abschließen. Letzte Dosis spätestens Mitte Januar.
+- [offen] Envivas fragen: Tauchen und Sozius: Schriftlich nachfragen, ob Tauchen (Open Water) und Mitfahren auf dem Motorrad (Ha Giang) abgedeckt sind.
+- [offen] Trade-Republic-Karte aktivieren: Einmal mit PIN zahlen, PIN merken, Cash-Guthaben auffüllen.
+- [offen] DKB-Aktivstatus entscheiden: Dauerauftrag (700 €/Monat) oder DKB nur als Notfallkarte.
+- [offen] Ausrüstung besorgen: Drybag (Pflicht für die Expedition), 40–50 l Rucksack, kleiner Tagesrucksack, warme Schicht und Regenschutz für Ha Giang, Stirnlampe, Weltadapter.
+- [offen] SSI-Theorie online durcharbeiten: Spart Zeit auf Koh Tao.
+- [offen] Bangkok-Hostel über späte Ankunft informieren: Ankunft 20.1., 19:25. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen.
+
+### 🔵 Letzte Tage
+- [offen] Online-Check-in Qatar: Hinflug ab 17.1., Rückflug ab 26.2.
+- [offen] TDAC ausfüllen: Thailand, frühestens 72 h vor Ankunft am 20.1. Nur tdac.immigration.go.th.
+- [offen] eTravel registrieren: Philippinen, 72 h vor dem 6.2. Ohne QR-Code kein Check-in.
+- [offen] Vietnam Pre-Arrival prüfen: Drei Tage vor dem 15.2. checken.
+- [offen] Dokumente digitalisieren: Pass, Impfpass, Versicherung, Tickets, QR-Codes. Cloud plus einmal ausgedruckt.
+
+### ⚪ Erledigt
+- [erledigt] Reisepass-Gültigkeit prüfen: Geprüft. Gültig über den 13. September 2027 hinaus.
+- [erledigt] Pass für die Reise wählen: Entschieden: deutscher Pass, überall derselbe. Vietnam 45 Tage visumfrei.
+- [erledigt] Vietnam-E-Visum: Entfällt mit dem deutschen Pass. Nur nötig, falls du mit dem irischen reist (evisa.gov.vn).
+- [erledigt] Langstreckenflüge buchen: Qatar Airways, 89KMNH + 89RPEW, 658 € inkl. Gepäck.
+- [erledigt] Qatar umbuchen: 19.1. hin, 28.2. zurück: Erledigt 23.10.: Ankunft Bangkok 20.1. 19:25, München 1.3. 13:25. Noch festhalten: Kosten, Gepäck, Ticketnummern.
+- [erledigt] HM-Prüfungen und APE-Termine gegen 19.1. und 1.3. prüfen: Erledigt: laut Lucas am 23.10. mit APE und HM geklärt.
+- [erledigt] Tauchkurs bezahlen: Erledigt: Big Blue Diving, 13.000 THB, bestätigt am 3.9.2026.
+- [erledigt] Tauchkurs bei Big Blue umbuchen: Erledigt 23.10.: Dorm ab 24.1., Kurs ab 25.1. (Jim Donaldson).
+- [erledigt] Bangkok-Hostel verschieben: Erledigt 22.10.: 20.–23.1., € 57,27, noch nicht bezahlt.
+- [erledigt] Reisemedizinische Beratung: Am 6.10. erledigt.
+- [erledigt] Auslandskrankenversicherung abschließen: Erledigt 23.10.: Envivas TravelXN, ab 19.1.2027, 19,40 €/Jahr. Unterlagen in versicherung/. Kündigung bis 18.10.2027, sonst Verlängerung.
+- [erledigt] Führerscheinfrage entscheiden: Entschieden: kein A1. Nichts mit Moped oder Roller einplanen; Songthaew, Boot, Fahrrad, auf Ha Giang als Sozius.
+</pre>
+  </div>
+</details>
 </div>
 
 <script>
@@ -216,115 +700,105 @@ const SECTIONS = [
 
 {id:"umbuchung", cat:"newplan", n:"NEU", title:"Umbuchung", cards:[
   {h:"Ergebnis der Prüfung", when:"Check · 22.10.2026", p:"Alles Geplante passt ins neue Fenster: drei Länder und alle Highlights, nur eine Nacht weniger als vorher. Kein echtes No-Go. Die Reihenfolge Thailand → Philippinen → Vietnam bleibt richtig.",
-   li:["<b>Boot-Expedition</b> ist jetzt das größte Risiko: 10.–13.2. liegt nur noch ~3,5 Monate entfernt und fällt in den Neujahrs-Peak. Innerhalb von 1–2 Wochen neu anfragen.","<b>APE und HM:</b> Termine laut Lucas am 23.10.2026 geklärt, auch die Landung am 1.3.","<b>Reisepass:</b> durchgehend den <b>deutschen</b> nutzen. Vietnam 45 Tage visumfrei; mit dem irischen Pass wäre ein E-Visum nötig.","<b>Rückflug</b> 28.2. ab Hanoi landet am <b>1.3. um 13:25</b> in München, einen Tag nach der ursprünglichen Frist (28.2.). Laut Lucas mit APE und HM geklärt (23.10.2026).","<b>Ha Giang im Februar</b>: kälter und nebliger als im März. Machbar, aber schlechtere Chancen auf klare Sicht.","<b>Tết-Puffer</b> schrumpft von 3,5 Wochen auf etwa eine. Reicht, Vietnam aber nicht nach vorne ziehen.","<b>Chinesisches Neujahr (6.2.)</b> liegt jetzt mitten in der Reise: Thailand und Philippinen voller und teurer.","Alle Buchungsfristen rücken etwa zwei Wochen nach vorne."],
+   li:["<b>Boot-Expedition</b> ist bestätigt und vollständig bezahlt (27.10.): 10.–13.2.2027, 1 Person, 378 €. Nächster Buchungsschritt: Regionalflüge.","<b>APE und HM:</b> Termine laut Lucas am 23.10.2026 geklärt, auch die Landung am 1.3.","<b>Reisepass:</b> durchgehend den <b>deutschen</b> nutzen. Vietnam 45 Tage visumfrei; mit dem irischen Pass wäre ein E-Visum nötig.","<b>Rückflug</b> 28.2. ab Hanoi landet am <b>1.3. um 13:25</b> in München, einen Tag nach der ursprünglichen Frist (28.2.). Laut Lucas mit APE und HM geklärt (23.10.2026).","<b>Ha Giang im Februar</b>: kälter und nebliger als im März. Machbar, aber schlechtere Chancen auf klare Sicht.","<b>Tết-Puffer</b> schrumpft von 3,5 Wochen auf etwa eine. Reicht, Vietnam aber nicht nach vorne ziehen.","<b>Chinesisches Neujahr (6.2.)</b> liegt jetzt mitten in der Reise: Thailand und Philippinen voller und teurer.","Alle Buchungsfristen rücken etwa zwei Wochen nach vorne."],
    long:"<p>Der alte Plan mit allen Daten liegt unter <a href='alter-plan.html'>Alter Plan</a>. Dort bleiben auch die bisherigen Abhak-Stände erhalten.</p>"},
-  {h:"1 · Qatar-Flüge: umgebucht", when:"Erledigt am 23.10.2026 · Hinflug 89KMNH · Rückflug 89RPEW", p:"<b>Hin:</b> Di 19.1., München 15:25 → Doha 23:00 · 10 h 10 Umstieg · Doha 09:10 → <b>Bangkok 19:25 am 20.1.</b><br><b>Zurück:</b> So 28.2., Hanoi 19:10 → Doha 23:10 · 10 h 15 Umstieg · Doha 09:25 → <b>München 13:25 am 1.3.</b>",
+  {h:"1 · Qatar-Flüge: umgebucht", ic:"✈️", when:"Erledigt am 23.10.2026 · Hinflug 89KMNH · Rückflug 89RPEW", p:"<b>Hin:</b> Di 19.1., München 15:25 → Doha 23:00 · 10 h 10 Umstieg · Doha 09:10 → <b>Bangkok 19:25 am 20.1.</b><br><b>Zurück:</b> So 28.2., Hanoi 19:10 → Doha 23:10 · 10 h 15 Umstieg · Doha 09:25 → <b>München 13:25 am 1.3.</b>",
    li:["<b>Belege:</b> <a href='evidence/2026-10-23/qatar-rebooked-outbound-89KMNH.webp'>Hinflug 89KMNH</a> · <a href='evidence/2026-10-23/qatar-rebooked-return-89RPEW.webp'>Rückflug 89RPEW</a> (Qatar-App, 23.10.2026).","Beide Umstiege in Doha liegen nachts (ca. 23:00–09:10): kein Stadtbesuch, eher Lounge oder Ruhebereich.","Online-Check-in öffnet 48 h vorher: Hinflug ab 17.1., Rückflug ab 26.2.","Bangkok erst am Abend: Hostel über späte Ankunft informieren; Early Check-in ist nicht mehr nötig. TDAC ab 17.1. ausfüllen.","Noch festhalten: gezahlte Umbuchungskosten, Gepäckfreigrenze, Ticketnummern. Bestätigungsmails und Rechnungen sichern.","Bei Bedarf Qatar: +49 69 1748 9914 (08:00–17:00 laut Lucas)."],
    warn:"Der Rückflug landet am 1.3. um 13:25, einen Tag nach der zuvor genannten Frist (28.2.). Aus Abflug 19:10 plus 10 h 15 Umstieg abgeleitet. Laut Lucas mit APE und HM geklärt (23.10.2026)."},
-  {h:"2 · Bangkok-Hostel: umgebucht", when:"Erledigt am 22.10.2026 · Booking.com", p:"Khao San Social Capsule Hostel: Datum geändert von 1.–6. Februar (€ 92,58) auf <b>20.–23. Januar, 3 Nächte, 1 Dorm-Bett, € 57,27</b>. Booking.com bestätigt die Änderung. <b>Noch nicht bezahlt</b> (Zahlung vor Ort / später); es wurde nichts erstattet, weil nichts abgebucht war.",
+  {h:"2 · Bangkok-Hostel: umgebucht", ic:"🛏️", when:"Erledigt am 22.10.2026 · Booking.com", p:"Khao San Social Capsule Hostel: Datum geändert von 1.–6. Februar (€ 92,58) auf <b>20.–23. Januar, 3 Nächte, 1 Dorm-Bett, € 57,27</b>. Booking.com bestätigt die Änderung. <b>Noch nicht bezahlt</b> (Zahlung vor Ort / später); es wurde nichts erstattet, weil nichts abgebucht war.",
    li:["Bestätigungsmail abwarten und prüfen: Zahlungstermin und kostenlose Stornofrist für die <b>neuen</b> Daten stehen dort, nicht mehr die alten.","Wenn die Flüge später anders fallen: Datum auf Booking.com erneut ändern, solange die Frist läuft.","Early Check-in für 20.1., 09:00 neu schriftlich beim Hostel bestätigen lassen (Check-in laut Buchung 14:00). Die alte Zusage gilt nicht automatisch."]},
-  {h:"3 · Anfragen mit neuen Daten erneuern", when:"Jetzt · vor allem die Expedition", p:"Bisher keine bezahlte Buchung dokumentiert, nur Anfragen mit den alten Daten.",
-   li:["<b>Buhay Isla:</b> 4T/3N El Nido → Coron um den <b>10.–13. Februar</b> anfragen. Feste Abfahrtstage erfragen und die Philippinen-Tage danach ausrichten. Online keine 2027-Termine gefunden (22.10.2026). Alternativen: Big Dream Boatman, Tao Philippines.","<b>Big Blue Diving (Koh Tao), Ref. BBD-002058:</b> umgebucht. Antwort von Jim Donaldson (General Manager), 23.10.2026: <b>Dorm-Bett ab 24.1.2027, Kurs startet am Folgetag (25.1.)</b>. Bezahlt 13.000 THB. Ob das Dorm im Preis enthalten ist und die Uhrzeit am 25.1. stehen nicht in der Mail; WhatsApp +66 8 1920 5698.","Die alten Anfragen bei IHASIA & Co. sind damit hinfällig; keine Doppelbuchung."]},
+  {h:"3 · Expedition und Tauchkurs bestätigt", when:"Stand 27.10.2026", p:"Buhay Isla und Big Blue sind gebucht und bezahlt.",
+   li:["<b>Buhay Isla:</b> Seeker's Realm, 4T/3N El Nido → Coron, <b>10.–13.2.2027</b>, 1 Person; <b>378 € vollständig bezahlt</b>, Zahlungseingang und Buchung bestätigt am 27.10. Briefing <b>9.2., 18:30</b>, Treffpunkt <b>10.2., 08:00</b> im El-Nido-Büro. Gästeformular/Unterkunftsdaten bleiben offen.","<b>Big Blue Diving (Koh Tao), Ref. BBD-002058:</b> umgebucht. Antwort von Jim Donaldson (General Manager), 23.10.2026: <b>Dorm-Bett ab 24.1.2027, Kurs startet am Folgetag (25.1.)</b>. Bezahlt 13.000 THB. WhatsApp +66 8 1920 5698.","Die alten Anfragen bei IHASIA & Co. sind damit hinfällig; keine Doppelbuchung."]},
   {h:"4 · Was sich gegenüber dem alten Plan ändert", when:"Machbar, aber anders", li:["<b>Länge:</b> 39 Nächte vor Ort, wie vorher. Ankunft Bangkok erst 20.1. um 19:25, Rückflug 28.2. um 19:10; Landung München 1.3., 13:25.","<b>Koh Tao Ende Januar:</b> Ausläufer des Nordost-Monsuns. Etwas höheres Risiko für raue See, schlechtere Sicht und ausfallende Fähren als im Februar.","<b>Chinesisches Neujahr:</b> nicht mehr in Bangkok, sondern am Tag des Flugs Krabi → Manila. Yaowarat-Nacht fällt weg.","<b>Chatuchak:</b> passt jetzt, Bangkok umfasst das Wochenende 23.–24.1.","<b>Koh Phangan:</b> Full Moon um den 22.1. (vorläufig) ist vorbei; um den 29.–30.1. ist Halbmond. Termine im Dezember prüfen.","<b>Expedition:</b> 10.–13.2. statt 24.–27.2.; überschneidet sich mit chinesischem und koreanischem Neujahr und dem Valentinswochenende.","<b>Vietnam:</b> Ankunft 15.2., fünf Tage nach Ende der offiziellen Tết-Feiertage (4.–10.2.2027). Danach Pilgersaison, an Wochenenden voll.","<b>Ha Giang:</b> Februar statt März. Tags 8–15 °C, nachts um 5 °C, Nebel am Morgen, Frost bei Dong Van möglich. Pfirsichblüte als Bonus.","<b>Ninh Binh:</b> eher grau und nieselig, Reisfelder noch kahl oder geflutet statt grün.","<b>Nicht mehr relevant:</b> Makha Bucha am 21.2. (Alkoholverbot), da du dann schon in Vietnam bist."]},
-  {h:"5 · Weitere Reservierungen und Zahlungen abgleichen", when:"Einmal vollständig prüfen", li:["Bestätigungsmails, Buchungsportale und Kartenumsätze auf zusätzliche Buchungen seit August prüfen.","Für jede Buchung notieren: Anbieter, Buchungsnummer, alter Termin, bezahlter Betrag, Änderungsgebühr, Stornofrist.","Stornierungen und Erstattungen erst nach Bestätigung als erledigt markieren."]},
-  {h:"6 · Kalender mit APE und HM", when:"Geklärt laut Lucas · 23.10.2026", p:"Termine von APE und HM sind für den Hinflug am 19.1. und die Landung am 1.3. abgestimmt."}
+  {h:"5 · Weitere Reservierungen und Zahlungen abgleichen", when:"Einmal vollständig prüfen", li:["Bestätigungsmails, Buchungsportale und Kartenumsätze auf zusätzliche Buchungen seit August prüfen.","Für jede Buchung notieren: Anbieter, Buchungsnummer, alter Termin, bezahlter Betrag, Änderungsgebühr, Stornofrist.","Stornierungen und Erstattungen erst nach Bestätigung als erledigt markieren."]}
 ]},
 
 {id:"status", cat:"start", n:"00", title:"Buchungsstatus", cards:[
-  {h:"Was steht", when:"Stand 22.10.2026", table:[
+  {h:"Was steht", when:"Stand 27.10.2026", table:[
     ["Langstreckenflüge","gebucht · umbuchen"],["Hostel Bangkok","umgebucht auf 20.–23.1. · zahlt später"],["Tauchkurs Koh Tao (Big Blue)","bezahlt · umgebucht: Dorm ab 24.1., Kurs ab 25.1."],
-    ["Boot-Expedition","alte Anfrage · dringend neu"],["Regionalflüge (3×)","offen"],["Ha Giang Loop","offen"],
-    ["Khao Sok Bungalow","offen"],["Impfungen","laufend"],["Versicherung","offen"]],
-   p:"Engpass ist die Boot-Expedition am 10.–13.2. Danach Regionalflüge im November.",
+    ["Boot-Expedition","Buhay Isla · 10.–13.2.2027 · 1 Person · bestätigt · 378 € bezahlt"],["Regionalflüge (3×)","offen"],["Ha Giang Loop","offen"],
+    ["Khao Sok Bungalow","offen"],["Impfungen","laufend"],["Versicherung","Envivas TravelXN · abgeschlossen 23.10."]],
+   p:"Expedition 10.–13.2. bestätigt und bezahlt. Jetzt Regionalflüge buchen; Gästeformular und Unterkunftsdaten ergänzen.",
    long:"<p><b>Qatar Airways, Refs. 89KMNH (hin) und 89RPEW (zurück), 658 € inkl. Gepäck.</b> Umgebucht am 23.10.2026: Hinflug 19.1. MUC 15:25 → Doha → Bangkok 19:25 am 20.1.; Rückflug 28.2. HAN 19:10 → Doha (10 h 15 Umstieg) → München 13:25 am 1.3.</p><p><b>Khao San Social Capsule Hostel</b> (Booking.com): am 22.10.2026 umgebucht auf 20.–23.1., 3 Nächte, € 57,27, noch nicht bezahlt.</p>"}
 ]},
 
-{id:"warum", cat:"start", n:"01", title:"Warum diese Route", cards:[
-  {h:"Drei Zwänge", p:"Tết vom 4. bis 10. Februar, das Wetter in Nordvietnam und der Monsun im Golf von Thailand. Vietnam bleibt deshalb am Ende.",
-   li:["<b>Tết (6.2.)</b> — offizielle Feiertage 4.–10.2.2027. Davor ist Transport ausgebucht, währenddessen vieles zu. Vietnam erst ab 15.2.","<b>Nordvietnam im Januar</b> ist am kältesten. Februar ist kühl und neblig, aber machbar; März wäre besser, liegt aber außerhalb des Fensters.","<b>Golf von Thailand</b> beruhigt sich Ende Januar. Koh Tao deshalb nicht vor dem 24.1."],
-   long:"<p>Innerhalb Thailands läuft die Route weiter von Ost nach West: Bangkok → Golf (Koh Tao, Koh Phangan) → Khao Sok → Andamanenseite (Krabi) → Abflug ab Krabi. Kein Rückweg.</p><p>Chiang Mai wäre Ende Januar sogar möglich, weil die Brandrodungssaison erst später beginnt. Kostet aber Reisetage, deshalb weiter nicht eingeplant.</p><p>2027 fällt Tết auf denselben Tag wie das chinesische Neujahr. Das treibt Flug- und Unterkunftspreise in der ganzen Region etwa vom 1. bis 14. Februar hoch.</p>"}
-]},
-
 {id:"vorbereitung", cat:"prep", n:"02", title:"Vorbereitung", cards:[
-  {h:"Impfungen", when:"bis Mitte Januar abschließen", p:"Beratung am 6.10. erledigt. Tollwut braucht 2–3 Dosen über 3–4 Wochen. Mit dem früheren Abflug muss der Impfplan bis etwa Mitte Januar fertig sein.",
+  {h:"Impfungen", ic:"💉", when:"bis Mitte Januar abschließen", p:"Beratung am 6.10. erledigt. Tollwut braucht 2–3 Dosen über 3–4 Wochen. Mit dem früheren Abflug muss der Impfplan bis etwa Mitte Januar fertig sein.",
    li:["Standard: Tetanus, Diphtherie, Polio, MMR","Hepatitis A — praktisch Pflicht in Südostasien","Typhus — bei viel Streetfood","Tollwut — relevant wegen Ha Giang und Khao Sok"],
    long:"<p>Hepatitis B je nach Vorgeschichte, Japanische Enzephalitis nur bei viel Zeit im ländlichen Raum. Malaria ist auf deiner Route ein geringes Risiko. Das reale Thema ist <b>Dengue</b> — dagegen hilft nur Mückenschutz, und die Mücken stechen tagsüber. Was für dich gilt, entscheidet die Ärztin.</p><p>Kosten grob 200–400 €. Viele Krankenkassen erstatten Reiseimpfungen ganz oder teilweise.</p>"},
 
-  {h:"Versicherung", when:"vor der Buchung der Expedition", p:"Die TK zahlt in keinem der drei Länder. Rücktransport zahlt die gesetzliche Kasse grundsätzlich nie.",
+  {h:"Versicherung", ic:"🛡️", when:"vor der Buchung der Expedition", p:"Die TK zahlt in keinem der drei Länder. Rücktransport zahlt die gesetzliche Kasse grundsätzlich nie.",
    li:["Rücktransport „medizinisch <b>sinnvoll und vertretbar</b>“ — nicht „notwendig“","Zeitraum 19.1.–1.3.2027, also mindestens 42 Tage","Tauchausbildung und Sporttauchen bis 40 m eingeschlossen","Motorrad als Sozius","Such-, Rettungs- und Bergungskosten","Keine Selbstbeteiligung"],
    long:"<p>Über die TK gibt es Envivas-Tarife (TravelXN / TravelXF, bis 60 Tage) direkt im TK-Portal. Als Vergleichsbasis nehmen, nicht automatisch abschließen — HanseMerkur, ERGO, Barmenia, Würzburger und DKV sind für junge Einzelpersonen oft günstiger.</p><p>„Notwendig“ heißt: Du wirst nur zurückgeflogen, wenn die Behandlung vor Ort nicht ausreicht — und in Bangkok reicht sie fast immer.</p><p>Kosten 30–60 € für den Zeitraum.</p>"},
 
-  {h:"Führerschein", when:"Entscheidung nötig", p:"Mit Klasse B darfst du in Thailand und Vietnam kein Moped fahren. B196 gilt nur in Deutschland.",
-   long:"<p>Der Internationale Führerschein überträgt nur Klassen, die du tatsächlich hast. Bei einem Unfall greift die Haftpflicht nicht, und die Auslandskrankenversicherung kann die Leistung verweigern. Vietnam hat die Kontrollen verschärft, Bußgelder 2–8 Mio. VND plus Beschlagnahmung.</p><p><b>Konsequenz:</b> Ha Giang als Sozius ist richtig. In Thailand Songthaews und Longtailboote. A1 vor Januar ist zeitlich knapp.</p>"},
-
-  {h:"Geld", when:"Trade Republic + DKB", p:"Trade Republic ist deine Hauptkarte: keine Fremdwährungsgebühr, weltweit kostenlos abheben ab 100 €.",
+  {h:"Geld", ic:"💳", when:"Trade Republic + DKB", p:"Trade Republic ist deine Hauptkarte: keine Fremdwährungsgebühr, weltweit kostenlos abheben ab 100 €.",
    li:["PIN in der App unter Profil → Karte → PIN anzeigen. Vor Abflug merken.","Karte einmal in Deutschland mit PIN nutzen, damit kontaktlos freigeschaltet ist.","Kartennummer und CVV stehen nur in der App — für Online-Buchungen nötig.","Cash-Guthaben auffüllen: Die Karte zieht nicht aus Wertpapieren."],
    long:"<p><b>DKB</b> ist weltweit nur mit Aktivstatus kostenlos (700 € monatlicher Geldeingang). Ohne Aktivstatus 2,20 % auf Fremdwährung. Entweder jetzt einen Dauerauftrag einrichten oder DKB als reine Notfallkarte nutzen.</p><p><b>DCC immer ablehnen.</b> Immer in Landeswährung abrechnen. Der angebotene Kurs liegt 3–6 % über dem echten.</p><p><b>Thailand:</b> 220 Baht Automatengebühr. Einmal 20.000 abheben statt fünfmal 4.000 spart ~25 €. <b>Vietnam:</b> TPBank und MB Bank gelten als gebührenfrei. <b>Philippinen:</b> ~250 PHP bei niedrigem Limit.</p><p>Beide Karten getrennt verstauen. Sperrnotruf 116 116, aus dem Ausland +49 116 116.</p>"},
 
-  {h:"Packen", when:"40–50 l Rucksack", p:"Weniger als du denkst. Alles außer Elektronik kaufst du unterwegs nach, Wäsche kostet in Thailand ~1 €/kg.",
+  {h:"Packen", ic:"🎒", when:"40–50 l Rucksack", p:"Weniger als du denkst. Alles außer Elektronik kaufst du unterwegs nach, Wäsche kostet in Thailand ~1 €/kg.",
    li:["<span class='star'>Drybag (10–20 l)</span> — auf der Expedition kommst du vier Tage nicht ans Hauptgepäck","<span class='star'>Richtig warme Schicht</span> für Ha Giang im Februar: nachts um 5 °C, Frost möglich, auf dem Motorrad gefühlt kälter. Dazu Regenschutz gegen Nieselregen.","Feste Schuhe für Khao Sok und Ninh Binh, dazu Flip-Flops","Stirnlampe, Powerbank, Weltadapter, Vorhängeschloss","Ohrstöpsel und Schlafmaske — bei 30 Nächten im Dorm nicht optional"],
    long:"<p>Kleidung: 5–6 T-Shirts, 2 Shorts, 1 lange leichte Hose, 2 Badehosen, 1 Longsleeve gegen Sonne und Mücken, Unterwäsche für sieben Tage, dünne Regenjacke.</p><p>Reef-safe Sonnencreme, Mückenschutz mit DEET oder Icaridin, Mikrofasertuch, kleine Reiseapotheke mit Elektrolyten und Durchfallmittel.</p><p>Warme Jacke, Handschuhe und Mütze für Ha Giang günstig in Hanoi nachkaufen.</p>"},
 
-  {h:"Einreise", when:"kurz vor Abflug", p:"Mit dem deutschen Pass sind alle drei Länder visumfrei. Dazu zwei Pflichtregistrierungen, beide erst 72 Stunden vorher.",
+  {h:"Einreise", ic:"🛂", when:"kurz vor Abflug", p:"Mit dem deutschen Pass sind alle drei Länder visumfrei. Dazu zwei Pflichtregistrierungen, beide erst 72 Stunden vorher.",
    li:["<b>Thailand:</b> seit 15.9.2026 nur noch <b>30 Tage</b> visumfrei (vorher 60). Reicht für 17 Nächte.","<b>TDAC</b> Thailand — tdac.immigration.go.th, kostenlos, frühestens 72 h vor Ankunft am 20.1.","<b>eTravel</b> Philippinen — etravel.gov.ph, kostenlos, 72 h vor dem 6.2.","<b>Reisepass:</b> durchgehend den <b>deutschen</b> nutzen (Flug, TDAC, eTravel, Einreise). <b>Vietnam:</b> 45 Tage visumfrei (Regelung bis 14.3.2028); mit dem irischen Pass wäre ein E-Visum nötig.","Reisepass muss mindestens sechs Monate über die Ausreise hinaus gültig sein."],
    long:"<p>Philippinen 30 Tage visumfrei. Nur die offiziellen Domains nutzen, es gibt viele Fake-Seiten mit Gebühren.</p><p>Alle drei können einen <b>Weiterflugnachweis</b> verlangen. Deshalb den Flug Krabi → Manila buchen, <i>bevor</i> du nach Bangkok fliegst.</p>"}
 ]},
 
-{id:"thailand", cat:"th", n:"03", title:"Thailand", cards:[
-  {h:"Bangkok", when:"20.–23.01 · 3 Nächte", p:"Ankommen, Jetlag abbauen, Anschluss finden. Landung 19:25 am 20.1. nach 10 h Umstieg in Doha, also erst abends im Hostel. Volle Tage sind der 21. und 22.1. Hostel über späte Ankunft informieren.",
+{id:"thailand", c:"th", cat:"th", n:"03", title:"Thailand", cards:[
+  {h:"Bangkok", ic:"🏙️", img:["bangkok.jpg","Diego Delso · CC BY-SA 3.0"], when:"20.–23.01 · 3 Nächte", p:"Ankommen, Jetlag abbauen, Anschluss finden. Landung 19:25 am 20.1. nach 10 h Umstieg in Doha, also erst abends im Hostel. Volle Tage sind der 21. und 22.1. Hostel über späte Ankunft informieren.",
    li:["<span class='star'>Rajadamnern Stadium</span> — Muay Thai, Tickets ab ~1.000–2.000 THB. Günstige Ränge nehmen.","<span class='star'>Yaowarat (Chinatown)</span> abends ab 18 Uhr — beste Streetfood-Straße Asiens","<span class='star'>Chatuchak</span> am Samstag, 23.1., vor dem Nachtbus","Wat Pho und Wat Arun, früh hin","Express Boat auf dem Chao Phraya statt Taxi, 20 THB"],
    long:"<p>Khao San Social Capsule, Soi Rambuttri-Gegend. Eine Straße hinter der Khao San — gleiche Dichte, aber du kannst schlafen.</p><p>Eine Nacht kürzer als im alten Plan, dafür bekommst du jetzt das Wochenende mit. Chinesisches Neujahr (6.2.) erlebst du nicht mehr in Bangkok.</p><p>Am Abend des 23.1. Nachtbus/Zug plus Fähre nach Koh Tao. Budget 160–230 €.</p>"},
 
-  {h:"Koh Tao — Tauchschein", when:"24.–29.01 · 5 Nächte", star:1, p:"<b>Gebucht: Big Blue Diving, Open Water Diver, Ref. BBD-002058, bezahlt 13.000 THB. Umgebucht: Dorm-Bett ab 24.1.2027, Kurs ab 25.1. (25.–27.1.).</b> 3 Tage, 6 Tauchgänge.",
-   li:["Umbuchung bestätigt (Jim Donaldson, 23.10.): Dorm ab 24.1., Kurs ab 25.1. Treffpunkt und Uhrzeit am 25.1. klären.","Bestätigung kam über DiveOps.ai: erst „Payment received, checking availability“, dann „Booking confirmed“. Bestätigungsmail mit Kursdetails prüfen.","Bezahlte 13.000 THB (~320 €, mehr als die ursprünglich geschätzten 9.000 THB): Wetter-, Absage- und Umbuchungsregel erfragen","Ende Januar: Wind und Sicht schwanken noch. 28.1. als Puffer- oder Fun-Dive-Tag lassen"],
+  {h:"Koh Tao — Tauchschein", ic:"🤿", img:["kohtao.jpg","Fabio Achilli · CC BY 2.0"], when:"24.–29.01 · 5 Nächte", star:1, p:"<b>Gebucht: Big Blue Diving, Open Water Diver, Ref. BBD-002058, bezahlt 13.000 THB. Umgebucht: Dorm-Bett ab 24.1.2027, Kurs ab 25.1. (25.–27.1.).</b> 3 Tage, 6 Tauchgänge.",
+   li:["Umbuchung bestätigt (Jim Donaldson, 23.10.): Dorm ab 24.1., Kurs ab 25.1. ","Bestätigung kam über DiveOps.ai: erst „Payment received, checking availability“, dann „Booking confirmed“. Bestätigungsmail mit Kursdetails prüfen.","Bezahlte 13.000 THB (~320 €, mehr als die ursprünglich geschätzten 9.000 THB): Wetter-, Absage- und Umbuchungsregel erfragen","Ende Januar: Wind und Sicht schwanken noch. 28.1. als Puffer- oder Fun-Dive-Tag lassen"],
    warn:"Ende Januar laufen die Ausläufer des Nordost-Monsuns aus. Bei hohen Wellen fallen Fähren aus. Weiterreise am 29.1. nicht eng an einen festen Termin koppeln.",
    long:"<p><b>Warum Koh Tao ganz nach vorne gehört:</b> Ein Tauchkurs ist die effektivste Freundschaftsmaschine der Reise. Drei Tage dieselbe Kleingruppe, und weil das in Woche eins passiert, begleiten dich diese Leute potenziell fünf Wochen statt einer.</p><p><b>Stundenplan laut Website:</b> Tag 1 — 08:30 Papierkram, 09:30 Theorie, 12:00 zwei Tauchgänge. Tag 2 — 09:00 Theorie, 10:00 Prüfung, 12:00 zwei Tauchgänge. Tag 3 — 06:30 zwei Tauchgänge, 12:00 Zertifizierung.</p><p><b>Noch klären:</b> Verfügbarkeit, Endpreis inkl. Zertifizierungskarte, Unterkunft während des Kurses, SSI-Theorie vorab online.</p><p>Danach ein Fun Dive am Chumphon Pinnacle, wenn das Wetter mitspielt. Budget 350–450 €.</p>"},
 
-  {h:"Koh Phangan", when:"29.–31.01 · 2 Nächte", p:"Liegt umwegfrei auf der Fährstrecke. Keine Full Moon Party — die ist um den 22.1. (vorläufig), da bist du noch in Bangkok.",
+  {h:"Koh Phangan", ic:"🏝️", img:["kohphangan.jpg","Fabio Achilli · CC BY 2.0"], when:"29.–31.01 · 2 Nächte", p:"Liegt umwegfrei auf der Fährstrecke. Keine Full Moon Party — die ist um den 22.1. (vorläufig), da bist du noch in Bangkok.",
    warn:"Termine für Ende Januar 2027 stehen noch nicht fest. Um den 29.–30.1. ist Halbmond; im Dezember prüfen, ob Half Moon Festival oder Jungle Experience im Fenster liegen. Sonst Stopp streichen und die Nächte an Koh Tao oder Krabi hängen.",
    long:"<p>Nordbuchten statt Haad Rin: Haad Yao, Chaloklum, Bottle Beach. Budget 90–130 €.</p>"},
 
-  {h:"Khao Sok Nationalpark", when:"31.01–03.02 · 3 Nächte", star:1, p:"Ältester Regenwald der Welt, Karstberge im Stausee. Der Natur-Reset.",
+  {h:"Khao Sok Nationalpark", ic:"🌿", img:["khaosok.jpg","Vyacheslav Argenberg · CC BY 4.0"], when:"31.01–03.02 · 3 Nächte", star:1, p:"Ältester Regenwald der Welt, Karstberge im Stausee. Der Natur-Reset.",
    li:["<span class='star'>Floating Bungalow auf dem Cheow-Lan-See</span>, 2 Tage / 1 Nacht, 3.000–5.000 THB","Höhlenwanderung Nam Talu — teils durch Wasser, nur mit Guide","Dschungeltrek, halbtags 800–1.200 THB"],
    warn:"Kurz vor dem chinesischen Neujahr sind Rafthouses gefragt. Im Dezember reservieren, nicht erst im Januar.",
    long:"<p>Anreise: Fähre von Koh Phangan nach Surat Thani, dann Minivan. Khao Sok liegt genau auf dem Weg zur Andamanenseite. Budget 200–280 €.</p>"},
 
-  {h:"Krabi — Ao Nang und Railay", when:"03.–06.02 · 3 Nächte", p:"Januar/Februar ist Hochsaison an der Andamanenküste: ruhige See und Postkartenwetter.",
+  {h:"Krabi — Ao Nang und Railay", ic:"🧗", img:["krabi.jpg","Nnthurber · CC BY-SA 4.0"], when:"03.–06.02 · 3 Nächte", p:"Januar/Februar ist Hochsaison an der Andamanenküste: ruhige See und Postkartenwetter.",
    li:["<span class='star'>Railay Beach</span> — nur per Longtailboot, 100–150 THB ab Ao Nang","Klettern in Railay, Halbtageskurs ab 1.000–1.500 THB","Kajaktour durch die Wasserhöhlen bei Ao Thalane","Phi Phi als Tagesausflug, nicht als Übernachtung"],
    long:"<p>Phi Phi als Tagesausflug ab Ao Nang (1.200–1.800 THB). Um das chinesische Neujahr sehr voll; Hong Islands sind leerer bei ähnlicher Landschaft.</p><p>Unterkunft für diese Nächte vorab buchen, Preise steigen zum Neujahr. Budget 220–320 €. Am 6.2. Flug Richtung Manila.</p>"}
 ]},
 
-{id:"philippinen", cat:"ph", n:"04", title:"Philippinen", cards:[
-  {h:"Anreise und El Nido", when:"06.02 Manila · 07.–10.02 El Nido · 3 Nächte", p:"Februar ist Trockenzeit in Palawan. Anfang Februar kann es etwas windiger sein als Ende Februar.",
+{id:"philippinen", c:"ph", cat:"ph", n:"04", title:"Philippinen", cards:[
+  {h:"Anreise und El Nido", ic:"🌴", img:["elnido.jpg","Marciano Villavito · CC BY-SA 4.0"], when:"06.02 Manila · 07.–10.02 El Nido · 3 Nächte", p:"Februar ist Trockenzeit in Palawan. Anfang Februar kann es etwas windiger sein als Ende Februar.",
    li:["Island Hopping Tour A — im Ort buchen, plus 200 PHP Umweltgebühr","Nacpan Beach, 4 km Sandstrand, 45 Min außerhalb","Taraw Cliff Viewpoint bei Sonnenaufgang"],
    warn:"Flug Krabi → Manila am 6.2. ist der Tag des chinesischen Neujahrs; dazu koreanisches Neujahr. Flüge und Unterkünfte im November buchen.",
    long:"<p>El Nido als Ort ist laut, aber die Hostel-Szene ist extrem gut fürs Leutekennenlernen. Outpost, Mad Monkey und Spin Designer Hostel haben ein aktives Abendprogramm.</p><p>Anreise: Manila → El Nido direkt mit AirSWIFT (110–150 €) oder billiger über Puerto Princesa plus 6 h Van.</p><p>Budget 250–330 €.</p>"},
 
-  {h:"Expedition El Nido → Coron", when:"10.–13.02 · 4 Tage / 3 Nächte", star:2, p:"Das Highlight der Reise. Vier Tage Bangka-Boot durch die Linapacan-Inseln, Übernachtung auf unbewohnten Inseln.",
-   table:[["Buhay Isla · 4T/3N","26.900 PHP"],["Big Dream Boatman · 4T/3N","~530–590 €"],["Tao Philippines · 5T/4N","~550–700 €"]],
-   warn:"Dringend: 3–5 Monate Vorlauf, und 10.–13.2. liegt im Neujahrs- und Valentins-Peak. Die festen Abfahrtstage bestimmen die übrigen Philippinen-Daten.",
-   long:"<p>Kein Netz, kein Strom, kein Zugriff aufs Hauptgepäck. Vier Tage mit 10–20 Leuten auf einem Boot.</p><p><b>Wetterrisiko:</b> Bei rauem Seegang entscheidet die Küstenwache morgens, ob Boote auslaufen. Weiterflug nach Hanoi nicht auf den Ankunftstag legen.</p><p>Direkt beim Anbieter buchen, nicht über Klook oder GetYourGuide (15–20 % Aufschlag). Drybag ist Pflicht.</p>"},
+  {h:"Expedition El Nido → Coron", ic:"⛵", img:["expedition.jpg","pablosievert · CC BY-SA 4.0"], when:"10.–13.02 · 4 Tage / 3 Nächte", star:2, p:"Gebucht und vollständig bezahlt am 27.10.2026: Buhay Isla, Seeker's Realm, 1 Person, 10.–13.2.2027. Vier Tage Bangka-Boot durch die Linapacan-Inseln, Übernachtung in einfachen Hütten/Zelten.",
+   table:[["Buhay Isla · Seeker's Realm · 1 Person","378 € vollständig bezahlt"],["Angebot","26.900 PHP · keine Restzahlung"]],
+   warn:"Briefing 9.2., 18:30 im El-Nido-Büro (Corong-Corong, neben Adventist Clinic/Pops District). Am 10.2. um 08:00 dort treffen; Transfer inklusive, Abfahrt San Fernando Port 09:30. Ankunft Coron Ferry Port 13.2., ca. 16:30–17:00, wetterabhängig.",
+   long:"<p>Begrenzter Stromzugang; Hauptgepäck bis Reiseende verstaut. Alles für vier Tage in separaten Rucksack/Drybag packen, Wertsachen wasserdicht sichern. Eigenes Handtuch, Wasserflasche, Wasserschuhe, Rashguard, leichte Regenjacke, Powerbank, Stirnlampe und persönliche Medikamente mitnehmen. Masken/Schnorchel inklusive; Flossen nur auf Anfrage gegen Mietgebühr.</p><p><b>Bedingungen laut Bestätigung:</b> volle Erstattung nur bei wetterbedingter Absage durch die Küstenwache; Umbuchung bei freien Plätzen möglich. Bei Krankheit/Flugverspätung kann der Anbieter eine Bescheinigung für die Reiseversicherung ausstellen. Weiterflug am 15.2. bleibt geplant, noch nicht gebucht.</p><p>Gästeformular (Einreichung nicht bestätigt): https://forms.gle/jxXbu8mkmSJ3pxZg8. Geplant: El Nido 7.–10.2., Coron 13.–15.2.; Unterkünfte noch nicht gebucht, Daten können variieren. Angaben nachreichen. WhatsApp El-Nido-Büro: +63 939 936 2095.</p>"},
 
-  {h:"Coron", when:"13.–15.02 · 2 Nächte", star:1, p:"Hier zahlt sich der frische Tauchschein aus: japanische Kriegswracks in 10–40 m Tiefe.",
+  {h:"Coron", ic:"🪸", img:["coron.jpg","Mmlibranda · CC BY-SA 4.0"], when:"13.–15.02 · 2 Nächte", star:1, p:"Hier zahlt sich der frische Tauchschein aus: japanische Kriegswracks in 10–40 m Tiefe.",
    li:["Wracktauchen, 2 Tauchgänge ~3.500–5.000 PHP. Skeleton Wreck und Lusong Gunboat sind auf Open-Water-Niveau.","Kayangan Lake","Barracuda Lake — Süß- und Salzwasser geschichtet"],
    long:"<p><b>Flugregel:</b> 18–24 Stunden zwischen letztem Tauchgang und Flug. Tauchen am 14.2., Flug am 15.2. — passt, aber nicht am Abflugtag tauchen.</p><p>Am 15.2. Flug Busuanga → Manila → Hanoi, in Manila mindestens 3 h Umsteigezeit. Budget 250–330 €.</p>"}
 ]},
 
-{id:"vietnam", cat:"vn", n:"05", title:"Vietnam", cards:[
-  {h:"Hanoi", when:"15.–17.02 · 2 Nächte", p:"Tết-Feiertage enden am 10.2. Am 15.2. läuft das Land wieder, einzelne Familienbetriebe können noch zu sein.",
+{id:"vietnam", c:"vn", cat:"vn", n:"05", title:"Vietnam", cards:[
+  {h:"Hanoi", ic:"🏮", img:["hanoi.jpg","Vyacheslav Argenberg · CC BY 4.0"], when:"15.–17.02 · 2 Nächte", p:"Tết-Feiertage enden am 10.2. Am 15.2. läuft das Land wieder, einzelne Familienbetriebe können noch zu sein.",
    li:["<span class='star'>Bia-Hoi-Ecke, Tạ-Hiện-Straße</span> — frisch gebrautes Bier für ~25 Cent","Bún chả, Bánh mì, Egg Coffee","Hoàn-Kiếm-See morgens um sechs","Hostels im Old Quarter sind der Umschlagplatz für Ha-Giang-Gruppen","Warme Sachen für Ha Giang hier kaufen"],
    long:"<p>Februar in Hanoi: kühl, oft Nieselregen, Luftqualität häufig schlecht. Kein Grund zum Streichen, aber eine Maske kann sinnvoll sein.</p><p>Train Street: Status wechselt regelmäßig. Budget 90–130 €.</p>"},
 
-  {h:"Ha Giang Loop", when:"17.–22.02 · 4 Tage + Nachtbusse", star:2, p:"Von vier Freunden empfohlen. Als Easy Rider, hinten beim Fahrer.",
+  {h:"Ha Giang Loop", ic:"🏍️", img:["hagiang.jpg","Khánh Hmoong · CC BY 2.0"], when:"17.–22.02 · 4 Tage + Nachtbusse", star:2, p:"Von vier Freunden empfohlen. Als Easy Rider, hinten beim Fahrer.",
    li:["Sleeper-Bus Hanoi → Ha Giang am Abend des 17.2., 6–7 h","<span class='star'>Mã Pí Lèng Pass</span> und die Nho-Quế-Schlucht","Preis 200–260 € inkl. Fahrer, Benzin, Mahlzeiten, Homestays, Bus","Anbieter: Bong Hostel, Jasmine, Mama's Homestay, QT Motorbikes"],
    warn:"Februar statt März: tags 8–15 °C, nachts um 5 °C, morgens Nebel, Frost bei Dong Van möglich. Sicht kann wegfallen. Nach Tết viele einheimische Reisende, Wochenende 20.–21.2. voll. Border Area Permit (200.000–265.000 VND) beim Buchen ausdrücklich abfragen.",
    long:"<p><b>Warum Easy Rider:</b> Mit Klasse B fährst du in Vietnam illegal und ohne Versicherungsschutz. Als Sozius hast du keins dieser Probleme.</p><p><b>Sozial identisch:</b> Konvoi mit 8–15 anderen Backpackern, gemeinsame Homestay-Abende.</p><p>4-Tage-Variante nehmen. Im Februar spät losfahren, bis der Talnebel aufreißt; das machen gute Anbieter ohnehin.</p><p>Pfirsich- und Pflaumenblüte rund um Tết ist der Bonus des Februars.</p><p>Etwa Anfang Januar buchen, Anzahlung 30–50 %.</p>"},
 
-  {h:"Ninh Bình", when:"22.–25.02 · 3 Nächte", star:1, p:"Halong-Bucht ohne Meer: Kalksteintürme zwischen Reisfeldern.",
+  {h:"Ninh Bình", ic:"🛶", img:["ninhbinh.jpg","Jakub Hałun · CC BY 4.0"], when:"22.–25.02 · 3 Nächte", star:1, p:"Halong-Bucht ohne Meer: Kalksteintürme zwischen Reisfeldern.",
    li:["<span class='star'>Ruderboottour Trang An</span> statt Tam Cốc — ~250.000 VND. Unter der Woche fahren.","Hang Mua Viewpoint, 500 Stufen","Fahrräder gratis im Hostel","Banana Tree Hostel (Lenis Tipp), vorher buchen"],
    long:"<p>Ende Februar eher grau, Reisfelder noch kahl oder geflutet. Nach Tết beginnt die Pilgersaison (Bái Đính), am Wochenende voll.</p><p>Anreise 2–2,5 h ab Hanoi bzw. direkt mit dem Bus aus Ha Giang. Budget 120–170 €.</p>"},
 
-  {h:"Letzte Nächte Hanoi", when:"25.–28.02 · 3 Nächte", p:"Rückflug am 28.2. um 19:10: Check-out gegen 12:00, gegen 16:00 zum Flughafen. Der Vormittag bleibt frei, die zusätzliche Nacht ist dein Puffer.",
+  {h:"Letzte Nächte Hanoi", ic:"✈️", img:["hanoi2.jpg","Vyacheslav Argenberg · CC BY 4.0"], when:"25.–28.02 · 3 Nächte", p:"Rückflug am 28.2. um 19:10: Check-out gegen 12:00, gegen 16:00 zum Flughafen. Der Vormittag bleibt frei, die zusätzliche Nacht ist dein Puffer.",
    warn:"Landung in München am 1.3. um 13:25, einen Tag nach der ursprünglichen Frist. Wenn auf den Philippinen etwas ausfällt, kürzt du Ninh Binh oder eine Hanoi-Nacht."}
 ]},
 
@@ -332,79 +806,65 @@ const SECTIONS = [
   {h:"Vor Ort", when:"Zielgröße 3.000 €", table:[
     ["Thailand · 17 Nächte","1.050–1.400 €"],["Philippinen · 9 Nächte","850–1.250 €"],["Vietnam · 13 Nächte","620–880 €"],["Regionalflüge","350–600 €"],["Summe","2.850–4.100 €"]],
    p:"Realistisch 3.100–3.500 €. Neu: Neujahrs-Aufschlag auf Flüge und Unterkünfte rund um den 6.2.",
-   long:"<p><b>Hebel:</b> 1. Buhay Isla statt Big Dream spart 150–200 €. 2. Konsequent Dorms und Streetfood. 3. Wracktauchen in Coron oder Koh Phangan streichen.</p><p>Die Werte sind aus dem alten Plan auf die neuen Nächte umgerechnet, nicht neu recherchiert.</p>"},
+   long:"<p><b>Bereits bezahlt:</b> Buhay Isla, 378 € für 10.–13.2.2027 (1 Person), Zahlungseingang bestätigt am 27.10. Im Philippinen-Budget enthalten; nicht zusätzlich addieren.</p><p><b>Hebel:</b> 1. Buhay Isla statt Big Dream spart 150–200 €. 2. Konsequent Dorms und Streetfood. 3. Wracktauchen in Coron oder Koh Phangan streichen.</p><p>Die Werte sind aus dem alten Plan auf die neuen Nächte umgerechnet, nicht neu recherchiert.</p>"},
 
-  {h:"Bereits ausgegeben", table:[["Flüge Qatar (89KMNH + 89RPEW)","658 €"],["Umbuchung Qatar (Betrag nicht erfasst)","offen"],["Tauchkurs Big Blue (BBD-002058, bezahlt)","13.000 THB"],["Hostel Bangkok 20.–23.1. (zahlt später, offen)","€ 57,27"]],
-   long:"<p>Dazu vor der Reise: Impfungen 200–400 €, Versicherung 30–60 €. Plus 300–500 € Notfallrücklage.</p>"},
-
-  {h:"Tageskosten", table:[["Hostel-Dorm TH / PH / VN","8–16 / 12–22 / 6–12 €"],["Essen pro Tag","10–25 €"],["Bier","0,80–3 €"],["Basis ohne Aktivitäten","25–60 €"]]}
 ]},
 
-{id:"freunde", cat:"info", n:"07", title:"Empfehlungen der Freunde", cards:[
-  {h:"Übernommen", p:"Bangkok als Start (Mati) · Krabi und Ao Nang (Mati, Molly) · Koh Tao mit Tauchschein (Nam, Leni) · Khao Sok (Nam) · Rajadamnern · El Nido–Coron (Leni) · Hanoi (Molly, Leni, Niclas) · Ha Giang (alle vier) · Ninh Binh mit Banana Tree (Molly, Leni)"},
-  {h:"Weggelassen", p:"Chiang Mai und Pai — Ende Januar wettermäßig möglich, kosten aber Reisetage. Phuket — Mati sagt es selbst. Koh Chang/Mak/Kood an der Ostküste, zwei Transfertage. Koh Lipe ganz im Süden. Bali im Februar nass. Banggai Islands zwei Tage Anreise. Sri Lanka, Kambodscha, Laos, Singapur — kein Platz.",
-   long:"<p><b>Koh Lipe</b> ist wahrscheinlich Matis bester Tipp. Tausch: Ao Nang raus, Koh Lipe rein, dafür einen Reisetag opfern.</p><p><b>Hoi An, Ho-Chi-Minh-Stadt:</b> Mit 12 Tagen bleibst du im Norden. Mittelvietnam wäre im Februar wärmer, aber Ha Giang fiele dann weg.</p>"},
-  {h:"Nicht entschlüsselt", p:"„Rainbowfish“ (Nams Tauchschule) · „Ban Tal Thai“ · „Thai boxing anachaeun“. Bei Gelegenheit nachfragen.",
-   long:"<p>Nams „Koh Tao in Vietnam“ ist ein Mix-up — Koh Tao liegt im Golf von Thailand.</p><p>„Ban Tal Thai“ könnte Ban Tai auf Koh Phangan sein.</p>"}
-]},
-
-{id:"leute", cat:"info", n:"08", title:"Leute treffen", cards:[
-  {h:"Drei Gruppenformate", p:"Die Route ist darauf gebaut — nicht über Partys, sondern über mehrtägige Gruppenerlebnisse.",
-   li:["<b>Tauchkurs Koh Tao</b> — 3 Tage, dieselbe Kleingruppe, in Woche eins","<b>Boot-Expedition</b> — 4 Tage, ~20 Leute, kein Handyempfang","<b>Ha Giang Loop</b> — 4 Tage Konvoi, gemeinsame Homestay-Abende"],
-   long:"<p>Dorms mit 6–8 Betten buchen, nicht die 20-Bett-Hallen. Hostels mit Gemeinschaftsküche, Rooftop oder Family Dinner wählen.</p><p>Nach Koh Tao ist wenig fest gebucht, außer den Neujahrsnächten und der Expedition. Wenn sich eine Gruppe bildet: tu es.</p>"}
-]}
 ];
 
 const TODOS = [
-{ph:"Jetzt · Ende Oktober", items:[
- {t:"Reisepass-Gültigkeit prüfen", d:"Geprüft. Gültig über den 13. September 2027 hinaus.", s:"done"},
- {t:"Langstreckenflüge buchen", d:"Qatar Airways, 89KMNH + 89RPEW, 658 € inkl. Gepäck.", s:"done"},
- {t:"HM-Prüfungen und APE-Termine gegen 19.1. und 1.3. prüfen", d:"Erledigt: laut Lucas am 23.10. mit APE und HM geklärt.", s:"done"},
- {t:"Qatar umbuchen: 19.1. hin, 28.2. zurück", d:"Erledigt 23.10.: Ankunft Bangkok 20.1. 19:25, München 1.3. 13:25. Noch festhalten: Kosten, Gepäck, Ticketnummern.", s:"done"},
- {t:"Boot-Expedition neu anfragen", d:"Buhay Isla 4T/3N um den 10.–13.2. Feste Abfahrtstage erfragen. Backup: Big Dream, Tao."},
- {t:"Tauchkurs bei Big Blue umbuchen", d:"Erledigt 23.10.: Dorm ab 24.1., Kurs ab 25.1. (Jim Donaldson). Uhrzeit am 25.1. und ob das Dorm im Preis steckt noch klären.", s:"done"},
- {t:"Bangkok-Hostel verschieben", d:"Erledigt 22.10.: 20.–23.1., € 57,27, noch nicht bezahlt. Ankunft 19:25, Hostel über späte Ankunft informieren.", s:"done"},
- {t:"Pass für die Reise wählen", d:"Entschieden: deutscher Pass, überall derselbe. Vietnam 45 Tage visumfrei.", s:"done"},
- {t:"Impfplan auf früheren Abflug abstimmen", d:"Tollwut-Serie bis Mitte Januar abschließen.", s:"pending"},
+{ph:"🔴 Vorab buchen (feste Anker)", c:"#FF3B30", items:[
+ {t:"Boot-Expedition buchen (Buhay Isla)", d:"Erledigt 27.10.2026: 10.–13.2.2027, Seeker's Realm 4T/3N, El Nido → Coron, 1 Person. 378 € vollständig bezahlt (26.900 PHP laut Angebot); Zahlungseingang und Buchung bestätigt. Keine Restzahlung.", s:"done"},
+ {t:"Flug Krabi → Manila buchen", d:"6.2. Neujahrstag, früh buchen. Gilt auch als Weiterflugnachweis für Thailand. Wenn der Aufpreis klein ist: Tarif mit Umbuchungsoption."},
+ {t:"Flug Manila → El Nido buchen", d:"7.2. AirSWIFT, Cebu Pacific oder CebGo. Spätestens am 9.2. in El Nido sein (Briefing 9.2., 18:30). Alternative: Puerto Princesa plus 6 h Van, vor Ort buchbar."},
+ {t:"Flug Coron → Manila → Hanoi buchen", d:"15.2. Weiterflugnachweis für die Philippinen. In Manila mindestens 3 h Umsteigezeit. Boot endet 13.2. gegen 16:30, am Abflugtag nicht tauchen."},
 ]},
-{ph:"November", items:[
- {t:"Reisemedizinische Beratung", d:"Am 6.10. erledigt.", s:"done"},
- {t:"Boot-Expedition buchen", d:"Für den 10.–13.2. Der größte Engpass der Reise."},
- {t:"Flug Krabi → Manila buchen", d:"6.2. Auch Weiterflugnachweis für Thailand. Neujahrstag, früh buchen."},
- {t:"Flug Manila → El Nido buchen", d:"7.2. Direkt mit AirSWIFT, Cebu Pacific oder CebGo."},
- {t:"Flug Coron → Manila → Hanoi buchen", d:"15.2. In Manila mindestens 3 h Umsteigezeit."},
- {t:"Auslandskrankenversicherung abschließen", d:"19.1.–1.3., Rücktransport „sinnvoll und vertretbar“, Tauchausbildung und Motorrad als Sozius."},
- {t:"Führerscheinfrage entscheiden", d:"Konsequent auf Songthaews, Boote und Fahrräder umstellen; A1 bis Januar ist knapp."},
+{ph:"🟢 Erst in Asien buchen (flexibel bleiben)", c:"#34C759", items:[
+ {t:"Hostels vor Ort buchen", d:"Koh Tao (Dorm ab 24.1. über Big Blue geregelt), Manila, Coron, Hanoi. Ausnahme Neujahr: Krabi 3.–6.2. und El Nido 7.–10.2. etwa 1–2 Wochen vorher."},
+ {t:"Fähre und Bus buchen", d:"Bangkok → Koh Tao (rechtzeitig für 24.1.), Koh Tao → Khao Sok → Krabi. Vor Ort im Hostel oder am Pier."},
+ {t:"Khao Sok Floating Bungalow reservieren", d:"31.1.–3.2. Erst 1–2 Wochen vorher, wenn klar ist, ob du hinwillst und mit wem."},
+ {t:"Ha Giang Loop buchen", d:"17.–22.2. In Hanoi über Hostel oder Anbieter, einige Tage vorher. Wochenende 20.–21.2. nach Tết voll. Border Permit im Preis? 4-Tage-Variante."},
+ {t:"Touren vor Ort buchen", d:"Island Hopping, Railay-Klettern, Kajak. Kein Vorab-Buchen nötig."},
+ {t:"Koh Phangan und Ninh Binh offen lassen", d:"Spontan vor Ort entscheiden. Koh Phangan: Halbmond-Partys um 29.–30.1. prüfen. Ninh Binh optional (Banana Tree Hostel)."},
+]},
+{ph:"🟡 Vor Abflug klären (kein Buchen)", c:"#FF9500", items:[
+ {t:"Impfplan auf früheren Abflug abstimmen", d:"Tollwut-Serie bis Mitte Januar abschließen. Letzte Dosis spätestens Mitte Januar.", s:"pending"},
+ {t:"Envivas fragen: Tauchen und Sozius", d:"Schriftlich nachfragen, ob Tauchen (Open Water) und Mitfahren auf dem Motorrad (Ha Giang) abgedeckt sind."},
  {t:"Trade-Republic-Karte aktivieren", d:"Einmal mit PIN zahlen, PIN merken, Cash-Guthaben auffüllen."},
  {t:"DKB-Aktivstatus entscheiden", d:"Dauerauftrag (700 €/Monat) oder DKB nur als Notfallkarte."},
-]},
-{ph:"Dezember", items:[
- {t:"Khao Sok Floating Bungalow reservieren", d:"31.1.–3.2. Kurz vor Neujahr gefragt."},
- {t:"Unterkünfte für die Neujahrsnächte buchen", d:"Krabi 3.–6.2., Manila 6.2., El Nido 7.–10.2."},
- {t:"Koh-Phangan-Termine prüfen", d:"Halbmond-Partys um 29.–30.1.? Sonst Stopp streichen."},
- {t:"Tauchkurs bezahlen", d:"Erledigt: Big Blue Diving, 13.000 THB, bestätigt am 3.9.2026.", s:"done"},
-]},
-{ph:"Anfang Januar", items:[
- {t:"Ha Giang Loop buchen", d:"17.–22.2. Border Permit im Preis? 4-Tage-Variante."},
- {t:"Vietnam-E-Visum", d:"Entfällt mit dem deutschen Pass. Nur nötig, falls du mit dem irischen reist (evisa.gov.vn).", s:"done"},
- {t:"Impfungen abgeschlossen", d:"Letzte Dosis spätestens Mitte Januar."},
- {t:"Restliche Hostels", d:"Koh Tao, Hanoi, Ninh Binh. Rest kurzfristig, damit du Leuten hinterherreisen kannst."},
- {t:"Ausrüstung besorgen", d:"Drybag, 40–50 l Rucksack, warme Schicht und Regenschutz für Ha Giang, Stirnlampe, Weltadapter."},
+ {t:"Ausrüstung besorgen", d:"Drybag (Pflicht für die Expedition), 40–50 l Rucksack, kleiner Tagesrucksack, warme Schicht und Regenschutz für Ha Giang, Stirnlampe, Weltadapter."},
  {t:"SSI-Theorie online durcharbeiten", d:"Spart Zeit auf Koh Tao."},
+ {t:"Bangkok-Hostel über späte Ankunft informieren", d:"Ankunft 20.1., 19:25. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen."},
+ {t:"Buhay-Isla-Gästeformular ausfüllen/aktualisieren", d:"https://forms.gle/jxXbu8mkmSJ3pxZg8 – Einreichung nicht bestätigt. El Nido 7.–10.2. und Coron 13.–15.2. geplant, Unterkünfte offen; Angaben später nachreichen."},
+ {t:"Expeditionsbriefing und Treffpunkt einplanen", d:"9.2.2027 um 18:30 im El-Nido-Büro, Corong-Corong neben Adventist Clinic/Pops District. 10.2. um 08:00 dort treffen. Unterkunft nahe El Nido Town/Corong-Corong. WhatsApp +63 939 936 2095."},
 ]},
-{ph:"Letzte Tage", items:[
+{ph:"🔵 Letzte Tage", c:"#0A84FF", items:[
+ {t:"Online-Check-in Qatar", d:"Hinflug ab 17.1., Rückflug ab 26.2."},
  {t:"TDAC ausfüllen", d:"Thailand, frühestens 72 h vor Ankunft am 20.1. Nur tdac.immigration.go.th."},
  {t:"eTravel registrieren", d:"Philippinen, 72 h vor dem 6.2. Ohne QR-Code kein Check-in."},
  {t:"Vietnam Pre-Arrival prüfen", d:"Drei Tage vor dem 15.2. checken."},
  {t:"Dokumente digitalisieren", d:"Pass, Impfpass, Versicherung, Tickets, QR-Codes. Cloud plus einmal ausgedruckt."},
- {t:"Freunde nach den unklaren Tipps fragen", d:"„Rainbowfish“, „Ban Tal Thai“, „Thai boxing anachaeun“."},
+]},
+{ph:"⚪ Erledigt", c:"#8C8C95", items:[
+ {t:"Reisepass-Gültigkeit prüfen", d:"Geprüft. Gültig über den 13. September 2027 hinaus.", s:"done"},
+ {t:"Pass für die Reise wählen", d:"Entschieden: deutscher Pass, überall derselbe. Vietnam 45 Tage visumfrei.", s:"done"},
+ {t:"Vietnam-E-Visum", d:"Entfällt mit dem deutschen Pass. Nur nötig, falls du mit dem irischen reist (evisa.gov.vn).", s:"done"},
+ {t:"Langstreckenflüge buchen", d:"Qatar Airways, 89KMNH + 89RPEW, 658 € inkl. Gepäck.", s:"done"},
+ {t:"Qatar umbuchen: 19.1. hin, 28.2. zurück", d:"Erledigt 23.10.: Ankunft Bangkok 20.1. 19:25, München 1.3. 13:25. Noch festhalten: Kosten, Gepäck, Ticketnummern.", s:"done"},
+ {t:"HM-Prüfungen und APE-Termine gegen 19.1. und 1.3. prüfen", d:"Erledigt: laut Lucas am 23.10. mit APE und HM geklärt.", s:"done"},
+ {t:"Tauchkurs bezahlen", d:"Erledigt: Big Blue Diving, 13.000 THB, bestätigt am 3.9.2026.", s:"done"},
+ {t:"Tauchkurs bei Big Blue umbuchen", d:"Erledigt 23.10.: Dorm ab 24.1., Kurs ab 25.1. (Jim Donaldson).", s:"done"},
+ {t:"Bangkok-Hostel verschieben", d:"Erledigt 22.10.: 20.–23.1., € 57,27, noch nicht bezahlt.", s:"done"},
+ {t:"Reisemedizinische Beratung", d:"Am 6.10. erledigt.", s:"done"},
+ {t:"Auslandskrankenversicherung abschließen", d:"Erledigt 23.10.: Envivas TravelXN, ab 19.1.2027, 19,40 €/Jahr. Unterlagen in versicherung/. Kündigung bis 18.10.2027, sonst Verlängerung.", s:"done"},
+ {t:"Führerscheinfrage entscheiden", d:"Entschieden: kein A1. Nichts mit Moped oder Roller einplanen; Songthaew, Boot, Fahrrad, auf Ha Giang als Sozius.", s:"done"},
 ]}
 ];
 
-const CATS=[["all","Alles"],["newplan","Umbuchung"],["start","Status"],["prep","Vorbereitung"],["th","Thailand"],["ph","Philippinen"],["vn","Vietnam"],["geld","Budget"],["info","Kontext"],["todo","To-dos"]];
+const CATS=[["all","Alles"],["newplan","Umbuchung"],["start","Status"],["prep","Vorbereitung"],["th","Thailand"],["ph","Philippinen"],["vn","Vietnam"],["geld","Budget"],["todo","To-dos"]];
 
 /* ============ STATE ============ */
-const KEY="asia27.v2";
+const KEY="asia27.v3";
 let store={};
 try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
@@ -417,6 +877,13 @@ TODOS.forEach((g,gi)=>g.items.forEach((it,ii)=>{
   it.key=gi+"."+ii;
   if(store[it.key]===undefined || (it.s && !seeded)) store[it.key]=it.s||"open";
 }));
+// Apply only the newly confirmed booking; preserve all other manually saved statuses.
+try{
+  if(localStorage.getItem(KEY+".boat-confirmed")!=="2026-10-27"){
+    store[TODOS[0].items[0].key]="done";
+    localStorage.setItem(KEY+".boat-confirmed","2026-10-27");
+  }
+}catch(e){store[TODOS[0].items[0].key]="done"}
 try{localStorage.setItem(KEY+".seed",SEED)}catch(e){}
 save();
 
@@ -427,7 +894,8 @@ const main=document.getElementById("main");
 
 function cardHTML(c){
   let h='<article class="card">';
-  h+='<h3>'+(c.star?'<span class="star">'+"★".repeat(c.star)+'</span> ':'')+c.h+'</h3>';
+  if(c.img) h+='<div class="ph"><img loading="lazy" src="images/'+c.img[0]+'" alt="'+c.h.replace(/"/g,"")+'"><span class="cr">Foto: '+c.img[1]+'</span></div>';
+  h+='<h3>'+(c.ic?'<span class="ic">'+c.ic+'</span>':'')+(c.star?'<span class="star">'+"★".repeat(c.star)+'</span> ':'')+c.h+'</h3>';
   if(c.when) h+='<div class="when">'+c.when+'</div>';
   if(c.p) h+='<p>'+c.p+'</p>';
   if(c.table){h+='<table><tbody>';c.table.forEach(r=>{h+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'});h+='</tbody></table>'}
@@ -439,7 +907,7 @@ function cardHTML(c){
 
 function renderSections(){
   main.innerHTML = SECTIONS.filter(s=>cat==="all"||s.cat===cat).map(s=>
-    '<section id="s-'+s.id+'"><div class="s-head"><h2>'+s.title+'</h2><span class="mono">'+s.n+'</span></div>'
+    '<section id="s-'+s.id+'"'+(s.c?' data-c="'+s.c+'"':'')+'><div class="s-head"><h2>'+s.title+'</h2><span class="mono">'+s.n+'</span></div>'
     + s.cards.map(cardHTML).join("") + '</section>'
   ).join("");
 }
@@ -448,7 +916,7 @@ function renderTodos(){
   const groups = TODOS.map((g,gi)=>{
     const items = g.items.filter(it=>tFilter==="all"||store[it.key]===tFilter);
     if(!items.length) return "";
-    return '<div class="phase"><span class="mono">'+g.ph+'</span>'
+    return '<div class="phase" style="--c:'+(g.c||"var(--muted)")+'"><span class="mono">'+g.ph+'</span>'
       + items.map(it=>
         '<button class="todo" data-k="'+it.key+'" data-s="'+store[it.key]+'">'
         +'<span class="mark"></span><span class="body"><span class="t">'+it.t+'</span>'
@@ -535,6 +1003,12 @@ document.getElementById("reset").addEventListener("click",()=>{
 });
 
 render(); moveGlass();
+
+document.getElementById("kcopy").addEventListener("click",async e=>{
+  const b=e.currentTarget,t=document.getElementById("ktext").textContent;
+  try{await navigator.clipboard.writeText(t);b.textContent="Kopiert"}catch(x){const r=document.createRange();r.selectNodeContents(document.getElementById("ktext"));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);b.textContent="Text markiert"}
+  setTimeout(()=>b.textContent="Text kopieren",1800);
+});
 </script>
 </body>
 </html>
