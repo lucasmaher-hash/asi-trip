@@ -63,8 +63,7 @@ h1{font-size:clamp(2rem,7.5vw,2.9rem);line-height:1.02;letter-spacing:-.035em;fo
 /* ---------- controls ---------- */
 .bar{position:sticky;top:0;z-index:40;background:rgba(240,240,243,.86);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid var(--line-soft)}
 .bar-in{max-width:720px;margin:0 auto;padding:11px 20px 12px}
-.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:0 20px}
-.chips::-webkit-scrollbar{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0}
 .chip{
   flex:0 0 auto;border:0;cursor:pointer;white-space:nowrap;
   padding:7px 14px;border-radius:100px;font:inherit;font-size:.83rem;font-weight:520;
