@@ -2,18 +2,26 @@
 
 Aktueller Reiseplan und Checkliste: [index.html](index.html). Der alte Plan in [alter-plan.html](alter-plan.html) ist ein unverändertes Archiv.
 
-## Boot-Expedition bestätigt · 27.10.2026
+## Plan seit 31.10.2026: Thailand + Nordvietnam, ohne Philippinen
 
-- Buhay Isla, **Seeker's Realm, 4 Tage / 3 Nächte**, **El Nido → Coron**, **10.–13. Februar 2027**, **1 Person**.
-- **Vollständig bezahlt: 378 €** (Angebot im Chat: 26.900 PHP). Anbieter bestätigt Zahlungseingang und Buchung; keine Restzahlung. Die Bestätigung selbst nennt keinen Betrag. Im Philippinen-Budget enthalten, nicht zusätzlich addieren.
-- **9.2., 18:30:** Briefing im [El-Nido-Büro](https://goo.gl/maps/unvHPN44oGLbaK3p9), Corong-Corong, Sitio Lugadia Highway, neben Adventist Clinic/Pops District.
-- **10.2., 08:00:** Treffpunkt im selben Büro; Jeepney-Transfer zum San Fernando Port inklusive. **09:30:** Abfahrt am Hafen.
-- **13.2., ca. 16:30–17:00:** Ankunft Coron Ferry Port, sofern keine Wetterverzögerung.
-- [Gästeformular](https://forms.gle/jxXbu8mkmSJ3pxZg8): später editierbar; Einreichung noch nicht bestätigt. El Nido **7.–10.2.** und Coron **13.–15.2.** sind geplant, Unterkünfte noch nicht gebucht; Daten können variieren. Unterkunfts- und Kontaktdaten nachreichen.
-- Büro-WhatsApp: **+63 939 936 2095**. Unterkunft nahe El Nido Town/Corong-Corong für Briefing und Abholung wählen.
-- Hauptgepäck bis Reiseende verstaut; alles für vier Tage in separatem Rucksack/Drybag mitführen. Wertsachen wasserdicht sichern. Eigenes Handtuch, Wasserflasche, Wasserschuhe, Rashguard, leichte Regenjacke, Sonnenschutz, Mückenschutz, Powerbank, Stirnlampe und Medikamente mitbringen. Stromzugang begrenzt; Flossen nur auf Anfrage gegen Mietgebühr, Masken/Schnorchel inklusive.
-- Laut neuer Bestätigung **volle Erstattung nur bei wetterbedingter Absage durch die Küstenwache**; Umbuchung bei freien Plätzen möglich. Anbieter kann bei Krankheit/Flugverspätung eine Bescheinigung für die Reiseversicherung ausstellen; keine Zusage der Versicherungsdeckung. Frühere Anzahlung-/Stornoangaben sind überholt.
+Der Trip wurde zu teuer: Allein die Regionalflüge lagen bei über 600 €, die Gesamtkosten bei rund 5.000 €. Lucas hat deshalb das Buhay-Isla-Boot (10.–13.2., 378 €) storniert; **volle Erstattung**. Alle anderen Buchungen (Qatar-Flüge, Bangkok-Hostel, Tauchkurs Koh Tao) bleiben unverändert.
 
-Quelle: vom Nutzer eingefügte Anbieterbestätigung, erhalten im Chat am 27.10.2026; Lucas bestätigt die Buchung. Der E-Mail-Zeitstempel war nicht enthalten. Die Originalbestätigung wird nur lokal aufbewahrt.
+| Datum | Ort |
+|---|---|
+| 20.–23.1. | Bangkok (3 N.) |
+| 23.→24.1. | Nachtzug/Bus plus Fähre |
+| 24.1.–1.2. | Koh Tao (8 N.): Tauchkurs 25.–27.1., danach Insel-Tage |
+| 1.–4.2. | Khao Sok (3 N.), Lake-Overnight |
+| 4.–9.2. | Koh Lanta (5 N., optional) |
+| 9.–14.2. | Krabi: Ao Nang und Railay (5 N.) |
+| 14.2. | Flug Krabi → Hanoi (offen) |
+| 14.–16.2. | Hanoi (2 N.) |
+| 16.–21.2. | Ha Giang Loop |
+| 21.–24.2. | Ninh Binh (3 N., optional) |
+| 24.–28.2. | Hanoi (4 N.), Rückflug 28.2. 19:10, Landung München 1.3. 13:25 |
 
-Offen: Gästeformular/Unterkunftsdaten, Regionalflüge (6.2. Krabi → Manila, 7.2. Manila → El Nido, 15.2. Coron → Manila → Hanoi). Kein Nachweis einer Formular-Einreichung oder dieser Flugbuchungen.
+**Budget:** Ziel 3.800 €, Grenze 4.000 € inklusive bereits Bezahltem. Arbeitsplan 3.757 € mit 300 € Reserve (bereits bezahlt 1.222 € nach Boot-Erstattung, Flug Krabi → Hanoi 190 €, Alltag 1.250 €, Khao Sok 100 €, Ha Giang 230 €, Transporte 250 €, Aktivitäten 120 €, Gepäck 60 €, Extras 35 €). Preise sind Suchwerte vom 27.10.2026, keine Buchungen.
+
+**Offen:** Flug Krabi → Hanoi am 14.2. buchen (AirAsia über Don-Mueang, Suchpreis 169–186 €, Gepäck dazu; als Weiterflugnachweis für Thailand vor dem 19.1.). Der Rest wird in Asien gebucht.
+
+Quelle des Plans: Recherche vom 27.10.2026 (Variante A, Thailand + Nordvietnam). Die Buhay-Isla-Bestätigung bleibt als Verlauf unter `evidence/2026-10-27/`.
