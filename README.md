@@ -22,6 +22,6 @@ Der Trip wurde zu teuer: Allein die Regionalflüge lagen bei über 600 €, die 
 
 **Budget:** Ziel 3.800 €, Grenze 4.000 € inklusive bereits Bezahltem. Arbeitsplan 3.757 € mit 300 € Reserve (bereits bezahlt 1.222 € nach Boot-Erstattung, Flug Krabi → Hanoi 160 €, Alltag 1.250 €, Khao Sok 100 €, Ha Giang 230 €, Transporte 250 €, Aktivitäten 120 €, Gepäck 60 €, Extras 35 €). Preise sind Suchwerte vom 27.10.2026, keine Buchungen.
 
-**Offen:** Gepäck zum gebuchten Flug Krabi → Hanoi (FKTDRR, 2.11.2026, 6.327,30 THB) online nachbuchen. Der Rest wird in Asien gebucht.
+**Offen:** Der Rest wird in Asien gebucht.
 
 Quelle des Plans: Recherche vom 27.10.2026 (Variante A, Thailand + Nordvietnam). Die Buhay-Isla-Bestätigung bleibt als Verlauf unter `evidence/2026-10-27/`.
