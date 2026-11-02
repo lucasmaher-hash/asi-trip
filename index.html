@@ -270,7 +270,7 @@ Lucas will Spielraum, falls er unterwegs Leute trifft und Pläne ändern will. N
 ## Aktueller Stand (31.10.2026)
 Gebucht und erledigt:
 - Qatar Airways, umgebucht am 23.10.: Hinflug 89KMNH Di 19.1.2027 MUC 15:25 → Doha 23:00 (10 h 10 Umstieg) → Bangkok 19:25 am 20.1. Rückflug 89RPEW So 28.2. Hanoi 19:10 → Doha 23:10 (10 h 15) → München 13:25 am 1.3. Gesamt 658 € inkl. Gepäck (vor Umbuchung). Umbuchungskosten, Gepäckfreigrenze und Ticketnummern nicht erfasst. Lucas nannte vorher grob 150 € Umbuchungsgebühr pro Buchung (Schätzung). Unverändert fix.
-- Bangkok-Hostel: Khao San Social Capsule Hostel (Booking.com), 20.–23.1., 3 Nächte, 1 Dorm-Bett, 57,27 €, Zahlung später, noch nicht bezahlt. Ankunft erst 19:25, Hostel über späte Ankunft informieren.
+- Bangkok-Hostel: Khao San Social Capsule Hostel (Booking.com), 20.–23.1., 3 Nächte, 1 Dorm-Bett, 57,27 €, Zahlung später, noch nicht bezahlt. Ankunft erst 19:25 (Hostelankunft gegen 22:00), Check-in ab 14:00, als geklärt abgehakt am 2.11.2026.
 - Tauchkurs: Big Blue Diving, Koh Tao, Open Water Diver, Ref. BBD-002058, bezahlt 13.000 THB. Umgebucht: Dorm-Bett ab 24.1., Kurs ab 25.1. (Jim Donaldson, GM, 23.10.). Kurszeit und ob das Dorm im Preis enthalten ist: unklar. Kostenlos umbuchbar bis 18:00 am Vortag. Kontakt info@bigbluediving.com.
 - Boot-Expedition Philippinen: Buhay Isla (Seeker's Realm 4T/3N, 10.–13.2.2027) am 27.10. gebucht (378 €), am 31.10.2026 von Lucas storniert; volle Erstattung erhalten. Grund: Der Trip wurde zu teuer (Regionalflüge über 600 €, Gesamtkosten ca. 5.000 €). Die Philippinen entfallen komplett.
 - Neuer Plan seit 31.10.2026: Thailand bis 14.2. verlängert, danach Nordvietnam. Grundlage ist die Recherche vom 27.10.2026 (Variante A, 3.757 € inkl. 300 € Reserve). Alle Preise sind Suchwerte, keine Buchungen.
@@ -634,7 +634,7 @@ Nach Koh Tao ist wenig fest gebucht, außer dem Flug Krabi → Hanoi. Wenn sich 
 - [erledigt] DKB-Aktivstatus entscheiden: Entschieden 2.11.2026: Trade Republic ist die Hauptkarte, kein Dauerauftrag, DKB bleibt Notfallkarte.
 - [offen] Ausrüstung besorgen: Drybag (Bootstouren, Khao Sok), 40–50 l Rucksack, kleiner Tagesrucksack, warme Schicht und Regenschutz für Ha Giang, Stirnlampe, Weltadapter.
 - [erledigt] SSI-Medical-Fragen erledigen: Erledigt: SSI-Medical-Fragen (Diver Medical, ausgefüllt 3.9.2026 über Big Blue, Ergebnis: cleared to dive, kein Attest nötig). Big Blue Diving auf Sairee Beach in der MySSI-App als Tauchcenter gewählt.
-- [offen] Bangkok-Hostel über späte Ankunft informieren: Ankunft 20.1., 19:25. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen.
+- [erledigt] Bangkok-Hostel über späte Ankunft informieren: Geklärt am 2.11.2026: Check-in ab 14:00 laut Booking.com, Ankunft 20.1. gegen 22:00 kein Problem. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen.
 
 ### 🔵 Letzte Tage
 - [offen] Online-Check-in Qatar: Hinflug ab 17.1., Rückflug ab 26.2.
@@ -1578,7 +1578,8 @@ const TODOS = [
       },
       {
         "t": "Bangkok-Hostel über späte Ankunft informieren",
-        "d": "Ankunft 20.1., 19:25. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen.",
+        "d": "Geklärt am 2.11.2026: Check-in ab 14:00 laut Booking.com, Ankunft 20.1. gegen 22:00 kein Problem. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen.",
+        "s": "done",
         "key": "2.6"
       }
     ]
@@ -1716,7 +1717,7 @@ try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 
 /* Bumping SEED re-applies the authored s:-defaults once; manual taps stick after that. */
-const SEED="2026-11-02.b";
+const SEED="2026-11-02.c";
 let seeded=false;
 try{seeded=localStorage.getItem(KEY+".seed")===SEED}catch(e){}
 TODOS.forEach((g,gi)=>g.items.forEach((it,ii)=>{
