@@ -633,7 +633,7 @@ Nach Koh Tao ist wenig fest gebucht, außer dem Flug Krabi → Hanoi. Wenn sich 
 - [erledigt] Trade-Republic-Karte aktivieren: Einmal mit PIN zahlen, PIN merken, Cash-Guthaben auffüllen. Karte funktioniert laut Lucas (2.11.2026).
 - [erledigt] DKB-Aktivstatus entscheiden: Entschieden 2.11.2026: Trade Republic ist die Hauptkarte, kein Dauerauftrag, DKB bleibt Notfallkarte.
 - [offen] Ausrüstung besorgen: Drybag (Bootstouren, Khao Sok), 40–50 l Rucksack, kleiner Tagesrucksack, warme Schicht und Regenschutz für Ha Giang, Stirnlampe, Weltadapter.
-- [offen] SSI-Theorie online durcharbeiten: Spart Zeit auf Koh Tao.
+- [erledigt] SSI-Medical-Fragen erledigen: Erledigt: SSI-Medical-Fragen (Diver Medical, ausgefüllt 3.9.2026 über Big Blue, Ergebnis: cleared to dive, kein Attest nötig). Big Blue Diving auf Sairee Beach in der MySSI-App als Tauchcenter gewählt.
 - [offen] Bangkok-Hostel über späte Ankunft informieren: Ankunft 20.1., 19:25. Zahlung vor Ort, Bestätigungsmail auf Stornofrist prüfen.
 
 ### 🔵 Letzte Tage
@@ -1571,8 +1571,9 @@ const TODOS = [
         "key": "2.4"
       },
       {
-        "t": "SSI-Theorie online durcharbeiten",
-        "d": "Spart Zeit auf Koh Tao.",
+        "t": "SSI-Medical-Fragen erledigen",
+        "d": "Erledigt: SSI-Medical-Fragen (Diver Medical, ausgefüllt 3.9.2026 über Big Blue, Ergebnis: cleared to dive, kein Attest nötig). Big Blue Diving auf Sairee Beach in der MySSI-App als Tauchcenter gewählt.",
+        "s": "done",
         "key": "2.5"
       },
       {
@@ -1715,7 +1716,7 @@ try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 
 /* Bumping SEED re-applies the authored s:-defaults once; manual taps stick after that. */
-const SEED="2026-11-02.a";
+const SEED="2026-11-02.b";
 let seeded=false;
 try{seeded=localStorage.getItem(KEY+".seed")===SEED}catch(e){}
 TODOS.forEach((g,gi)=>g.items.forEach((it,ii)=>{
